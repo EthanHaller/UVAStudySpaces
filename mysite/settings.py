@@ -35,18 +35,18 @@ IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 if not IS_HEROKU_APP:
     DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'project-a-06-99a4abdf2d2b.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'project-a-06-99a4abdf2d2b.herokuapp.com']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'study_spaces.apps.StudySpacesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    #'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
 ]
 
