@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Study Spaces Home</title>
+    <title>Study Spaces Google Sign In</title>
 </head>
 <body>
-    <p>Welcome to the study spaces home!</p>
+    {% load socialaccount %}
+    <h2>Google Login</h2>
+    <a href="{% provider_login_url 'google' %}?next=/">Login With Google</a>
 </body>
 </html>
