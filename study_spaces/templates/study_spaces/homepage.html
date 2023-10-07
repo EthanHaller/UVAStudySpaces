@@ -12,6 +12,9 @@
     {% if user.is_authenticated %}
     <p>Account Name: {{user.email}}</p>
     <p>User Name: {{user.get_username}}</p>
+    {% if user.is_superuser %}
+    <p>Hello, Admin</p>
+    {% endif %}
     <a href="logout">Logout</a>
     {% endif %}
 </body>
