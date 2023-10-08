@@ -58,13 +58,13 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 ]
 
-CLIENT_SECRET_FILE_PATH = os.path.join(BASE_DIR, 'client_secret_567396885190-0ogq5n4agd5e61s7jn2p9tink9aprugj.apps.googleusercontent.com.json')
+#CLIENT_SECRET_FILE_PATH = os.path.join(BASE_DIR, 'client_secret_567396885190-0ogq5n4agd5e61s7jn2p9tink9aprugj.apps.googleusercontent.com.json')
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'APP': {
-            'client_id': 'YOUR_GOOGLE_CLIENT_ID',
-            'secret': 'YOUR_GOOGLE_CLIENT_SECRET',
+            'client_id': os.environ.get("CLIENT_ID"),
+            'secret': os.environ.get("CLIENT_SECRET"),
             'key': '',
         },
         'SCOPE': ['profile', 'email'],
@@ -74,10 +74,10 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-with open(CLIENT_SECRET_FILE_PATH) as json_file:
+"""with open(CLIENT_SECRET_FILE_PATH) as json_file:
     json_data = json.load(json_file)
     SOCIALACCOUNT_PROVIDERS['google']['APP']['client_id'] = json_data['web']['client_id']
-    SOCIALACCOUNT_PROVIDERS['google']['APP']['secret'] = json_data['web']['client_secret']
+    SOCIALACCOUNT_PROVIDERS['google']['APP']['secret'] = json_data['web']['client_secret']"""
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
