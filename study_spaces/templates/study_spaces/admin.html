@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+</head>
+{% if user.is_authenticated %}
+<p>Account Name: {{user.email}}</p>
+<p>Username: {{user.get_username}}</p>
+<p>Hello, Admin</p>
+<a href="logout">Logout</a>
+{% endif %}
