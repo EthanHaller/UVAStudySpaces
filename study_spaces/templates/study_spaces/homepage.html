@@ -11,7 +11,7 @@
 
     {% if user.is_authenticated %}
     <p>Account Name: {{user.email}}</p>
-    <p>User Name: {{user.get_username}}</p>
+    <p>Username: {{user.get_username}}</p>
     <a href="logout">Logout</a>
     {% endif %}
 </body>
