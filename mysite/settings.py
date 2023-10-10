@@ -39,6 +39,14 @@ if not IS_HEROKU_APP:
 ALLOWED_HOSTS = ['127.0.0.1', 'project-a-06-99a4abdf2d2b.herokuapp.com']
 
 
+try:     
+    if "HEROKU" in os.environ:        
+         import django_heroku
+         django_heroku.settings(locals())
+
+except ImportError:     
+    found = False
+
 # Application definition
 
 SITE_ID = 1
