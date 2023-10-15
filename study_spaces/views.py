@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
-
+from django.conf import settings
+from .mixins import Directions
 
 def home(request):
     if request.user.is_authenticated:
@@ -14,3 +15,31 @@ def home(request):
 def logout_view(request):
     logout(request)
     return redirect("/study/")
+
+def map(request):
+
+    # Code taken from https://www.youtube.com/watch?v=wCn8WND-JpU
+
+	lat_a = request.GET.get("lat_a")
+	long_a = request.GET.get("long_a")
+	lat_b = request.GET.get("lat_b")
+	long_b = request.GET.get("long_b")
+	directions = Directions(
+		lat_a= lat_a,
+		long_a=long_a,
+		lat_b = lat_b,
+		long_b=long_b
+		)
+
+	context = {
+	"google_api_key": settings.GOOGLE_API_KEY,
+	"lat_a": lat_a,
+	"long_a": long_a,
+	"lat_b": lat_b,
+	"long_b": long_b,
+	"origin": f'{lat_a}, {long_a}',
+	"destination": f'{lat_b}, {long_b}',
+	"directions": directions,
+
+	}
+	return render(request, 'main/map.html', context)
