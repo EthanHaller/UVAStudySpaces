@@ -42,4 +42,8 @@ def map(request):
 	"directions": directions,
 
 	}
-	return render(request, 'main/map.html', context)
+	return render(request, 'study_spaces/map.html', context)
+
+def route(request):
+	context = {"google_api_key": settings.GOOGLE_API_KEY}
+	return render(request, 'study_spaces/route.html', context)
