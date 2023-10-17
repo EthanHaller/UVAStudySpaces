@@ -1,5 +1,18 @@
-{% if user.is_authenticated %}
-    <p>Account Name: {{user.email}}</p>
-    <p>Username: {{user.get_username}}</p>
-    <a href="logout">Logout</a>
-{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>User Homepage</title>
+
+		{% load static %} {% load bootstrap5 %} {# Load Bootstrap CSS #} {% bootstrap_css %}
+	</head>
+	<body>
+		{% include 'polls/navbar.html' %} 
+        {% if user.is_authenticated %}
+            <p>Account Name: {{user.email}}</p>
+            <p>Username: {{user.get_username}}</p>
+            <a href="logout">Logout</a>
+		{% endif %}
+	</body>
+</html>
