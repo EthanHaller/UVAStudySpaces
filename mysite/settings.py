@@ -11,15 +11,14 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 import secrets
 from pathlib import Path
+from dotenv import load_dotenv, find_dotenv
 
 import dj_database_url
 
 import os
-import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
@@ -35,6 +34,7 @@ IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 # SECURITY WARNING: don't run with debug turned on in production!
 if not IS_HEROKU_APP:
     DEBUG = True
+    load_dotenv(find_dotenv())
 
 ALLOWED_HOSTS = ['127.0.0.1', 'project-a-06-99a4abdf2d2b.herokuapp.com']
 
@@ -188,5 +188,5 @@ AUTHENTICATION_BACKENDS = (
 )
 
 LOGIN_REDIRECT_URL = "/study/"
-LOGOUT_REDIRECT_URL = "/study/"
+LOGOUT_REDIRECT_URL = "/study/logout/"
 SOCIALACCOUNT_LOGIN_ON_GET=True
