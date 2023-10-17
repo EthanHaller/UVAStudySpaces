@@ -24,6 +24,6 @@ urlpatterns = [
     path('', views.home),
     path('admin/', admin.site.urls),
     path('study/', include("study_spaces.urls")),
-    path('study/accounts/', include("allauth.urls")),
+    path('accounts/', include("allauth.urls")),
     #path('/', include("study_spaces.urls"))
 ]
