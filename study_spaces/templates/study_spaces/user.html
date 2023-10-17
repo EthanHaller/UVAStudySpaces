@@ -8,7 +8,7 @@
 		{% load static %} {% load bootstrap5 %} {# Load Bootstrap CSS #} {% bootstrap_css %}
 	</head>
 	<body>
-		{% include 'polls/navbar.html' %} 
+		{% include 'study_spaces/navbar.html' %} 
         {% if user.is_authenticated %}
             <p>Account Name: {{user.email}}</p>
             <p>Username: {{user.get_username}}</p>
