@@ -45,5 +45,8 @@ def map(request):
 	return render(request, 'study_spaces/map.html', context)
 
 def route(request):
+     
+	# Code taken from https://www.youtube.com/watch?v=wCn8WND-JpU
+
 	context = {"google_api_key": settings.GOOGLE_API_KEY}
 	return render(request, 'study_spaces/route.html', context)
