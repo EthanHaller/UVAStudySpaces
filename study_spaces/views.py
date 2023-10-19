@@ -1,9 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
-<<<<<<< HEAD
 from django.conf import settings
 from .mixins import Directions
-=======
 from django.contrib.auth.decorators import login_required
 
 def is_admin(email):
@@ -11,7 +9,6 @@ def is_admin(email):
         'lukecreech11@gmail.com',
         'rqf8pe@virginia.edu'
     ]
->>>>>>> main
 
     return email in admins
 
@@ -25,7 +22,6 @@ def home(request):
 
 def logout_view(request):
     logout(request)
-<<<<<<< HEAD
     return redirect("/study/")
 
 def map(request):
@@ -62,20 +58,3 @@ def route(request):
 
 	context = {"google_api_key": settings.GOOGLE_API_KEY}
 	return render(request, 'study_spaces/route.html', context)
-=======
-    return redirect("/study")
-
-def login_view(request):
-    if request.user.is_authenticated:
-        return redirect("/study")
-    else:
-    	return render(request, "study_spaces/login.html")
-
-@login_required(login_url='/study/login')
-def admin_view(request):
-    if is_admin(request.user.email):
-        return render(request, "study_spaces/admin.html")
-    else:
-        return redirect('/study')
-    
->>>>>>> main
