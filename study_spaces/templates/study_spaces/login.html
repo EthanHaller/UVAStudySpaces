@@ -1,11 +1,18 @@
-<head>
-    <meta charset="UTF-8">
-    <title>Study Spaces Google Sign In</title>
-
-    {% load static %} {% load bootstrap5 %} {# Load Bootstrap CSS #} {% bootstrap_css %}
-</head>
-<body>
-    {% load socialaccount %}
-    <h2>Google Login</h2>
-    <a href="{% provider_login_url 'google' %}?next=/">Login With Google</a>
-</body>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Study Spaces Google Sign In</title>
+		{% load socialaccount %} {% load static %} {% load bootstrap5 %} {% bootstrap_css %} {% load bootstrap_icons %}
+	</head>
+	<body>
+		<div class="container">
+			<div class="row justify-content-center mt-5">
+				<div class="col-md-6 text-center">
+					<h2>Google Login</h2>
+					<a href="{% provider_login_url 'google' %}" class="btn btn-primary d-flex align-items-center"> {% bs_icon 'google' %} Login With Google </a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'bootstrap5',
+    'django_bootstrap_icons',
 ]
 
 SOCIALACCOUNT_PROVIDERS = {
