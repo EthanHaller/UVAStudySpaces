@@ -1,18 +1,4 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Study Spaces Google Sign In</title>
-</head>
-<body>
-    {% load socialaccount %}
-    <h2>Google Login</h2>
-    <a href="{% provider_login_url 'google' %}?next=/">Login With Google</a>
-
-    {% if user.is_authenticated %}
-    <p>Account Name: {{user.email}}</p>
-    <p>Username: {{user.get_username}}</p>
-    <a href="logout">Logout</a>
-    {% endif %}
-</body>
+<h1>Hello World</h1>
 </html>
