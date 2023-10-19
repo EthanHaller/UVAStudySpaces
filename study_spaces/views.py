@@ -27,9 +27,11 @@ def logout_view(request):
     return redirect("/study/")
 
 
+@login_required(login_url='/study/login')
 def map(request):
     # Code taken from https://www.youtube.com/watch?v=wCn8WND-JpU
-
+    if "lat_a" not in request or "long_a" not in request or "lat_b" not in request or "long_b" not in request:
+        return redirect("/study/route")
     lat_a = request.GET.get("lat_a")
     long_a = request.GET.get("long_a")
     lat_b = request.GET.get("lat_b")
@@ -55,6 +57,7 @@ def map(request):
     return render(request, 'study_spaces/map.html', context)
 
 
+@login_required(login_url='/study/login')
 def route(request):
     # Code taken from https://www.youtube.com/watch?v=wCn8WND-JpU
 
