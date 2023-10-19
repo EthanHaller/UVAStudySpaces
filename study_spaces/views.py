@@ -30,7 +30,10 @@ def logout_view(request):
 @login_required(login_url='/study/login')
 def map(request):
     # Code taken from https://www.youtube.com/watch?v=wCn8WND-JpU
-    if "lat_a" not in request or "long_a" not in request or "lat_b" not in request or "long_b" not in request:
+    if ("lat_a" not in request.GET
+            or "long_a" not in request.GET
+            or "lat_b" not in request.GET
+            or "long_b" not in request.GET):
         return redirect("/study/route")
     lat_a = request.GET.get("lat_a")
     long_a = request.GET.get("long_a")
