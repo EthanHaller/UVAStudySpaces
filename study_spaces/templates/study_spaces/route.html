@@ -1,10 +1,11 @@
 {% extends 'study_spaces/base.html' %}
-{% load static %}
+{% load static %} {% load bootstrap5 %} {# Load Bootstrap CSS #} {% bootstrap_css %}
 
 
 {% block extend_head %}
 
 <script src='https://www.google.com/recaptcha/api.js?render={{recaptcha_site_key}}'></script>
+{% include 'study_spaces/navbar.html' %}
 
 {% endblock %}
 
