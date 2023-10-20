@@ -1,8 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from django.conf import settings
+from django.utils.decorators import method_decorator
+
 from .mixins import Directions
 from django.contrib.auth.decorators import login_required
+from django.views import generic
+
+from .models import *
 
 
 def is_admin(email):
@@ -81,3 +86,15 @@ def admin_view(request):
         return render(request, "study_spaces/admin.html")
     else:
         return redirect('/study')
+
+
+@method_decorator(login_required, name='dispatch')
+class IndexView(generic.ListView):
+    template_name = "study_spaces/index.html"
+    context_object_name = "study_space_list"
+
+    def get_queryset(self):
+        return StudySpace.objects.all()
+
+
+

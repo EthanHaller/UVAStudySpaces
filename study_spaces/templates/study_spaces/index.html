@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Study Spaces Index</title>
+</head>
+<body>
+    <h1>Study Spaces</h1>
+    {% if study_space_list %}
+        {% for study_space in study_space_list %}
+            <p>{{study_space.name}} is located at {{study_space.address}}.</p>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
