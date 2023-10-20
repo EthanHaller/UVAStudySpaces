@@ -21,10 +21,8 @@ def is_admin(email):
 
 @login_required(login_url='/study/login')
 def home(request):
-    if is_admin(request.user.email):
-        return redirect('/study/admin')
-    else:
-        return render(request, "study_spaces/user.html")
+    mod = StudySpace.objects.all()
+    return render(request, "study_spaces/studyspaces.html", {'mod': mod})
 
 
 def logout_view(request):
@@ -95,6 +93,12 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         return StudySpace.objects.all()
+
+@login_required(login_url='/study/login')
+def profile(request):
+    if is_admin(request.user.email):
+        return render(request, 'study_spaces/admin.html')
+    return render(request, 'study_spaces/profile.html')
 
 
 

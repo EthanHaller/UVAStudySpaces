@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Login</title>
+    {% load static %} {% load bootstrap5 %} {# Load Bootstrap CSS #} {% bootstrap_css %}
 </head>
-{% if user.is_authenticated %}
+<body>
+    {% include 'study_spaces/navbar.html' %} 
+    {% if user.is_authenticated %}
     <p>Account Name: {{user.email}}</p>
     <p>Username: {{user.get_username}}</p>
     <p>Hello, Admin</p>
-<a href="logout">Logout</a>
-{% endif %}
+    <a href="logout">Logout</a>
+    {% endif %}
+</body>

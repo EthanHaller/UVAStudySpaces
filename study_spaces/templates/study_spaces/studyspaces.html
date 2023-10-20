@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Study Spaces</title>
+
+		{% load static %} {% load bootstrap5 %} {# Load Bootstrap CSS #} {% bootstrap_css %}
+	</head>
+	<body>
+		{% include 'study_spaces/navbar.html' %} 
+		<h1>UVA Study Spaces</h1>
+		{% block content %}
+		{% for x in mod %}
+			<br>
+  			{{x.name }}
+			<br>
+			{{x.address }}
+			<br>
+			<a href="/study/route">Get directions</a>
+			<br>
+		{% endfor %}
+		{% endblock content %}
+	</body>
+</html>
+
