@@ -19,11 +19,15 @@ from django.urls import path, include
 
 import study_spaces
 from mysite import views
+from study_spaces import views
 
 urlpatterns = [
     path('', views.home),
     path('admin/', admin.site.urls),
     path('study/', include("study_spaces.urls")),
     path('study/accounts/', include("allauth.urls")),
+    #path('study/route/', views.route, name="route"),
+	path('map', views.map, name="map"),
+
     #path('/', include("study_spaces.urls"))
 ]
