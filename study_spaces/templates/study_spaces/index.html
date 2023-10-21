@@ -8,7 +8,7 @@
     <h1>Study Spaces</h1>
     {% if study_space_list %}
         {% for study_space in study_space_list %}
-            <p>{{study_space.name}} is located at {{study_space.address}}.</p>
+            <p>{{ study_space.get_sentence }}</p>
         {% endfor %}
     {% endif %}
 </body>
