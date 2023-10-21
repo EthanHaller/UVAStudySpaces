@@ -29,7 +29,11 @@
    <input type="text" placeholder="Type Address Here" id="id-google-address-a" name="google_address_a">
 
    <label for="id-google-address-b">Study Space Address</label>
-   <input type="text" placeholder="Type Address Here" id="id-google-address-b" name="google_address_b">
+    <input type="text" placeholder="Type Address Here" id="id-google-address-b" name="google_address_b"
+        {% if dest_address %}
+           value="{{ dest_address }}"
+        {% endif %}
+           >
 
 
    <input type="hidden" class="geo" id="id-lat-a" value="">

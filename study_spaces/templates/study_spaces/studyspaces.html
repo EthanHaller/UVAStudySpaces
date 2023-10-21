@@ -17,7 +17,7 @@
 			<br>
 			{{x.address }}
 			<br>
-			<a href="/study/route">Get directions</a>
+			<a href="{% url 'study_spaces:route' %}?dest={{ x.id }}">Get directions</a>
 			<br>
 		{% endfor %}
 		{% endblock content %}

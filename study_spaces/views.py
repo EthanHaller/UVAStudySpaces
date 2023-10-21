@@ -66,8 +66,11 @@ def map(request):
 @login_required(login_url='/study/login')
 def route(request):
     # Code taken from https://www.youtube.com/watch?v=wCn8WND-JpU
-
     context = {"google_api_key": settings.GOOGLE_API_KEY}
+    if "dest" in request.GET:
+        s = StudySpace.objects.get(pk=request.GET["dest"])
+        dest = s.address
+        context["dest_address"] =  dest
     return render(request, 'study_spaces/route.html', context)
 
 
