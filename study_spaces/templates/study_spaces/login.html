@@ -6,11 +6,23 @@
 		{% load socialaccount %} {% load static %} {% load bootstrap5 %} {% bootstrap_css %} {% load bootstrap_icons %}
 	</head>
 	<body>
-		<div class="container">
-			<div class="row justify-content-center mt-5">
-				<div class="col-md-6 text-center">
-					<h2>Google Login</h2>
-					<a href="{% provider_login_url 'google' %}" class="btn btn-primary d-flex align-items-center"> {% bs_icon 'google' %} Login With Google </a>
+		<div class="container-fluid p-0" style="height: 100vh">
+			<div class="row m-0 d-flex h-100">
+				<div class="col-md-7 p-0">
+					<div class="d-flex flex-column align-items-center justify-content-center h-100">
+						<div class="text-center login-box">
+							<h1>Google Login</h1>
+							<a href="{% provider_login_url 'google' %}" class="btn btn-primary d-flex justify-content-center align-items-center">
+								<div class="d-flex align-items-center">
+									{% bs_icon 'google' extra_classes='mx-2' %}
+									<span class="mx-2">Login With Google</span>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-5 p-0 bg-primary d-none d-md-block">
+					<div class="d-flex align-items-center justify-content-center h-100"></div>
 				</div>
 			</div>
 		</div>
