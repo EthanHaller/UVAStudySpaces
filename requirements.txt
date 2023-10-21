@@ -1,5 +1,8 @@
-dj_database_url==2.1.0
-Django==4.2.6
-django_heroku==0.3.1
-python-dotenv==1.0.0
-Requests==2.31.0
+Django
+gunicorn
+django-heroku
+dj-database-url
+django.allauth
+python-dotenv
+django-bootstrap-v5
+django-bootstrap-icons
