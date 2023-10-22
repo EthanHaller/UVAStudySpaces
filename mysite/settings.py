@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
 import secrets
+import sys
 from pathlib import Path
 from dotenv import load_dotenv, find_dotenv
 
@@ -119,13 +120,31 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {
-    'default': dj_database_url.config(
-        conn_max_age=600,
-        conn_health_checks=True,
-        ssl_require=True,
-    ),
-}
+# Provisioning a Test PostgreSQL database on Heroku for your Django App
+# https://medium.com/analytics-vidhya/provisioning-a-test-postgresql-database-on-heroku-for-your-django-app-febb2b5d3b29
+if 'test' in sys.argv:
+    #Configuration for test database
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'druutn3jp1o',
+            'USER': 'iaxajdctvqmrby',
+            'PASSWORD': '3e83438a6d53219848ec5c6e8daa87b3cb9d82ad1b97ea7cfef97fdef0049c7b',
+            'HOST': 'ec2-34-236-103-63.compute-1.amazonaws.com',
+            'PORT': 5432,
+            'TEST': {
+                'NAME': 'druutn3jp1o',
+            }
+        }
+    }
+else:
+    DATABASES = {
+        'default': dj_database_url.config(
+            conn_max_age=600,
+            conn_health_checks=True,
+            ssl_require=True,
+        ),
+    }
 
 
 # Password validation

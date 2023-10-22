@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Study Spaces Index</title>
+    {% load static %} {% load bootstrap5 %} {# Load Bootstrap CSS #} {% bootstrap_css %}
 </head>
 <body>
+    {% include 'study_spaces/navbar.html' %}
     <h1>Study Spaces</h1>
     {% if study_space_list %}
         {% for study_space in study_space_list %}
