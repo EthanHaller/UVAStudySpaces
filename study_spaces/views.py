@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from django.conf import settings
@@ -89,8 +90,10 @@ def admin_view(request):
         return redirect('/study')
 
 
-@method_decorator(login_required, name='dispatch')
-class IndexView(generic.ListView):
+#https://stackoverflow.com/questions/2140550/how-to-require-login-for-django-generic-views
+class IndexView(LoginRequiredMixin, generic.ListView):
+    login_url = '/study/login'
+    redirect_field_name = 'next'
     template_name = "study_spaces/index.html"
     context_object_name = "study_space_list"
 
