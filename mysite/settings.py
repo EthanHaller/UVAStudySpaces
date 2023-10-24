@@ -105,14 +105,24 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 # Provisioning a Test PostgreSQL database on Heroku for your Django App
 # https://medium.com/analytics-vidhya/provisioning-a-test-postgresql-database-on-heroku-for-your-django-app-febb2b5d3b29
+from urllib.parse import urlparse
+DATABASE_URL = os.environ.get("DATABASE_URL")
+url_parts = urlparse(DATABASE_URL)
+
+DATABASE_USER = url_parts.username
+DATABASE_PASSWORD = url_parts.password
+DATABASE_HOST = url_parts.hostname
+DATABASE_PORT = url_parts.port
+DATABASE_NAME = url_parts.path[1:]
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd2h8gkbasetga1',
-        'USER': 'tninepmojnmkxz',
-        'PASSWORD': os.environ.get("DATABASE_PASSWORD"),
-        'HOST': 'ec2-54-145-174-66.compute-1.amazonaws.com',
-        'PORT':  '5432'
+        'NAME': DATABASE_NAME,
+        'USER': DATABASE_USER,
+        'PASSWORD': DATABASE_PASSWORD,
+        'HOST': DATABASE_HOST,
+        'PORT':  DATABASE_PORT
     }
 }
 
