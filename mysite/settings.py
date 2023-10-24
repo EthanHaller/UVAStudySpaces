@@ -9,57 +9,40 @@ https://docs.djangoproject.com/en/dev/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
-import secrets
-import sys
 from pathlib import Path
+import os
+import sys
 from dotenv import load_dotenv, find_dotenv
 
-import dj_database_url
-
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(find_dotenv())
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get(
-    "DJANGO_SECRET_KEY",
-    default=secrets.token_urlsafe(nbytes=64),
-)
-
-IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
+SECRET_KEY = os.environ.get( "DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if not IS_HEROKU_APP:
-    DEBUG = True
-    load_dotenv(find_dotenv())
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'project-a-06-99a4abdf2d2b.herokuapp.com']
-
-
-try:     
-    if "HEROKU" in os.environ:        
-         import django_heroku
-         django_heroku.settings(locals())
-
-except ImportError:     
-    found = False
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'project-a-06-99a4abdf2d2b.herokuapp.com']
 
 # Application definition
 
 SITE_ID = 1
 
 INSTALLED_APPS = [
-    'study_spaces.apps.StudySpacesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'study_spaces',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -122,28 +105,21 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 # Provisioning a Test PostgreSQL database on Heroku for your Django App
 # https://medium.com/analytics-vidhya/provisioning-a-test-postgresql-database-on-heroku-for-your-django-app-febb2b5d3b29
-if 'test' in sys.argv:
-    #Configuration for test database
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'druutn3jp1o',
-            'USER': 'iaxajdctvqmrby',
-            'PASSWORD': '3e83438a6d53219848ec5c6e8daa87b3cb9d82ad1b97ea7cfef97fdef0049c7b',
-            'HOST': 'ec2-34-236-103-63.compute-1.amazonaws.com',
-            'PORT': 5432,
-            'TEST': {
-                'NAME': 'druutn3jp1o',
-            }
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'druutn3jp1o',
+        'USER': 'iaxajdctvqmrby',
+        'PASSWORD': os.environ.get("DATABASE_PASSWORD"),
+        'HOST': 'ec2-34-236-103-63.compute-1.amazonaws.com',
+        'PORT':  '5432'
     }
-else:
-    DATABASES = {
-        'default': dj_database_url.config(
-            conn_max_age=600,
-            conn_health_checks=True,
-            ssl_require=True,
-        ),
+}
+
+if "test" in sys.argv:
+    DATABASES["default"] = {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
 
 
@@ -192,7 +168,6 @@ STATICFILES_DIRS = [
     ]
 
 STATIC_URL = '/static/'
-
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
 STORAGES = {
@@ -201,14 +176,12 @@ STORAGES = {
     },
 }
 
-AUTHENTICATION_BACKENDS = (
-    "django.contrib.auth.backends.ModelBackend",
-    "allauth.account.auth_backends.AuthenticationBackend",
-)
+AUTHENTICATION_BACKENDS = [
+  'django.contrib.auth.backends.ModelBackend',
+  'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 LOGIN_REDIRECT_URL = "/study/"
 LOGOUT_REDIRECT_URL = "/study/logout/"
 SOCIALACCOUNT_LOGIN_ON_GET=True
-if IS_HEROKU_APP:
-    ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
 GOOGLE_API_KEY = 'AIzaSyC5DCptRFmVd168TUsP-5pe0etKaeGNCEY'
