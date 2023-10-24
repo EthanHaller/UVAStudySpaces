@@ -7,6 +7,7 @@ from django.utils.decorators import method_decorator
 from .mixins import Directions
 from django.contrib.auth.decorators import login_required
 from django.views import generic
+import json
 
 from .models import *
 
@@ -23,7 +24,8 @@ def is_admin(email):
 @login_required(login_url='/study/login')
 def home(request):
     mod = StudySpace.objects.all()
-    return render(request, "study_spaces/studyspaces.html", {'mod': mod})
+    mod_json = json.dumps(list(mod.values('latitude', 'longitude')))
+    return render(request, "study_spaces/studyspaces.html", {'mod': mod, 'mod_json': mod_json, 'key': 'AIzaSyC5DCptRFmVd168TUsP-5pe0etKaeGNCEY'})
 
 
 def logout_view(request):

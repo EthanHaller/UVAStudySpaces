@@ -15,7 +15,16 @@ function initMap() {
     });
     directionsDisplay.setMap(map);
     calculateAndDisplayRoute(directionsService, directionsDisplay);
-
+    const data = [
+      {'latitude': 38.035296426566426, 'longitude': -78.50360833130435},
+      {'latitude': 38.036391644762894, 'longitude': -78.50589947123407}
+    ]
+    const markers = data?.map((i) => {
+      const marker = new google.maps.Marker({
+          position: { lat: parseFloat(i.latitude), lng: parseFloat(i.longitude)},
+          map: map,
+      })
+  });
 }
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
