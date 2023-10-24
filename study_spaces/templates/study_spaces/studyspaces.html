@@ -15,11 +15,9 @@
 					center: { lat: 38.03413872243867, lng: -78.50873523191473 },
 					zoom: 16,
 				})
-				const data = [
-					{ latitude: 38.035296426566426, longitude: -78.50360833130435 },
-					{ latitude: 38.036391644762894, longitude: -78.50589947123407 },
-				]
-				const markers = data?.map((i) => {
+
+				const modData = JSON.parse("{{ mod_json|escapejs }}")
+				const markers = modData.map((i) => {
 					const marker = new google.maps.Marker({
 						position: { lat: parseFloat(i.latitude), lng: parseFloat(i.longitude) },
 						map: map,
