@@ -10,3 +10,6 @@ class StudySpace(models.Model):
 
     def get_sentence(self):
         return "{name} is located at {address}.".format(name=self.name, address=self.address)
+
+    def __str__(self):
+        return self.name

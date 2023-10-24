@@ -23,7 +23,7 @@ def is_admin(email):
 @login_required(login_url='/study/login')
 def home(request):
     mod = StudySpace.objects.all()
-    return render(request, "study_spaces/studyspaces.html", {'mod': mod})
+    return render(request, "study_spaces/studyspaces.html", {'mod': mod, 'key': 'AIzaSyC5DCptRFmVd168TUsP-5pe0etKaeGNCEY'})
 
 
 def logout_view(request):
