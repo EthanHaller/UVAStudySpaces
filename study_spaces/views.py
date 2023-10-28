@@ -108,5 +108,9 @@ def profile(request):
         return render(request, 'study_spaces/admin.html')
     return render(request, 'study_spaces/profile.html')
 
+@login_required(login_url='/study/login')
+def submission(request):
+    return render(request, 'study_spaces/submission.html')
+
 
 

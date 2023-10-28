@@ -13,4 +13,5 @@ urlpatterns = [
     path('map', views.map, name="map"),
     path('index', views.IndexView.as_view(), name="index"),
     path('profile', views.profile, name='profile'),
+    path('submission', views.submission, name='submission')
 ]
