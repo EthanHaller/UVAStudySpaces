@@ -21,9 +21,21 @@ def is_admin(email):
     return email in admins
 
 
+def get_approved_spaces():
+    return StudySpace.objects.filter(approved_submission=StudySpace.ApprovalStatus.APPROVED)
+
+
+def get_pending_spaces():
+    return StudySpace.objects.filter(approved_submission=StudySpace.ApprovalStatus.PENDING)
+
+
+def get_spaces_by_email(email):
+    return StudySpace.objects.filter(user_email=email)
+
+
 @login_required(login_url='/study/login')
 def home(request):
-    mod = StudySpace.objects.all()
+    mod = get_approved_spaces()
     mod_json = json.dumps(list(mod.values('latitude', 'longitude')))
     return render(request, "study_spaces/studyspaces.html", {'mod': mod, 'mod_json': mod_json, 'key': 'AIzaSyC5DCptRFmVd168TUsP-5pe0etKaeGNCEY'})
 
@@ -92,7 +104,7 @@ def admin_view(request):
         return redirect('/study')
 
 
-#https://stackoverflow.com/questions/2140550/how-to-require-login-for-django-generic-views
+# https://stackoverflow.com/questions/2140550/how-to-require-login-for-django-generic-views
 class IndexView(LoginRequiredMixin, generic.ListView):
     login_url = '/study/login'
     redirect_field_name = 'next'
@@ -100,7 +112,8 @@ class IndexView(LoginRequiredMixin, generic.ListView):
     context_object_name = "study_space_list"
 
     def get_queryset(self):
-        return StudySpace.objects.all()
+        return get_approved_spaces()
+
 
 @login_required(login_url='/study/login')
 def profile(request):
@@ -108,9 +121,47 @@ def profile(request):
         return render(request, 'study_spaces/admin.html')
     return render(request, 'study_spaces/profile.html')
 
+
 @login_required(login_url='/study/login')
 def submission(request):
-    return render(request, 'study_spaces/submission.html')
+    context = {"google_api_key": settings.GOOGLE_API_KEY}
+    if is_admin(request.user.email):
+        context["pending_list"] = get_pending_spaces()
+        return render(request, 'study_spaces/approval.html', context)
+    else:
+        if request.method == 'POST':
+            print("latitude:", request.POST["lat"])
+            print("longitude:", request.POST["long"])
+            if request.POST["name"] == '':
+                context["error_message"] = "Please input a name."
+                return render(request, 'study_spaces/submission.html', context)
+            if request.POST["address"] == '' or request.POST["lat"] == '' or request.POST["long"] == '':
+                context["error_message"] = "Please input a valid address."
+                return render(request, 'study_spaces/submission.html', context)
+            s = StudySpace(
+                name=request.POST["name"],
+                address=request.POST["address"],
+                latitude=request.POST["lat"],
+                longitude=request.POST["long"],
+                user_email=request.user.email
+            )
+            s.save()
+        context["submitted_list"] = get_spaces_by_email(request.user.email)
+        return render(request, 'study_spaces/submission.html', context)
 
 
+@login_required(login_url='/study/login')
+def approve_submission(request):
+    if request.method == 'POST':
+        s = StudySpace.objects.get(pk=request.POST["id"])
+        s.approved_submission = StudySpace.ApprovalStatus.APPROVED
+        s.save()
+    return redirect('/submission')
 
+
+def deny_submission(request):
+    if request.method == 'POST':
+        s = StudySpace.objects.get(pk=request.POST["id"])
+        s.approved_submission = StudySpace.ApprovalStatus.DENIED
+        s.save()
+    return redirect('/submission')

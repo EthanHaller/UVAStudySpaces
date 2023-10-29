@@ -13,5 +13,7 @@ urlpatterns = [
     path('map', views.map, name="map"),
     path('index', views.IndexView.as_view(), name="index"),
     path('profile', views.profile, name='profile'),
-    path('submission', views.submission, name='submission')
+    path('submission', views.submission, name='submission'),
+    path('approve', views.approve_submission, name='approve'),
+    path('deny', views.deny_submission, name='deny'),
 ]
