@@ -12,14 +12,14 @@
 		{% include 'study_spaces/navbar.html' %}
 		<h1>Approve Submissions</h1>
 		{% for x in pending_list %}
-            <form class="form-multiline">
+            <form method="post" class="form-multiline">
 				{% csrf_token %}
 				Study Space Name: {{ x.name }}<br>
 				Study Space Address: {{ x.address }}<br>
 				<input type="hidden" name="id" value="{{ x.id }}">
-                <input type="submit" value="Approve" formaction="{% url 'polls:approve' %}"
+                <input type="submit" value="Approve" formaction="{% url 'study_spaces:approve' %}"
 					   class="btn btn-success">
-				<input type="submit" value="Deny" formaction="{% url 'polls:deny' %}"
+				<input type="submit" value="Deny" formaction="{% url 'study_spaces:deny' %}"
 					   class="btn btn-danger">
 				<br><br>
             </form>

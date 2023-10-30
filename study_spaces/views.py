@@ -85,7 +85,7 @@ def route(request):
     if "dest" in request.GET:
         s = StudySpace.objects.get(pk=request.GET["dest"])
         dest = s.address
-        context["dest_address"] =  dest
+        context["dest_address"] = dest
     return render(request, 'study_spaces/route.html', context)
 
 
@@ -129,9 +129,8 @@ def submission(request):
         context["pending_list"] = get_pending_spaces()
         return render(request, 'study_spaces/approval.html', context)
     else:
+        context["submitted_list"] = get_spaces_by_email(request.user.email)
         if request.method == 'POST':
-            print("latitude:", request.POST["lat"])
-            print("longitude:", request.POST["long"])
             if request.POST["name"] == '':
                 context["error_message"] = "Please input a name."
                 return render(request, 'study_spaces/submission.html', context)
@@ -156,7 +155,7 @@ def approve_submission(request):
         s = StudySpace.objects.get(pk=request.POST["id"])
         s.approved_submission = StudySpace.ApprovalStatus.APPROVED
         s.save()
-    return redirect('/submission')
+    return redirect('/study/submission')
 
 
 def deny_submission(request):
@@ -164,4 +163,4 @@ def deny_submission(request):
         s = StudySpace.objects.get(pk=request.POST["id"])
         s.approved_submission = StudySpace.ApprovalStatus.DENIED
         s.save()
-    return redirect('/submission')
+    return redirect('/study/submission')
