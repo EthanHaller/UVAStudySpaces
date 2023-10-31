@@ -16,6 +16,8 @@
 				{% csrf_token %}
 				Study Space Name: {{ x.name }}<br>
 				Study Space Address: {{ x.address }}<br>
+				<label>Reason for Denial (if applicable) <input type="text" name="Denial", size="100"></label>
+				<br>
 				<input type="hidden" name="id" value="{{ x.id }}">
                 <input type="submit" value="Approve" formaction="{% url 'study_spaces:approve' %}"
 					   class="btn btn-success">

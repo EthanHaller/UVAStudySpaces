@@ -162,5 +162,6 @@ def deny_submission(request):
     if request.method == 'POST':
         s = StudySpace.objects.get(pk=request.POST["id"])
         s.approved_submission = StudySpace.ApprovalStatus.DENIED
+        s.denial_reason = request.POST["Denial"]
         s.save()
     return redirect('/study/submission')
