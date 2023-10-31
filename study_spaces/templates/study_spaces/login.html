@@ -11,13 +11,15 @@
 				<div class="col-md-7 p-0">
 					<div class="d-flex flex-column align-items-center justify-content-center h-100">
 						<div class="text-center login-box">
-							<h1>Google Login</h1>
-							<a href="{% provider_login_url 'google' %}" class="btn btn-primary d-flex justify-content-center align-items-center">
-								<div class="d-flex align-items-center">
-									{% bs_icon 'google' extra_classes='mx-2' %}
-									<span class="mx-2">Login With Google</span>
-								</div>
-							</a>
+							<h1>UVA Study Spaces</h1>
+							<div class="d-flex justify-content-center align-items-center">
+								<a href="{% provider_login_url 'google' %}" class="btn btn-primary">
+									<div class="d-flex align-items-center">
+										{% bs_icon 'google' extra_classes='mx-2' %}
+										<span class="mx-2">Login With Google</span>
+									</div>
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>

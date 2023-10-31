@@ -36,7 +36,7 @@ def get_spaces_by_email(email):
 @login_required(login_url='/study/login')
 def home(request):
     mod = get_approved_spaces()
-    mod_json = json.dumps(list(mod.values('latitude', 'longitude')))
+    mod_json = json.dumps(list(mod.values('latitude', 'longitude', 'id', 'name')))
     return render(request, "study_spaces/studyspaces.html", {'mod': mod, 'mod_json': mod_json, 'key': 'AIzaSyC5DCptRFmVd168TUsP-5pe0etKaeGNCEY'})
 
 

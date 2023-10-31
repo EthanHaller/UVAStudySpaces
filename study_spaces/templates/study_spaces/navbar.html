@@ -8,7 +8,7 @@
 		{% load static %} {% load bootstrap5 %} {% bootstrap_css %}
 	</head>
 	<body>
-		<nav class="navbar navbar-expand-lg bg-light">
+		<nav id="global-navbar" class="navbar navbar-expand-lg bg-light">
 			<div class="container-fluid">
 				<a class="navbar-brand">StudySpaces</a>
 				<button
@@ -24,30 +24,26 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item">
+						<li class="nav-item mx-2">
 							<a class="nav-link active" aria-current="page" href="/study/">Home</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item mx-2">
 							<a class="nav-link active" aria-current="page" href="/study/index">Index</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item mx-2">
 							<a class="nav-link" href="/study/route">Routes</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item mx-2">
 							<a class="nav-link" href="#">Favorites</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item mx-2">
 							<a class="nav-link" href="/study/profile">Profile</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item mx-2">
 							<a class="nav-link" href="/study/submission">Submit a Study Space</a>
 						</li>
 
 					</ul>
-					<form class="d-flex" role="search">
-						<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-						<button class="btn btn-outline-primary" type="submit">Search</button>
-					</form>
 					<a href="{% url 'study_spaces:logout' %}">
 						<button class="btn btn-primary">Logout</button>
 					</a>
