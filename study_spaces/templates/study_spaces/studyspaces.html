@@ -65,6 +65,7 @@
 									<h5 class="card-title">{{x.name}}</h5>
 									<p class="card-text">{{x.address}}</p>
 									<a href="{% url 'study_spaces:route' %}?dest={{ x.id }}" class="btn btn-primary">Get Directions</a>
+									<a href="{% url 'study_spaces:information' %}?dest={{ x.id }}" class="btn btn-primary">More Information</a>
 								</div>
 							</div>
 						</div>

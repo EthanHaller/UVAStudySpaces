@@ -165,3 +165,12 @@ def deny_submission(request):
         s.denial_reason = request.POST["Denial"]
         s.save()
     return redirect('/study/submission')
+
+@login_required(login_url='/study/login')
+def information(request):
+    context = {}
+    if "dest" in request.GET:
+        s = StudySpace.objects.get(pk=request.GET["dest"])
+        dest = s.information
+        context["dest_information"] = dest
+    return render(request, 'study_spaces/information.html', context)
