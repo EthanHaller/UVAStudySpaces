@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Profile</title>
+
+		{% load static %} {% load bootstrap5 %} {# Load Bootstrap CSS #} {% bootstrap_css %}
+	</head>
+	<body>
+		{% include 'study_spaces/navbar.html' %}
+        <h1>Study Space Information</h1>
+        {% block content %}
+        {% if dest_information %}
+            {{ dest_information }}
+        {% endif %}
+        {%endblock%}
+	</body>
+</html>

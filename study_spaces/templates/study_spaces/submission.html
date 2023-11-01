@@ -43,6 +43,8 @@
 			{% endif %}
 			{% if x.approved_submission == -1 %}
 				Denied.
+				<br>
+				Denial Reason: {{ x.denial_reason }}
 			{% endif %}
 			<br>
 			<br>

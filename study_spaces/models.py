@@ -16,6 +16,8 @@ class StudySpace(models.Model):
 
     approved_submission = models.IntegerField(choices=ApprovalStatus.choices, default=ApprovalStatus.PENDING)
     user_email = models.CharField(max_length=200)
+    denial_reason = models.CharField(max_length=200, default='')
+    information = models.TextField(default='')
 
     def get_sentence(self):
         return "{name} is located at {address}.".format(name=self.name, address=self.address)
