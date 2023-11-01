@@ -20,6 +20,7 @@ function initMap() {
 			map: map,
 		})
 		marker.addListener("click", () => {
+			markerClicked(this)
 			map.setZoom(18)
 			map.setCenter(marker.getPosition())
 
@@ -34,6 +35,11 @@ function initMap() {
 			card.style.borderColor = "#8BC34A"
 		})
 	})
+}
+
+function markerClicked(this) {
+	console.log(this)
+	console.log(this.id)
 }
 
 window.initMap = initMap

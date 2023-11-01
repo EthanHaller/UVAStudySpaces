@@ -19,7 +19,8 @@ function initMap() {
 			position: { lat: parseFloat(i.latitude), lng: parseFloat(i.longitude) },
 			map: map,
 		})
-		marker.addListener("click", () => {
+		marker.addListener("click", (this) => {
+			markerClicked(this)
 			map.setZoom(18)
 			map.setCenter(marker.getPosition())
 
@@ -34,6 +35,11 @@ function initMap() {
 			card.style.borderColor = "#8BC34A"
 		})
 	})
+}
+
+function markerClicked(this) {
+	console.log(this)
+	console.log(this.id)
 }
 
 window.initMap = initMap

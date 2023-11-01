@@ -22,7 +22,7 @@
 
 /* Accent Color */
 .accent {
-    background-color: var(--accent-color) !important;
+    background-color: var(--accent-color);
     color: var(--accent-color) !important;
 }
 

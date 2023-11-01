@@ -4,16 +4,17 @@
 		<meta charset="UTF-8" />
 		<title>Study Spaces Google Sign In</title>
 		{% load socialaccount %} {% load static %} {% load bootstrap5 %} {% bootstrap_css %} {% load bootstrap_icons %}
+		<link rel="stylesheet" type="text/css" href="{% static 'theme.css' %}" />
 	</head>
-	<body>
+	<body class="background">
 		<div class="container-fluid p-0" style="height: 100vh">
 			<div class="row m-0 d-flex h-100">
 				<div class="col-md-7 p-0">
 					<div class="d-flex flex-column align-items-center justify-content-center h-100">
 						<div class="text-center login-box">
-							<h1>UVA Study Spaces</h1>
+							<h1>UVAStudySpaces</h1>
 							<div class="d-flex justify-content-center align-items-center">
-								<a href="{% provider_login_url 'google' %}" class="btn btn-primary">
+								<a href="{% provider_login_url 'google' %}" class="btn btn-primary primary">
 									<div class="d-flex align-items-center">
 										{% bs_icon 'google' extra_classes='mx-2' %}
 										<span class="mx-2">Login With Google</span>
@@ -23,8 +24,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-5 p-0 bg-primary d-none d-md-block">
-					<div class="d-flex align-items-center justify-content-center h-100"></div>
+				<div class="col-md-5 p-0 d-md-block">
+					<div class="row primary d-flex flex-fill" style="height: 33%;"></div>
+					<div class="row secondary d-flex flex-fill" style="height: 34%;"></div>
+					<div class="row accent d-flex flex-fill" style="height: 33%;"></div>
 				</div>
 			</div>
 		</div>
