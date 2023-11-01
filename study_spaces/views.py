@@ -153,6 +153,5 @@ def information(request):
     context = {}
     if "dest" in request.GET:
         s = StudySpace.objects.get(pk=request.GET["dest"])
-        dest = s.information
-        context["dest_information"] = dest
+        context["study_space"] = s
     return render(request, 'study_spaces/information.html', context)

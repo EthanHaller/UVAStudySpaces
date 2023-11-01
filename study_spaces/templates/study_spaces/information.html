@@ -9,11 +9,13 @@
 	</head>
 	<body>
 		{% include 'study_spaces/navbar.html' %}
-        <h1>Study Space Information</h1>
-        {% block content %}
-        {% if dest_information %}
-            {{ dest_information }}
-        {% endif %}
+		{% block content %}
+		{% if study_space %}
+        	<h1>{{ study_space.name }} Information</h1>
+            {{ study_space.information }}
+		{% else %}
+			<h1>Study Space Information</h1>
+		{% endif %}
         {%endblock%}
 	</body>
 </html>
