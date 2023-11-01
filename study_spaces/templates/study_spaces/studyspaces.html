@@ -5,43 +5,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Study Spaces</title>
 
-
 		<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-		<script src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap&v=weekly" defer></script>
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.min.js"
+			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			crossorigin="anonymous"
+		></script>
 		<script>
-			let map
-			function initMap() {
-				map = new google.maps.Map(document.getElementById("map"), {
-					center: { lat: 38.03413872243867, lng: -78.50873523191473 },
-					zoom: 16,
-				})
-
-				const navbarHeight = document.getElementById("global-navbar").offsetHeight
-				const mapHeight = `calc(100vh - ${navbarHeight}px)`
-				document.getElementById("map-container").style.height = mapHeight
-
-				const modData = JSON.parse("{{ mod_json|escapejs }}")
-				const markers = modData.map((i) => {
-					const marker = new google.maps.Marker({
-						position: { lat: parseFloat(i.latitude), lng: parseFloat(i.longitude) },
-						map: map,
-					})
-					marker.addListener("click", () => {
-						map.setZoom(18)
-						map.setCenter(marker.getPosition())
-
-						modData.forEach((element) => {
-							const card = document.getElementById("study-card-id-" + element.id)
-							card.style.backgroundColor = null
-						})
-
-						const card = document.getElementById("study-card-id-" + i.id)
-						card.style.backgroundColor = "#F5F5F5"
-					})
-				})
-			}
-			window.initMap = initMap
+			window.map
+			window.key = "{{key}}"
+			console.log(window.key)
+			window.modJson = JSON.parse("{{ mod_json|escapejs }}")
 		</script>
+		{% load static %}
+		<script src="{% static 'home_map.js' %}"></script>
 	</head>
 	<body>
 		{% include 'study_spaces/navbar.html' %}
