@@ -18,11 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 
 import study_spaces
-from mysite import views
+from mysite import views as mysite_views
 from study_spaces import views
 
 urlpatterns = [
-    path('', views.home),
+    path('', mysite_views.home),
     path('admin/', admin.site.urls),
     path('study/', include("study_spaces.urls")),
     path('study/accounts/', include("allauth.urls")),

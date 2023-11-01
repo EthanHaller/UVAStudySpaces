@@ -30,7 +30,7 @@
 			<input type="submit" class="btn btn-primary" formaction="{% url 'study_spaces:submission' %}">
 			<br><br>
 		</form>
-		<h3>Past Submission Statuses</h3>
+		<h3>Past Submissions</h3>
 		{% for x in submitted_list %}
 			Name: {{ x.name }} <br>
 			Address: {{ x.address }} <br>

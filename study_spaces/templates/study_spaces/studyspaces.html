@@ -14,13 +14,12 @@
 		<script>
 			window.map
 			window.key = "{{key}}"
-			console.log(window.key)
 			window.modJson = JSON.parse("{{ mod_json|escapejs }}")
 		</script>
 		{% load static %}
 		<script src="{% static 'home_map.js' %}"></script>
 	</head>
-	<body>
+	<body class="background">
 		{% include 'study_spaces/navbar.html' %}
 		<div class="row" style="width: 100vw">
 			<div class="col-sm-8">

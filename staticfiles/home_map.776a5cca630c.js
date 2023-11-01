@@ -11,7 +11,6 @@ function initMap() {
 	const navbarHeight = document.getElementById("global-navbar").offsetHeight
 	const mapHeight = `calc(100vh - ${navbarHeight}px)`
 	document.getElementById("map-container").style.height = mapHeight
-	document.getElementById("list-container").style.maxHeight = `calc(${mapHeight} - 48px)`
 
 	const modData = window.modJson
 	const markers = modData.map((i) => {

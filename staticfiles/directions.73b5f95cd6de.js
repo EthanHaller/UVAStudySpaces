@@ -7,26 +7,11 @@ function initMap() {
 	var directionsDisplay = new google.maps.DirectionsRenderer()
     
     const modData = window.modData
-	const markers = []
-	if(!modData || modData.length === 0) {
-		map = new google.maps.Map(document.getElementById("map"), {
-			center: { lat: 38.03413872243867, lng: -78.50873523191473 },
-			zoom: 16,
-		})
-	}
-	else {
-		map = new google.maps.Map(document.getElementById("map"), {
-			center: { lat: parseFloat(modData.latitude), lng: parseFloat(modData.longitude) },
-			zoom: 16,
-		})
-
-		markers.push(
-			new google.maps.Marker({
-				position: { lat: parseFloat(modData.latitude), lng: parseFloat(modData.longitude) },
-				map: map,
-			})
-		)
-	}
+	console.log(modData)
+	map = new google.maps.Map(document.getElementById("map"), {
+		center: { lat: parseFloat(modData.latitude), lng: parseFloat(modData.longitude) },
+		zoom: 16,
+	})
 	directionsDisplay.setMap(map)
 	const showDirections = window.showDirections
 	if (showDirections != "False") {
@@ -39,6 +24,14 @@ function initMap() {
 	const navbarHeight = document.getElementById("global-navbar").offsetHeight
 	const mapHeight = `calc(100vh - ${navbarHeight}px)`
 	document.getElementById("map-container").style.height = mapHeight
+
+	const markers = []
+	markers.push(
+		new google.maps.Marker({
+			position: { lat: parseFloat(modData.latitude), lng: parseFloat(modData.longitude) },
+			map: map,
+		})
+	)
 }
 
 async function populateStartAddressWithUserLocation() {
