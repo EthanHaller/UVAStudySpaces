@@ -44,53 +44,6 @@ def logout_view(request):
     logout(request)
     return redirect("/study/")
 
-
-@login_required(login_url='/study/login')
-def map(request):
-    # Code taken from https://www.youtube.com/watch?v=wCn8WND-JpU
-    if ("lat_a" not in request.GET
-            or "long_a" not in request.GET
-            or "lat_b" not in request.GET
-            or "long_b" not in request.GET):
-        return redirect("/study/directions")
-    lat_a = request.GET.get("lat_a")
-    long_a = request.GET.get("long_a")
-    lat_b = request.GET.get("lat_b")
-    long_b = request.GET.get("long_b")
-    directions = Directions(
-        lat_a=lat_a,
-        long_a=long_a,
-        lat_b=lat_b,
-        long_b=long_b
-    )
-
-    context = {
-        "google_api_key": settings.GOOGLE_API_KEY,
-        "lat_a": lat_a,
-        "long_a": long_a,
-        "lat_b": lat_b,
-        "long_b": long_b,
-        "origin": f'{lat_a}, {long_a}',
-        "destination": f'{lat_b}, {long_b}',
-        "directions": directions,
-
-    }
-    return render(request, 'study_spaces/map.html', context)
-
-
-@login_required(login_url='/study/login')
-def route(request):
-    # Code taken from https://www.youtube.com/watch?v=wCn8WND-JpU
-    mod_json = []
-    if "dest" in request.GET:
-        s = StudySpace.objects.get(pk=request.GET["dest"])
-        print(s)
-        dest = s.address
-        context["dest_address"] = dest
-        mod_json = json.dumps(list(s.values('latitude', 'longitude', 'id', 'name', 'address')))
-    return render(request, 'study_spaces/directions.html', {'mod_json': mod_json, 'key': 'AIzaSyC5DCptRFmVd168TUsP-5pe0etKaeGNCEY'})
-
-
 @login_required(login_url='/study/login')
 def directions(request):
     # Code taken from https://www.youtube.com/watch?v=wCn8WND-JpU
