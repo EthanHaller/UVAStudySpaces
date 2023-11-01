@@ -1,0 +1,43 @@
+/* Primary Color */
+.primary {
+    background-color: #004d99; /* Deep Blue */
+    color: #F5F5F5; /* Off-White for text color */
+}
+
+/* Secondary Color */
+.secondary {
+    background-color: #8BC34A; /* Light Green */
+    color: #333333; /* Dark gray for text color */
+}
+
+/* Accent Color */
+.accent {
+    color: #FFA726; /* Orange */
+}
+
+/* Text Color */
+.primary-text {
+    color: #333333; /* Dark gray */
+}
+
+/* Background Color */
+.background {
+    background-color: #F5F5F5; /* Off-White */
+}
+
+/* Shadow Color */
+.shadow {
+    background-color: #CCCCCC; /* Customize shadow as needed */
+}
+
+/* Highlight Color */
+.highlight {
+    background-color: #87CEEB; /* Sky Blue */
+    color: #F5F5F5; /* Off-White for text color */
+}
+
+/* Warning/Error Color */
+.warning {
+    background-color: #FF5252; /* Red */
+    color: #F5F5F5; /* Off-White for text color */
+}

@@ -52,7 +52,7 @@ def map(request):
             or "long_a" not in request.GET
             or "lat_b" not in request.GET
             or "long_b" not in request.GET):
-        return redirect("/study/route")
+        return redirect("/study/directions")
     lat_a = request.GET.get("lat_a")
     long_a = request.GET.get("long_a")
     lat_b = request.GET.get("lat_b")
@@ -81,12 +81,41 @@ def map(request):
 @login_required(login_url='/study/login')
 def route(request):
     # Code taken from https://www.youtube.com/watch?v=wCn8WND-JpU
-    context = {"google_api_key": settings.GOOGLE_API_KEY}
+    mod_json = []
     if "dest" in request.GET:
         s = StudySpace.objects.get(pk=request.GET["dest"])
+        print(s)
         dest = s.address
         context["dest_address"] = dest
-    return render(request, 'study_spaces/route.html', context)
+        mod_json = json.dumps(list(s.values('latitude', 'longitude', 'id', 'name', 'address')))
+    return render(request, 'study_spaces/directions.html', {'mod_json': mod_json, 'key': 'AIzaSyC5DCptRFmVd168TUsP-5pe0etKaeGNCEY'})
+
+
+@login_required(login_url='/study/login')
+def directions(request):
+    # Code taken from https://www.youtube.com/watch?v=wCn8WND-JpU
+    mod_json = []
+    s = None
+    if "dest" in request.GET:
+        s = StudySpace.objects.get(pk=request.GET["dest"])
+        s = {'latitude': s.latitude, 'longitude': s.longitude, 'id': s.id, 'name': s.name, 'address': s.address}
+        mod_json = json.dumps(s)
+
+    lat_a = request.GET.get("lat_a")
+    long_a = request.GET.get("long_a")
+    lat_b = request.GET.get("lat_b")
+    long_b = request.GET.get("long_b")
+    directions = None
+    showDirections = False
+    if lat_a and long_a and lat_b and long_b:
+        directions = Directions(
+            lat_a=lat_a,
+            long_a=long_a,
+            lat_b=lat_b,
+            long_b=long_b,
+        )
+        showDirections = True
+    return render(request, 'study_spaces/directions.html', {'s': s, 'mod_json': mod_json, 'key': 'AIzaSyC5DCptRFmVd168TUsP-5pe0etKaeGNCEY', 'directions': directions, 'showDirections': showDirections, "origin": f'{lat_a}, {long_a}', "destination": f'{lat_b}, {long_b}'})
 
 
 def login_view(request):

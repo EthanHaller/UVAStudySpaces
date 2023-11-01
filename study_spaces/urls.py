@@ -10,6 +10,7 @@ urlpatterns = [
     path('login', views.login_view, name="login"),
     path('admin', views.admin_view, name="admin"),
     path('route', views.route, name="route"),
+    path('directions', views.directions, name="directions"),
     path('map', views.map, name="map"),
     path('index', views.IndexView.as_view(), name="index"),
     path('profile', views.profile, name='profile'),

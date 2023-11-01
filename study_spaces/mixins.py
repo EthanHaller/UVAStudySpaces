@@ -23,7 +23,8 @@ def Directions(*args, **kwargs):
         params={
             'origin': origin,
             'destination': destination,
-            "key": settings.GOOGLE_API_KEY
+            "key": settings.GOOGLE_API_KEY,
+            'mode': 'walking'
         })
 
     directions = result.json()
