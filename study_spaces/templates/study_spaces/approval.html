@@ -1,0 +1,30 @@
+<!-- https://www.tutorialspoint.com/How-can-I-use-multiple-submit-buttons-in-an-HTML-form -->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Study Space Approval</title>
+
+		{% load static %} {% load bootstrap5 %} {# Load Bootstrap CSS #} {% bootstrap_css %}
+	</head>
+	<body>
+		{% include 'study_spaces/navbar.html' %}
+		<h1>Approve Submissions</h1>
+		{% for x in pending_list %}
+            <form method="post" class="form-multiline">
+				{% csrf_token %}
+				Study Space Name: {{ x.name }}<br>
+				Study Space Address: {{ x.address }}<br>
+				<label>Reason for Denial (if applicable) <input type="text" name="Denial", size="100"></label>
+				<br>
+				<input type="hidden" name="id" value="{{ x.id }}">
+                <input type="submit" value="Approve" formaction="{% url 'study_spaces:approve' %}"
+					   class="btn btn-success">
+				<input type="submit" value="Deny" formaction="{% url 'study_spaces:deny' %}"
+					   class="btn btn-danger">
+				<br><br>
+            </form>
+        {% endfor %}
+	</body>
+</html>

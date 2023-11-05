@@ -6,11 +6,12 @@
 		<title>NavBar</title>
 
 		{% load static %} {% load bootstrap5 %} {% bootstrap_css %}
+		<link rel="stylesheet" type="text/css" href="{% static 'theme.css' %}" />
 	</head>
 	<body>
-		<nav class="navbar navbar-expand-lg bg-light">
+		<nav id="global-navbar" class="navbar navbar-expand-lg primary">
 			<div class="container-fluid">
-				<a class="navbar-brand">StudySpaces</a>
+				<h1 class="navbar-brand m-2">UVAStudySpaces</h1>
 				<button
 					class="navbar-toggler"
 					type="button"
@@ -24,29 +25,22 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="/study/">Home</a>
+						<li class="nav-item mx-2 my-1">
+							<a class="nav-link {% if request.path == '/study/' %}nav-active{% endif %}" href="/study/">Home</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="/study/index">Index</a>
+						<li class="nav-item mx-2 my-1">
+							<a class="nav-link {% if '/directions' in request.path %}nav-active{% endif %}" href="/study/directions">Directions</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="/study/route">Routes</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Favorites</a>
-						</li>
-						<li class="nav-item">
+						<li class="nav-item mx-2 my-1">
 							<a class="nav-link" href="/study/profile">Profile</a>
 						</li>
+						<li class="nav-item mx-2 my-1">
+							<a class="nav-link" href="/study/submission">Submit a Study Space</a>
+						</li>
 					</ul>
-					<form class="d-flex" role="search">
-						<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-						<button class="btn btn-outline-primary" type="submit">Search</button>
-					</form>
-					<a href="{% url 'study_spaces:logout' %}">
-						<button class="btn btn-primary">Logout</button>
-					</a>
+					<div class="nav-item my-1">
+						<a class="nav-link" href="{% url 'study_spaces:logout' %}"> Logout </a>
+					</div>
 				</div>
 			</div>
 		</nav>

@@ -5,43 +5,49 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Study Spaces</title>
 
-		{% load static %} {% load bootstrap5 %} {# Load Bootstrap CSS #} {% bootstrap_css %}
-
 		<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.min.js"
+			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			crossorigin="anonymous"
+		></script>
 		<script>
-			let map
-			function initMap() {
-				map = new google.maps.Map(document.getElementById("map"), {
-					center: { lat: 38.03413872243867, lng: -78.50873523191473 },
-					zoom: 16,
-				})
-
-				const modData = JSON.parse("{{ mod_json|escapejs }}")
-				const markers = modData.map((i) => {
-					const marker = new google.maps.Marker({
-						position: { lat: parseFloat(i.latitude), lng: parseFloat(i.longitude) },
-						map: map,
-					})
-				})
-			}
-			window.initMap = initMap
+			window.map
+			window.key = "{{key}}"
+			window.modJson = JSON.parse("{{ mod_json|escapejs }}")
 		</script>
+		{% load static %}
+		<script src="{% static 'home_map.js' %}"></script>
 	</head>
-	<body>
+	<body class="background">
 		{% include 'study_spaces/navbar.html' %}
-		<h1>UVA Study Spaces</h1>
-		<div style="height: 500px; width: 100%">
-			<div id="map" style="height: 100%"></div>
-			<script src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap&v=weekly" defer></script>
+		<div class="row" style="width: 100vw">
+			<div class="col-sm-8">
+				<div id="map-container">
+					<div id="map" class="h-100"></div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div id="list-container" class="py-4">
+					{% block content %} {% for x in mod %}
+					<div id="study-card-id-{{x.id}}" class="card mb-3" style="border-width: 2px; border-style: solid;">
+						<div class="row g-0">
+							<div class="col-md-4">
+								<img src="..." class="img-fluid rounded-start" alt="..." />
+							</div>
+							<div class="col-md-8">
+								<div class="card-body">
+									<h5 class="card-title">{{x.name}}</h5>
+									<p class="card-text">{{x.address}}</p>
+									<a href="{% url 'study_spaces:directions' %}?dest={{ x.id }}" class="btn btn-primary">Get Directions</a>
+									<a href="{% url 'study_spaces:information' %}?dest={{ x.id }}" class="btn btn-primary">More Information</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					{% endfor %} {% endblock content %}
+				</div>
+			</div>
 		</div>
-		{% block content %} {% for x in mod %}
-		<br />
-		{{x.name }}
-		<br />
-		{{x.address }}
-		<br />
-		<a href="{% url 'study_spaces:route' %}?dest={{ x.id }}">Get directions</a>
-		<br />
-		{% endfor %} {% endblock content %}
 	</body>
 </html>

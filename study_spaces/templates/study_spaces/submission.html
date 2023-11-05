@@ -1,0 +1,98 @@
+<!-- https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete#maps_places_autocomplete-javascript -->
+<!-- //https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete#maps_places_autocomplete-javascript -->
+<!-- https://www.w3schools.com/tags/att_input_size.asp -->
+<!-- https://www.w3schools.com/js/js_htmldom_html.asp -->
+<!-- https://www.w3schools.com/jquery/jquery_get_started.asp -->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Submit a Study Space</title>
+
+		{% load static %} {% load bootstrap5 %} {# Load Bootstrap CSS #} {% bootstrap_css %}
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	</head>
+	<body>
+		{% include 'study_spaces/navbar.html' %}
+		<h3>Submit a New Study Space!</h3>
+		<form method="post" class="form-multiline">
+			{% csrf_token %}
+			{% if error_message %}
+				<p><strong>{{ error_message }}</strong></p>
+			{% endif %}
+			<label>Name: <input required type="text" name="name"></label><br>
+			<label>Address:
+				<input required type="text" size="50" id="id-google-address" name="address">
+			</label><br><br>
+			<input type="hidden" class="geo" id="id-lat" name="lat" value="">
+   			<input type="hidden" class="geo" id="id-long" name="long" value="">
+			<input type="submit" class="btn btn-primary" formaction="{% url 'study_spaces:submission' %}">
+			<br><br>
+		</form>
+		<h3>Past Submissions</h3>
+		{% for x in submitted_list %}
+			Name: {{ x.name }} <br>
+			Address: {{ x.address }} <br>
+			Approval Status:
+			{% if x.approved_submission == 1 %}
+				Approved!
+			{% endif %}
+			{% if x.approved_submission == 0 %}
+				Pending...
+			{% endif %}
+			{% if x.approved_submission == -1 %}
+				Denied.
+				<br>
+				Denial Reason: {{ x.denial_reason }}
+			{% endif %}
+			<br>
+			<br>
+		{% endfor %}
+	</body>
+	<script>
+		var google_api_key = "{{google_api_key|safe}}";
+    </script>
+	<script type="text/javascript">
+		$.getScript( "https://maps.googleapis.com/maps/api/js?key=" + google_api_key + "&libraries=places")
+		.done(function( script, textStatus ) {
+			google.maps.event.addDomListener(window, "load", initAutocomplete())
+
+		})
+		function initAutocomplete(callback) {
+			let autocomplete = new google.maps.places.Autocomplete(
+				document.getElementById('id-google-address'),
+				{
+				   types: ['address'],
+				   componentRestrictions: {'country': ['usa']},
+				})
+
+			autocomplete.addListener("place_changed", () => {
+				const place = autocomplete.getPlace();
+				onPlaceChanged(place)
+			});
+
+		}
+		function onPlaceChanged (place){
+			let el_id = 'id-google-address'
+			let lat_id = 'id-lat'
+			let long_id = 'id-long'
+			var geocoder = new google.maps.Geocoder()
+			var address = document.getElementById(el_id).value
+
+			geocoder.geocode( { 'address': address}, function(results, status) {
+
+				if (status == google.maps.GeocoderStatus.OK) {
+					var latitude = results[0].geometry.location.lat();
+					var longitude = results[0].geometry.location.lng();
+					$('#' + lat_id).val(latitude)
+					$('#' + long_id).val(longitude)
+				}
+				else{
+					$('#' + lat_id).val('')
+					$('#' + long_id).val('')
+				}
+			});
+		}
+	</script>
+</html>
