@@ -76,12 +76,54 @@ async function initAutocomplete() {
 		componentRestrictions: { country: ["usa"] },
 	})
 
+	// autocomplete_a.addListener("place_changed", function () {
+	// 	onPlaceChanged("a")
+	// })
+
 	autocomplete_b = new google.maps.places.Autocomplete(document.getElementById("id-google-address-b"), {
 		types: ["address"],
 		componentRestrictions: { country: ["usa"] },
 	})
+
+	// autocomplete_b.addListener("place_changed", function () {
+	// 	onPlaceChanged("b")
+	// })
 }
 
+// function geocodeAndSetValues(address, latId, longId) {
+// 	var geocoder = new google.maps.Geocoder()
+// 	geocoder.geocode({ address: address }, function (results, status) {
+// 		if (status === google.maps.GeocoderStatus.OK) {
+// 			var latitude = results[0].geometry.location.lat()
+// 			var longitude = results[0].geometry.location.lng()
+
+// 			document.getElementById(latId).value = latitude
+// 			document.getElementById(longId).value = longitude
+// 		}
+// 	})
+// }
+
+// function onPlaceChanged(addy) {
+// 	let auto
+// 	let elId
+// 	let latId
+// 	let longId
+
+// 	if (addy === "a") {
+// 		auto = autocomplete_a
+// 		elId = "id-google-address-a"
+// 		latId = "id-lat-a"
+// 		longId = "id-long-a"
+// 	} else {
+// 		auto = autocomplete_b
+// 		elId = "id-google-address-b"
+// 		latId = "id-lat-b"
+// 		longId = "id-long-b"
+// 	}
+
+// 	var address = document.getElementById(elId).value
+// 	geocodeAndSetValues(address, latId, longId)
+// }
 
 async function CalcRoute() {
 	const startAddress = document.getElementById("id-google-address-a").value
