@@ -34,22 +34,9 @@ function initMap() {
 			card.style.borderColor = "#8BC34A"
 			card.scrollIntoView({ behavior: 'smooth' })
 		})
-		
 		const card = document.getElementById("study-card-id-" + i.id)
 		card.addEventListener("click", () => {
-			map.setZoom(18)
-			map.setCenter(marker.getPosition())
-
-			modData.forEach((element) => {
-				const card = document.getElementById("study-card-id-" + element.id)
-				card.style.backgroundColor = null
-				card.style.borderColor = null
-			})
-
-			const card = document.getElementById("study-card-id-" + i.id)
-			card.style.backgroundColor = "#F5F5F5"
-			card.style.borderColor = "#8BC34A"
-			card.scrollIntoView({ behavior: 'smooth' })
+			marker.click()
 		})
 	})
 }
