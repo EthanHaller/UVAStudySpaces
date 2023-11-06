@@ -15,7 +15,8 @@ from .models import *
 def is_admin(email):
     admins = [
         'lukecreech11@gmail.com',
-        'rqf8pe@virginia.edu'
+        'rqf8pe@virginia.edu',
+        'ethanhaller02@gmail.com'
     ]
 
     return email in admins
