@@ -11,7 +11,7 @@ function initMap() {
 	const navbarHeight = document.getElementById("global-navbar").offsetHeight
 	const mapHeight = `calc(100vh - ${navbarHeight}px)`
 	document.getElementById("map-container").style.height = mapHeight
-	document.getElementById("list-container").style.maxHeight = `calc(${mapHeight} - 48px)`
+	document.getElementById("list-container").style.maxHeight = mapHeight
 
 	const modData = window.modJson
 	const markers = modData.map((i) => {
@@ -32,7 +32,7 @@ function initMap() {
 			const card = document.getElementById("study-card-id-" + i.id)
 			card.style.backgroundColor = "#F5F5F5"
 			card.style.borderColor = "#8BC34A"
-			card.scrollIntoView({ behavior: 'smooth' })
+			card.scrollIntoView()
 		})
 	})
 }
