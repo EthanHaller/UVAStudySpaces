@@ -15,7 +15,8 @@ from .models import *
 def is_admin(email):
     admins = [
         'lukecreech11@gmail.com',
-        'rqf8pe@virginia.edu'
+        'rqf8pe@virginia.edu',
+        'gracefly4@gmail.com'
     ]
 
     return email in admins
@@ -37,12 +38,14 @@ def get_spaces_by_email(email):
 def home(request):
     mod = get_approved_spaces()
     mod_json = json.dumps(list(mod.values('latitude', 'longitude', 'id', 'name')))
-    return render(request, "study_spaces/studyspaces.html", {'mod': mod, 'mod_json': mod_json, 'key': 'AIzaSyC5DCptRFmVd168TUsP-5pe0etKaeGNCEY'})
+    return render(request, "study_spaces/studyspaces.html",
+                  {'mod': mod, 'mod_json': mod_json, 'key': 'AIzaSyC5DCptRFmVd168TUsP-5pe0etKaeGNCEY'})
 
 
 def logout_view(request):
     logout(request)
     return redirect("/study/")
+
 
 @login_required(login_url='/study/login')
 def directions(request):
@@ -68,7 +71,10 @@ def directions(request):
             long_b=long_b,
         )
         showDirections = True
-    return render(request, 'study_spaces/directions.html', {'s': s, 'mod_json': mod_json, 'key': 'AIzaSyC5DCptRFmVd168TUsP-5pe0etKaeGNCEY', 'directions': directions, 'showDirections': showDirections, "origin": f'{lat_a}, {long_a}', "destination": f'{lat_b}, {long_b}'})
+    return render(request, 'study_spaces/directions.html',
+                  {'s': s, 'mod_json': mod_json, 'key': 'AIzaSyC5DCptRFmVd168TUsP-5pe0etKaeGNCEY',
+                   'directions': directions, 'showDirections': showDirections, "origin": f'{lat_a}, {long_a}',
+                   "destination": f'{lat_b}, {long_b}'})
 
 
 def login_view(request):
@@ -147,6 +153,7 @@ def deny_submission(request):
         s.denial_reason = request.POST["Denial"]
         s.save()
     return redirect('/study/submission')
+
 
 @login_required(login_url='/study/login')
 def information(request):

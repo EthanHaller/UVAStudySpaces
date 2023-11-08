@@ -1,6 +1,7 @@
 from django.test import TestCase
 from study_spaces.models import *
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 # Create your tests here.
@@ -28,42 +29,40 @@ class StudySpaceViewTest(TestCase):
 
         response = self.client.get(reverse("study_spaces:directions"))
         response2 = self.client.get(reverse("study_spaces:profile"))
+        response3 = self.client.get(reverse("study_spaces:submission"))
+
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response2.status_code, 302)
-        # self.assertEqual(response3.status_code, 302)
+        self.assertEqual(response3.status_code, 302)
 
 
-"""class NavigationBarTest(TestCase):
-    # def setUp(self):
-    #     # create a user and log them in so we can access google maps page
-    #     self.user = ????create_user(username='testuser', password='testpassword')
-    #     self.client.login(username='testuser', password='testpassword')
+"""
+class NavigationBarTest(TestCase):
+    def setUp(self):
+        self.user = User.objects.create(username='testuser', password='testpassword')
+        self.client.login(username='testuser', password='testpassword')
+
     def test_home_link(self):
-        response = self.client.get(reverse("study_spaces:directions"))
+        response = self.client.get(reverse("study_spaces:profile"))
         self.assertContains(response, 'href="/study/"')
 
-    def test_index_link(self):
-        response = self.client.get(reverse("study_spaces:directions"))
-        self.assertContains(response, 'href="/study/index"')
-
-    def test_favorites_link(self):
-        response = self.client.get(reverse("study_spaces:directions"))
-        self.assertContains(response, 'href="#"')
+    def test_directions_link(self):
+        response = self.client.get(reverse("study_spaces:profile"))
+        self.assertContains(response, 'href="/study/directions"')
 
     def test_profile_link(self):
-        response = self.client.get(reverse("study_spaces:directions"))
+        response = self.client.get(reverse("study_spaces:profile"))
         self.assertContains(response, 'href="/study/profile"')
 
     def test_submission_link(self):
-        response = self.client.get(reverse("study_spaces:directions"))
+        response = self.client.get(reverse("study_spaces:profile"))
         self.assertContains(response, 'href="/study/submission"')
 
 
 class GoogleMapsViewTest(TestCase):
-    # def setUp(self):
-    #     # create a user and log them in so we can access google maps page
-    #     self.user = ????create_user(username='testuser', password='testpassword')
-    #     self.client.login(username='testuser', password='testpassword')
+    def setUp(self):
+        self.user = User.objects.create(username='testuser', password='testpassword')
+        self.client.login(username='testuser', password='testpassword')
 
     def test_google_maps_page(self):
         response = self.client.get(reverse("study_spaces:directions"))
@@ -75,4 +74,5 @@ class GoogleMapsViewTest(TestCase):
 
     def test_google_maps_api(self):
         response = self.client.get(reverse("study_spaces:directions"))
-        self.assertContains(response, "maps.googleapis.com/maps/api/js?key=")"""
+        self.assertContains(response, "maps.googleapis.com/maps/api/js?key=")
+"""

@@ -12,7 +12,7 @@
 		{% block content %}
 		{% if study_space %}
         	<h1>{{ study_space.name }} Information</h1>
-            {{ study_space.information }}
+            {{ study_space.information|linebreaks }}
 		{% else %}
 			<h1>Study Space Information</h1>
 		{% endif %}
