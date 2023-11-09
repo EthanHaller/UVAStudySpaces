@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>NavBar</title>
 
-		{% load static %} {% load bootstrap5 %} {% bootstrap_css %}
+		{% load static %} {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
 		<link rel="stylesheet" type="text/css" href="{% static 'theme.css' %}" />
 	</head>
 	<body>
@@ -21,7 +21,7 @@
 					aria-expanded="false"
 					aria-label="Toggle navigation"
 				>
-					<span class="navbar-toggler-icon"></span>
+					<p class="nav-link nav-item my-0">Menu</p>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -29,17 +29,22 @@
 							<a class="nav-link {% if request.path == '/study/' %}nav-active{% endif %}" href="/study/">Home</a>
 						</li>
 						<li class="nav-item mx-2 my-1">
-							<a class="nav-link {% if '/directions' in request.path %}nav-active{% endif %}" href="/study/directions">Directions</a>
-						</li>
-						<li class="nav-item mx-2 my-1">
-							<a class="nav-link" href="/study/profile">Profile</a>
+							<a class="nav-link {% if '/directions' in request.path %}nav-active{% endif %}" href="{% url 'study_spaces:directions' %}">Directions</a>
 						</li>
 						<li class="nav-item mx-2 my-1">
 							<a class="nav-link" href="/study/submission">Submit a Study Space</a>
 						</li>
 					</ul>
-					<div class="nav-item my-1">
-						<a class="nav-link" href="{% url 'study_spaces:logout' %}"> Logout </a>
+					<div class="nav-item dropdown float-end">
+						<a class="dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<span class="profile-name mx-2">Hello, {{ googleUser.name }}</span>
+							<img src="{{ googleUser.picture }}" alt="User Profile Picture" class="profile-picture" />
+						</a>
+						<ul class="dropdown-menu dropdown-menu-end primary" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item nav-link" href="{% url 'study_spaces:profile' %}">Profile</a></li>
+							<li><hr class="dropdown-divider" /></li>
+							<li><a class="dropdown-item nav-link" href="{% url 'study_spaces:logout' %}">Logout</a></li>
+						</ul>
 					</div>
 				</div>
 			</div>

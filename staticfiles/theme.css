@@ -78,3 +78,25 @@
 .body {
     background-color: var(--background-light) !important;
 }
+
+
+.profile-picture {
+    width: 40px; /* Adjust the size as needed */
+    height: 40px; /* Adjust the size as needed */
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover; /* Maintain the aspect ratio and cover the container */
+}
+
+.profile-name {
+    color: var(--background-light);
+    font-weight: 500;
+}
+
+.dropdown-toggle {
+    text-decoration: none !important;
+    color: var(--background-light) !important;
+}
+
+.dropdown-divider {
+    border-top: 2px solid var(--background-light) !important
+}
