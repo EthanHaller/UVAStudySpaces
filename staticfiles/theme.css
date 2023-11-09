@@ -100,3 +100,9 @@
 .dropdown-divider {
     border-top: 2px solid var(--background-light) !important
 }
+
+.feature-icon {
+    border-radius: 50%;
+    background-color: var(--background-light);
+    margin: 0.5rem 0.5rem 0.5rem 0px !important;
+}
