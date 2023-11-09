@@ -19,14 +19,9 @@ function initMap() {
 			position: { lat: parseFloat(i.latitude), lng: parseFloat(i.longitude) },
 			map: map,
 		})
-
-		const studySpotClicked = () => {
-			map.setZoom(16)
-			const moveMap = () => {
-				map.setCenter(marker.getPosition())
-				map.setZoom(18)
-			}
-			setTimeout(moveMap, 700)
+		marker.addListener("click", () => {
+			map.setZoom(18)
+			map.setCenter(marker.getPosition())
 
 			modData.forEach((element) => {
 				const card = document.getElementById("study-card-id-" + element.id)
@@ -38,12 +33,11 @@ function initMap() {
 			card.style.backgroundColor = "#F5F5F5"
 			card.style.borderColor = "#8BC34A"
 			card.scrollIntoView({ behavior: 'smooth' })
-		}
-
-		marker.addListener("click", studySpotClicked)
-		
+		})
 		const card = document.getElementById("study-card-id-" + i.id)
-		card.addEventListener("click", studySpotClicked)
+		card.addEventListener("click", () => {
+			marker.click()
+		})
 	})
 }
 

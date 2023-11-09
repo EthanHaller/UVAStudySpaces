@@ -16,7 +16,8 @@ def is_admin(email):
     admins = [
         'lukecreech11@gmail.com',
         'rqf8pe@virginia.edu',
-        'gracefly4@gmail.com'
+        'gracefly4@gmail.com',
+        'ethanhaller02@gmail.com'
     ]
 
     return email in admins
@@ -38,8 +39,12 @@ def get_spaces_by_email(email):
 def home(request):
     mod = get_approved_spaces()
     mod_json = json.dumps(list(mod.values('latitude', 'longitude', 'id', 'name')))
-    return render(request, "study_spaces/studyspaces.html",
-                  {'mod': mod, 'mod_json': mod_json, 'key': 'AIzaSyC5DCptRFmVd168TUsP-5pe0etKaeGNCEY'})
+    context = {
+        'mod': mod,
+        'mod_json': mod_json,
+        'key': settings.GOOGLE_API_KEY,
+    }
+    return render(request, "study_spaces/studyspaces.html", context)
 
 
 def logout_view(request):
@@ -71,10 +76,16 @@ def directions(request):
             long_b=long_b,
         )
         showDirections = True
-    return render(request, 'study_spaces/directions.html',
-                  {'s': s, 'mod_json': mod_json, 'key': 'AIzaSyC5DCptRFmVd168TUsP-5pe0etKaeGNCEY',
-                   'directions': directions, 'showDirections': showDirections, "origin": f'{lat_a}, {long_a}',
-                   "destination": f'{lat_b}, {long_b}'})
+    context = {
+        's':s,
+        'mod_json':mod_json,
+        'key':settings.GOOGLE_API_KEY,
+        'directions':directions,
+        'showDirections':showDirections,
+        "origin": f'{lat_a}, {long_a}',
+        "destination": f'{lat_b}, {long_b}'
+    }
+    return render(request, 'study_spaces/directions.html', context)
 
 
 def login_view(request):
@@ -90,17 +101,6 @@ def admin_view(request):
         return render(request, "study_spaces/admin.html")
     else:
         return redirect('/study')
-
-
-# https://stackoverflow.com/questions/2140550/how-to-require-login-for-django-generic-views
-class IndexView(LoginRequiredMixin, generic.ListView):
-    login_url = '/study/login'
-    redirect_field_name = 'next'
-    template_name = "study_spaces/index.html"
-    context_object_name = "study_space_list"
-
-    def get_queryset(self):
-        return get_approved_spaces()
 
 
 @login_required(login_url='/study/login')
