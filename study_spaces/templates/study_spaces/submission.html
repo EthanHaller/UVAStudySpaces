@@ -15,6 +15,7 @@
 	</head>
 	<body>
 		{% include 'study_spaces/navbar.html' %}
+		<div class="container-fluid">
 		<h3>Submit a New Study Space!</h3>
 		<form method="post" class="form-multiline">
 			{% csrf_token %}
@@ -49,6 +50,7 @@
 			<br>
 			<br>
 		{% endfor %}
+		</div>
 	</body>
 	<script>
 		var google_api_key = "{{google_api_key|safe}}";

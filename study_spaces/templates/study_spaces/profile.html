@@ -6,12 +6,14 @@
 		<title>Profile</title>
 	</head>
 	<body>
-		{% include 'study_spaces/navbar.html' %} 
+		{% include 'study_spaces/navbar.html' %}
+		<div class="container-fluid">
         {% if user.is_authenticated %}
 			<!--<p>{{googleUser}}</p>-->
             <p>Account Name: {{user.email}}</p>
             <p>Username: {{user.get_username}}</p>
             <a href="logout">Logout</a>
 		{% endif %}
+		</div>
 	</body>
 </html>

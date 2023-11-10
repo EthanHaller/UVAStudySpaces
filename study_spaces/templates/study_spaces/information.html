@@ -9,6 +9,7 @@
 	</head>
 	<body>
 		{% include 'study_spaces/navbar.html' %}
+		<div class="container-fluid">
 		{% block content %}
 		{% if study_space %}
         	<h1>{{ study_space.name }} Information</h1>
@@ -17,5 +18,6 @@
 			<h1>Study Space Information</h1>
 		{% endif %}
         {%endblock%}
+		</div>
 	</body>
 </html>
