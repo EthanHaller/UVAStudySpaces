@@ -2,6 +2,9 @@ from django.test import TestCase
 from study_spaces.models import *
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.test import Client
+from allauth.socialaccount.models import SocialApp, SocialAccount
+import os
 
 
 # Create your tests here.
@@ -35,44 +38,115 @@ class StudySpaceViewTest(TestCase):
         self.assertEqual(response2.status_code, 302)
         self.assertEqual(response3.status_code, 302)
 
-
-"""
-class NavigationBarTest(TestCase):
+class NavigationBarTests(TestCase):
     def setUp(self):
-        self.user = User.objects.create(username='testuser', password='testpassword')
-        self.client.login(username='testuser', password='testpassword')
-
+        self.user = User.objects.create_user(username='studyspace', password='studyspacepassword')
+        google_app = SocialApp.objects.create(
+            provider='google',
+            name='Google',
+            client_id= os.environ.get("CLIENT_ID"),
+            secret= os.environ.get("CLIENT_SECRET"),
+        )
+        SocialAccount.objects.create(
+            user=self.user,
+            provider=google_app.provider,
+            uid='test',
+        )
     def test_home_link(self):
+        self.client.login(username='studyspace', password='studyspacepassword')
         response = self.client.get(reverse("study_spaces:profile"))
         self.assertContains(response, 'href="/study/"')
 
     def test_directions_link(self):
+        self.client.login(username='studyspace', password='studyspacepassword')
         response = self.client.get(reverse("study_spaces:profile"))
         self.assertContains(response, 'href="/study/directions"')
 
     def test_profile_link(self):
+        self.client.login(username='studyspace', password='studyspacepassword')
         response = self.client.get(reverse("study_spaces:profile"))
         self.assertContains(response, 'href="/study/profile"')
 
     def test_submission_link(self):
+        self.client.login(username='studyspace', password='studyspacepassword')
         response = self.client.get(reverse("study_spaces:profile"))
         self.assertContains(response, 'href="/study/submission"')
 
-
 class GoogleMapsViewTest(TestCase):
     def setUp(self):
-        self.user = User.objects.create(username='testuser', password='testpassword')
-        self.client.login(username='testuser', password='testpassword')
+        self.user = User.objects.create_user(username='studyspace', password='studyspacepassword')
+        google_app = SocialApp.objects.create(
+            provider='google',
+            name='Google',
+            client_id= os.environ.get("CLIENT_ID"),
+            secret= os.environ.get("CLIENT_SECRET"),
+        )
+        SocialAccount.objects.create(
+            user=self.user,
+            provider=google_app.provider,
+            uid='test',
+        )
 
     def test_google_maps_page(self):
+        self.client.login(username='studyspace', password='studyspacepassword')
         response = self.client.get(reverse("study_spaces:directions"))
         self.assertEqual(response.status_code, 200)
 
-    def test_google_maps_init(self):
-        response = self.client.get(reverse("study_spaces:directions"))
-        self.assertContains(response, "initMap")
 
-    def test_google_maps_api(self):
-        response = self.client.get(reverse("study_spaces:directions"))
-        self.assertContains(response, "maps.googleapis.com/maps/api/js?key=")
+class FeatureTests(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='studyspace', password='studyspacepassword')
+        google_app = SocialApp.objects.create(
+            provider='google',
+            name='Google',
+            client_id= os.environ.get("CLIENT_ID"),
+            secret= os.environ.get("CLIENT_SECRET"),
+        )
+        SocialAccount.objects.create(
+            user=self.user,
+            provider=google_app.provider,
+            uid='test',
+        )
+        newModel = StudySpace.objects.create(
+            name='Rice Hall',
+            address="85 Engineer's Way, Charlottesville, VA 22903",
+            latitude = 38.03162799401157,
+            longitude = -78.51084803374002,
+            approved_submission = 1,
+            user_email = '',
+            denial_reason = '',
+            information = 'Location: Located on Engineering Way, home to the Computer Science Department',
+        )
+
+    def test_login(self):
+        self.client.login(username='studyspace', password='studyspacepassword')
+        response = self.client.get("/study/")
+        self.assertEqual(response.status_code, 200)
+    
+    def test_profile(self):
+        self.client.login(username='studyspace', password='studyspacepassword')
+        response = self.client.get(reverse("study_spaces:profile"))
+        self.assertContains(response, 'studyspace')
+
+    def test_more_information(self):
+        self.client.login(username='studyspace', password='studyspacepassword')
+        context = {
+            'study_space': '1',
+        }
+        #response = self.client.post(reverse("study_spaces:information"), data=context_data)
+        #print(response.content)
+        #self.assertContains(response, 'Location: Located on Engineering Way, home to the Computer Science Department')
+"""    
+    def test_get_directions(self):
+        # still in progress
+        self.client.login(username='studyspace', password='studyspacepassword')
+        form_data = {
+            'startinput': '568 Buckler Dr, Charlottesville, VA 22903, USA',
+            'endinput' : "85 Engineer's Way, Charlottesville, VA 22903",
+            'getdirectionsbutton': 'Click Me',
+        }
+        response = self.client.post(reverse("study_spaces:directions"), data=form_data)
+        print(response.content)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Distance: 1.7 mi')
 """
