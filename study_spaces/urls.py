@@ -16,4 +16,5 @@ urlpatterns = [
     path('approve', views.approve_submission, name='approve'),
     path('deny', views.deny_submission, name='deny'),
     path('information', views.information, name='information'),
+    path('closest', views.closest, name='closest'),
 ]
