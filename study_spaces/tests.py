@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.test import Client
 from allauth.socialaccount.models import SocialApp, SocialAccount
+from django.conf import settings
 import os
 
 
@@ -44,8 +45,8 @@ class NavigationBarTests(TestCase):
         google_app = SocialApp.objects.create(
             provider='google',
             name='Google',
-            client_id= os.environ.get("CLIENT_ID"),
-            secret= os.environ.get("CLIENT_SECRET"),
+            client_id= settings.CLIENT_ID,
+            secret= settings.CLIENT_SECRET,
         )
         SocialAccount.objects.create(
             user=self.user,
@@ -89,8 +90,8 @@ class FeatureTests(TestCase):
         google_app = SocialApp.objects.create(
             provider='google',
             name='Google',
-            client_id= os.environ.get("CLIENT_ID"),
-            secret= os.environ.get("CLIENT_SECRET"),
+            client_id= settings.CLIENT_ID,
+            secret= settings.CLIENT_SECRET,
         )
         SocialAccount.objects.create(
             user=self.user,
@@ -177,8 +178,8 @@ class AdminTests(TestCase):
         google_app = SocialApp.objects.create(
             provider='google',
             name='Google',
-            client_id= os.environ.get("CLIENT_ID"),
-            secret= os.environ.get("CLIENT_SECRET"),
+            client_id= settings.CLIENT_ID,
+            secret= settings.CLIENT_SECRET,
         )
         SocialAccount.objects.create(
             user=self.user,
