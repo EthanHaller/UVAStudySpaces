@@ -16,6 +16,7 @@ def is_admin(email):
     admins = [
         'lukecreech11@gmail.com',
         'rqf8pe@virginia.edu',
+        'gracefly4@gmail.com',
         'ethanhaller02@gmail.com'
     ]
 
@@ -50,6 +51,7 @@ def logout_view(request):
     logout(request)
     return redirect("/study/")
 
+
 @login_required(login_url='/study/login')
 def directions(request):
     # Code taken from https://www.youtube.com/watch?v=wCn8WND-JpU
@@ -75,11 +77,11 @@ def directions(request):
         )
         showDirections = True
     context = {
-        's':s,
-        'mod_json':mod_json,
-        'key':settings.GOOGLE_API_KEY,
-        'directions':directions,
-        'showDirections':showDirections,
+        's': s,
+        'mod_json': mod_json,
+        'key': settings.GOOGLE_API_KEY,
+        'directions': directions,
+        'showDirections': showDirections,
         "origin": f'{lat_a}, {long_a}',
         "destination": f'{lat_b}, {long_b}'
     }
@@ -152,6 +154,7 @@ def deny_submission(request):
         s.save()
     return redirect('/study/submission')
 
+
 @login_required(login_url='/study/login')
 def information(request):
     context = {}
@@ -159,3 +162,51 @@ def information(request):
         s = StudySpace.objects.get(pk=request.GET["dest"])
         context["study_space"] = s
     return render(request, 'study_spaces/information.html', context)
+
+
+# https://stackoverflow.com/questions/10844064/items-in-json-object-are-out-of-order-using-json-dumps
+# https://www.freecodecamp.org/news/lambda-sort-list-in-python/
+@login_required(login_url='/study/login')
+def closest(request):
+    mod = get_approved_spaces()
+    context = {
+        'mod': mod,
+        'key': settings.GOOGLE_API_KEY,
+    }
+    if request.method == 'POST':
+        if request.POST["address"] == '' or request.POST["lat"] == '' or request.POST["long"] == '':
+            context["error_message"] = "Please input a valid address."
+            return render(request, 'study_spaces/closest.html', context)
+        input_lat = float(request.POST["lat"])
+        input_long = float(request.POST["long"])
+        spaces_list = list(mod.values('latitude', 'longitude', 'id', 'name', 'address'))
+        sorted_spaces_list = (
+            sorted(spaces_list,
+                   key=lambda space:
+                   (space['latitude'] - input_lat) ** 2 + (space['longitude'] - input_long) ** 2
+                   ))
+        mod = sorted_spaces_list
+        context['mod'] = mod
+    """if is_admin(request.user.email):
+        context["pending_list"] = get_pending_spaces()
+        return render(request, 'study_spaces/approval.html', context)
+    else:
+        context["submitted_list"] = get_spaces_by_email(request.user.email)
+        if request.method == 'POST':
+            if request.POST["name"] == '':
+                context["error_message"] = "Please input a name."
+                return render(request, 'study_spaces/submission.html', context)
+            if request.POST["address"] == '' or request.POST["lat"] == '' or request.POST["long"] == '':
+                context["error_message"] = "Please input a valid address."
+                return render(request, 'study_spaces/submission.html', context)
+            s = StudySpace(
+                name=request.POST["name"],
+                address=request.POST["address"],
+                latitude=request.POST["lat"],
+                longitude=request.POST["long"],
+                user_email=request.user.email
+            )
+            s.save()
+        context["submitted_list"] = get_spaces_by_email(request.user.email)
+        return render(request, 'study_spaces/submission.html', context)"""
+    return render(request, 'study_spaces/closest.html', context)

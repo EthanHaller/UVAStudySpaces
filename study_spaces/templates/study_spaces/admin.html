@@ -1,3 +1,7 @@
+<!--
+For container-fluid
+URL: https://getbootstrap.com/docs/4.0/layout/overview/
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,10 +11,12 @@
 </head>
 <body>
     {% include 'study_spaces/navbar.html' %} 
-    {% if user.is_authenticated %}
-    <p>Account Name: {{user.email}}</p>
-    <p>Username: {{user.get_username}}</p>
-    <p>Hello, Admin</p>
-    <a href="logout">Logout</a>
-    {% endif %}
+    <div class="container-fluid">
+        {% if user.is_authenticated %}
+        <p>Account Name: {{user.email}}</p>
+        <p>Username: {{user.get_username}}</p>
+        <p>Hello, Admin</p>
+        <a href="logout">Logout</a>
+        {% endif %}
+    </div>
 </body>

@@ -10,6 +10,7 @@
 	</head>
 	<body>
 		{% include 'study_spaces/navbar.html' %}
+		<div class="container-fluid">
 		<h1>Approve Submissions</h1>
 		{% for x in pending_list %}
             <form method="post" class="form-multiline">
@@ -26,5 +27,6 @@
 				<br><br>
             </form>
         {% endfor %}
+		</div>
 	</body>
 </html>

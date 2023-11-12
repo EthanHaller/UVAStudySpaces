@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Study Spaces</title>
 
+		{% load bootstrap_icons %}
 		<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 		<script
 			src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -28,20 +29,22 @@
 				</div>
 			</div>
 			<div class="col-sm-4">
-				<div id="list-container" class="my-4" style="overflow-y: scroll;">
+				<div id="list-container" class="my-4" style="overflow-y: scroll">
 					{% block content %} {% for x in mod %}
-					<div id="study-card-id-{{x.id}}" class="card mb-3" style="border-width: 2px; border-style: solid;">
-						<div class="row g-0">
-							<div class="col-md-4">
-								<img src="..." class="img-fluid rounded-start" alt="..." />
+					<div id="study-card-id-{{x.id}}" class="card mb-3" style="border-width: 2px; border-style: solid">
+						<div class="card-body">
+							<h5 class="card-title">{{x.name}}</h5>
+							<p class="card-text m-0">{{x.address}}</p>
+							<div>
+								<span>
+									{% bs_icon 'wifi' size='1.75em' extra_classes='feature-icon p-1' %}
+									{% bs_icon 'outlet' size='1.75em' extra_classes='feature-icon p-1' %}
+									{% bs_icon 'bell-slash' size='1.75em' extra_classes='feature-icon p-1' %}
+								</span>
 							</div>
-							<div class="col-md-8">
-								<div class="card-body">
-									<h5 class="card-title">{{x.name}}</h5>
-									<p class="card-text">{{x.address}}</p>
-									<a href="{% url 'study_spaces:directions' %}?dest={{ x.id }}" class="btn btn-primary">Get Directions</a>
-									<a href="{% url 'study_spaces:information' %}?dest={{ x.id }}" class="btn btn-primary">More Information</a>
-								</div>
+							<div class="float-end">
+								<a href="{% url 'study_spaces:information' %}?dest={{ x.id }}" class="btn btn-outline-primary">More Information</a>
+								<a href="{% url 'study_spaces:directions' %}?dest={{ x.id }}" class="btn btn-primary">Get Directions</a>
 							</div>
 						</div>
 					</div>
