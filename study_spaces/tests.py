@@ -45,8 +45,8 @@ class NavigationBarTests(TestCase):
         google_app = SocialApp.objects.create(
             provider='google',
             name='Google',
-            client_id= settings.CLIENT_ID,
-            secret= settings.CLIENT_SECRET,
+            client_id = getattr(settings, 'CLIENT_ID', 'default_client_id'),
+            secret = getattr(settings, 'CLIENT_SECRET', 'default_client_secret')
         )
         SocialAccount.objects.create(
             user=self.user,
@@ -90,8 +90,8 @@ class FeatureTests(TestCase):
         google_app = SocialApp.objects.create(
             provider='google',
             name='Google',
-            client_id= settings.CLIENT_ID,
-            secret= settings.CLIENT_SECRET,
+            client_id = getattr(settings, 'CLIENT_ID', 'default_client_id'),
+            secret = getattr(settings, 'CLIENT_SECRET', 'default_client_secret')
         )
         SocialAccount.objects.create(
             user=self.user,
@@ -178,8 +178,8 @@ class AdminTests(TestCase):
         google_app = SocialApp.objects.create(
             provider='google',
             name='Google',
-            client_id= settings.CLIENT_ID,
-            secret= settings.CLIENT_SECRET,
+            client_id = getattr(settings, 'CLIENT_ID', 'default_client_id'),
+            secret = getattr(settings, 'CLIENT_SECRET', 'default_client_secret')
         )
         SocialAccount.objects.create(
             user=self.user,
