@@ -18,6 +18,7 @@ def is_admin(email):
         'rqf8pe@virginia.edu',
         'gracefly4@gmail.com',
         'ethanhaller02@gmail.com'
+        'cs3240.super@gmail.com'
     ]
 
     return email in admins
@@ -187,6 +188,7 @@ def closest(request):
                    ))
         mod = sorted_spaces_list
         context['mod'] = mod
+        context['start_address'] = request.POST["address"]
     """if is_admin(request.user.email):
         context["pending_list"] = get_pending_spaces()
         return render(request, 'study_spaces/approval.html', context)
