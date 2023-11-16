@@ -35,7 +35,7 @@
 							<a class="nav-link {% if '/directions' in request.path %}nav-active{% endif %}" href="{% url 'study_spaces:directions' %}">Directions</a>
 						</li>
 						<li class="nav-item mx-2 my-1">
-							<a class="nav-link" href="/study/submission">{% if is_admin %}Submissions{% else %}Submit a Study Space{% endif %}</a>
+							<a class="nav-link {% if '/submission' in request.path %}nav-active{% endif %}" href="/study/submission">{% if is_admin %}Submissions{% else %}Submit a Study Space{% endif %}</a>
 						</li>
 					</ul>
 					<div class="nav-item dropdown float-end mx-2">
