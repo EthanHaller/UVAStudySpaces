@@ -166,6 +166,7 @@ def deny_submission(request):
         s.save()
     return redirect('/study/submission')
 
+@login_required(login_url='/study/login')
 def edit_study_space(request, study_space_id):
     space = StudySpace.objects.get(pk=study_space_id)
     context = {"study_space": space, "google_api_key": settings.GOOGLE_API_KEY}
@@ -178,24 +179,22 @@ def edit_study_space(request, study_space_id):
             context["error_message"] = "Please input a valid address."
             return render(request, 'study_spaces/edit.html', context)
 
-        s = StudySpace(
-            name=request.POST["name"],
-            address=request.POST["address"],
-            latitude=request.POST["lat"],
-            longitude=request.POST["long"],
-            user_email=request.user.email,
-            has_wifi= 'has_wifi' in request.POST,
-            has_outlets = 'has_outlets' in request.POST,
-            has_printers = 'has_printers' in request.POST,
-            has_whiteboards = 'has_whiteboards' in request.POST,
-            is_quiet = 'is_quiet' in request.POST,
-            is_outside = 'is_outside' in request.POST,
-            has_food = 'has_food' in request.POST,
-            information=request.POST["information"],
-            approved_submission = StudySpace.ApprovalStatus.APPROVED,
-            denial_reason = 'None'
-        )
-        s.save()
+        space.name=request.POST["name"]
+        space.address=request.POST["address"]
+        space.latitude=request.POST["lat"]
+        space.longitude=request.POST["long"]
+        space.user_email=request.user.email
+        space.has_wifi= 'has_wifi' in request.POST
+        space.has_outlets = 'has_outlets' in request.POST
+        space.has_printers = 'has_printers' in request.POST
+        space.has_whiteboards = 'has_whiteboards' in request.POST
+        space.is_quiet = 'is_quiet' in request.POST
+        space.is_outside = 'is_outside' in request.POST
+        space.has_food = 'has_food' in request.POST
+        space.information=request.POST["information"]
+        space.approved_submission = StudySpace.ApprovalStatus.APPROVED
+        space.denial_reason = 'None'
+        space.save()
         return redirect('/study/submission')
     return render(request, 'study_spaces/edit.html', context)
 
