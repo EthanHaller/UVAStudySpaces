@@ -81,17 +81,10 @@
 
 
 .profile-picture {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.profile-picture-large {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    object-fit: cover;
+    width: 40px; /* Adjust the size as needed */
+    height: 40px; /* Adjust the size as needed */
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover; /* Maintain the aspect ratio and cover the container */
 }
 
 .profile-name {
@@ -109,14 +102,14 @@
 }
 
 .feature-icon {
-    padding: 0.3em !important;
     border-radius: 50%;
     background-color: var(--background-light);
     margin: 0.5rem 0.5rem 0.5rem 0px !important;
 }
 
-.submission-section {
-    border: 1px solid rgba(0,0,0,.125);
-    border-radius: 5px;
-    background-color: white;
+.feature-icon-smaller {
+    border-radius: 50%;
+    background-color: var(--background-light);
+    margin: 0.5rem 0.5rem 0.5rem 0px !important;
+    font-size: 1.5em;
 }

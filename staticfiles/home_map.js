@@ -35,8 +35,7 @@ function initMap() {
 			})
 
 			const card = document.getElementById("study-card-id-" + i.id)
-			card.style.backgroundColor = "#F5F5F5"
-			card.style.borderColor = "#8BC34A"
+			card.style.borderColor = "#FFA726"
 			card.scrollIntoView({ behavior: 'smooth' })
 		}
 

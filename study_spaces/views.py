@@ -18,7 +18,6 @@ def is_admin(email):
         'rqf8pe@virginia.edu',
         'gracefly4@gmail.com',
         'ethanhaller02@gmail.com'
-        'cs3240.super@gmail.com'
     ]
 
     return email in admins
@@ -106,8 +105,6 @@ def admin_view(request):
 
 @login_required(login_url='/study/login')
 def profile(request):
-    if is_admin(request.user.email):
-        return render(request, 'study_spaces/admin.html')
     return render(request, 'study_spaces/profile.html')
 
 
@@ -116,6 +113,9 @@ def submission(request):
     context = {"google_api_key": settings.GOOGLE_API_KEY}
     if is_admin(request.user.email):
         context["pending_list"] = get_pending_spaces()
+        context["pending_list_length"] = len(context["pending_list"])
+        context["approved_list"] = get_approved_spaces()
+        context["approved_list_length"] = len(context["approved_list"])
         return render(request, 'study_spaces/approval.html', context)
     else:
         context["submitted_list"] = get_spaces_by_email(request.user.email)
@@ -126,15 +126,26 @@ def submission(request):
             if request.POST["address"] == '' or request.POST["lat"] == '' or request.POST["long"] == '':
                 context["error_message"] = "Please input a valid address."
                 return render(request, 'study_spaces/submission.html', context)
+
             s = StudySpace(
                 name=request.POST["name"],
                 address=request.POST["address"],
                 latitude=request.POST["lat"],
                 longitude=request.POST["long"],
-                user_email=request.user.email
+                user_email=request.user.email,
+                has_wifi = 'has_wifi' in request.POST,
+                has_outlets = 'has_outlets' in request.POST,
+                has_printers = 'has_printers' in request.POST,
+                has_whiteboards = 'has_whiteboards' in request.POST,
+                is_quiet = 'is_quiet' in request.POST,
+                is_outside = 'is_outside' in request.POST,
+                has_food = 'has_food' in request.POST,
+                information=request.POST["information"],
+                denial_reason = 'None'
             )
             s.save()
         context["submitted_list"] = get_spaces_by_email(request.user.email)
+        context["submitted_list_length"] = len(context["submitted_list"])
         return render(request, 'study_spaces/submission.html', context)
 
 
@@ -147,6 +158,7 @@ def approve_submission(request):
     return redirect('/study/submission')
 
 
+@login_required(login_url='/study/login')
 def deny_submission(request):
     if request.method == 'POST':
         s = StudySpace.objects.get(pk=request.POST["id"])
@@ -154,6 +166,41 @@ def deny_submission(request):
         s.denial_reason = request.POST["Denial"]
         s.save()
     return redirect('/study/submission')
+
+
+@login_required(login_url='/study/login')
+def edit_study_space(request, study_space_id):
+    if is_admin(request.user.email):
+        space = StudySpace.objects.get(pk=study_space_id)
+        context = {"study_space": space, "google_api_key": settings.GOOGLE_API_KEY}
+
+        if request.method == 'POST':
+            if request.POST["name"] == '':
+                context["error_message"] = "Please input a name."
+                return render(request, 'study_spaces/edit.html', context)
+            if request.POST["address"] == '' or request.POST["lat"] == '' or request.POST["long"] == '':
+                context["error_message"] = "Please input a valid address."
+                return render(request, 'study_spaces/edit.html', context)
+
+            space.name=request.POST["name"]
+            space.address=request.POST["address"]
+            space.latitude=request.POST["lat"]
+            space.longitude=request.POST["long"]
+            space.user_email=request.user.email
+            space.has_wifi= 'has_wifi' in request.POST
+            space.has_outlets = 'has_outlets' in request.POST
+            space.has_printers = 'has_printers' in request.POST
+            space.has_whiteboards = 'has_whiteboards' in request.POST
+            space.is_quiet = 'is_quiet' in request.POST
+            space.is_outside = 'is_outside' in request.POST
+            space.has_food = 'has_food' in request.POST
+            space.information=request.POST["information"]
+            space.approved_submission = StudySpace.ApprovalStatus.APPROVED
+            space.denial_reason = 'None'
+            space.save()
+            return redirect('/study/submission')
+        return render(request, 'study_spaces/edit.html', context)
+    return redirect('/study')
 
 
 @login_required(login_url='/study/login')
@@ -188,27 +235,4 @@ def closest(request):
                    ))
         mod = sorted_spaces_list
         context['mod'] = mod
-        context['start_address'] = request.POST["address"]
-    """if is_admin(request.user.email):
-        context["pending_list"] = get_pending_spaces()
-        return render(request, 'study_spaces/approval.html', context)
-    else:
-        context["submitted_list"] = get_spaces_by_email(request.user.email)
-        if request.method == 'POST':
-            if request.POST["name"] == '':
-                context["error_message"] = "Please input a name."
-                return render(request, 'study_spaces/submission.html', context)
-            if request.POST["address"] == '' or request.POST["lat"] == '' or request.POST["long"] == '':
-                context["error_message"] = "Please input a valid address."
-                return render(request, 'study_spaces/submission.html', context)
-            s = StudySpace(
-                name=request.POST["name"],
-                address=request.POST["address"],
-                latitude=request.POST["lat"],
-                longitude=request.POST["long"],
-                user_email=request.user.email
-            )
-            s.save()
-        context["submitted_list"] = get_spaces_by_email(request.user.email)
-        return render(request, 'study_spaces/submission.html', context)"""
     return render(request, 'study_spaces/closest.html', context)
