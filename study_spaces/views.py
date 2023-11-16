@@ -115,6 +115,7 @@ def submission(request):
     context = {"google_api_key": settings.GOOGLE_API_KEY}
     if is_admin(request.user.email):
         context["pending_list"] = get_pending_spaces()
+        context["pending_list_length"] = len(context["pending_list"])
         return render(request, 'study_spaces/approval.html', context)
     else:
         context["submitted_list"] = get_spaces_by_email(request.user.email)
@@ -130,10 +131,18 @@ def submission(request):
                 address=request.POST["address"],
                 latitude=request.POST["lat"],
                 longitude=request.POST["long"],
-                user_email=request.user.email
+                user_email=request.user.email,
+                has_wifi=request.POST["has_wifi"],
+                has_outlets=request.POST["has_outlets"],
+                has_printers=request.POST["has_printers"],
+                has_whiteboards=request.POST["has_whiteboards"],
+                is_quiet=request.POST["is_quiet"],
+                is_outside=request.POST["is_outside"],
+                has_food=request.POST["has_food"],
             )
             s.save()
         context["submitted_list"] = get_spaces_by_email(request.user.email)
+        context["submitted_list_length"] = len(context["submitted_list"])
         return render(request, 'study_spaces/submission.html', context)
 
 

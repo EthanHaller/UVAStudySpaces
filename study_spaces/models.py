@@ -9,6 +9,15 @@ class StudySpace(models.Model):
     latitude = models.FloatField(default=0.0)
     longitude = models.FloatField(default=0.0)
 
+    # Amenities
+    has_wifi = models.BooleanField(default=False)
+    has_outlets = models.BooleanField(default=False)
+    has_printers = models.BooleanField(default=False)
+    has_whiteboards = models.BooleanField(default=False)
+    is_quiet = models.BooleanField(default=False)
+    is_outside = models.BooleanField(default=False)
+    has_food = models.BooleanField(default=False)
+
     class ApprovalStatus(models.IntegerChoices):
         APPROVED = 1
         PENDING = 0

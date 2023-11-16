@@ -10,23 +10,23 @@
 	</head>
 	<body>
 		{% include 'study_spaces/navbar.html' %}
-		<div class="container-fluid">
-		<h1>Approve Submissions</h1>
-		{% for x in pending_list %}
-            <form method="post" class="form-multiline">
-				{% csrf_token %}
-				Study Space Name: {{ x.name }}<br>
-				Study Space Address: {{ x.address }}<br>
-				<label>Reason for Denial (if applicable) <input type="text" name="Denial", size="100"></label>
-				<br>
-				<input type="hidden" name="id" value="{{ x.id }}">
-                <input type="submit" value="Approve" formaction="{% url 'study_spaces:approve' %}"
-					   class="btn btn-success">
-				<input type="submit" value="Deny" formaction="{% url 'study_spaces:deny' %}"
-					   class="btn btn-danger">
-				<br><br>
-            </form>
-        {% endfor %}
+		<div class="container-fluid col-md-8 col-lg-6 mx-auto">
+			<h3 class="mt-5 mb-3">Approve Submissions</h3>
+			{% if pending_list_length == 0%}
+			<p>No pending submissions</p>
+			{% endif %}
+			{% for x in pending_list %}
+			<form method="post" class="form-multiline">
+				{% csrf_token %} Study Space Name: {{ x.name }}<br />
+				Study Space Address: {{ x.address }}<br />
+				<label>Reason for Denial (if applicable) <input type="text" name="Denial" , size="100" /></label>
+				<br />
+				<input type="hidden" name="id" value="{{ x.id }}" />
+				<input type="submit" value="Approve" formaction="{% url 'study_spaces:approve' %}" class="btn btn-success" />
+				<input type="submit" value="Deny" formaction="{% url 'study_spaces:deny' %}" class="btn btn-danger" />
+				<br /><br />
+			</form>
+			{% endfor %}
 		</div>
 	</body>
 </html>
