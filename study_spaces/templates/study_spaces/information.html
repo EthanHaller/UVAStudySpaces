@@ -5,19 +5,51 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Profile</title>
 
-		{% load static %} {% load bootstrap5 %} {# Load Bootstrap CSS #} {% bootstrap_css %}
+		{% load static %} {% load bootstrap5 %} {# Load Bootstrap CSS #} {% bootstrap_css %} {% load bootstrap_icons %}
 	</head>
 	<body>
 		{% include 'study_spaces/navbar.html' %}
-		<div class="container-fluid">
-		{% block content %}
-		{% if study_space %}
-        	<h1>{{ study_space.name }} Information</h1>
-            {{ study_space.information|linebreaks }}
-		{% else %}
-			<h1>Study Space Information</h1>
-		{% endif %}
-        {%endblock%}
+		<div class="container-fluid col-md-8 col-lg-6 mx-auto">
+			<h1 class="mt-3">{{ study_space.name }}</h1>
+			<span class="d-flex">
+				<strong>Address:</strong>
+				<p class="mx-2">{{ study_space.address }}</p>
+			</span>
+			<span class="d-flex flex-column">
+				<strong>Amenities:</strong>
+				<span class="px-3">
+					{% if study_space.has_wifi %}
+					<span data-bs-toggle="tooltip" data-bs-placement="top" title="Has WiFi">
+						{% bs_icon 'wifi' size='1.75em' extra_classes='feature-icon' %}
+					</span>
+					{% endif %} {% if study_space.has_outlets %}
+					<span data-bs-toggle="tooltip" data-bs-placement="top" title="Has Outlets">
+						{% bs_icon 'outlet' size='1.75em' extra_classes='feature-icon' %}
+					</span>
+					{% endif %} {% if study_space.has_printers %}
+					<span data-bs-toggle="tooltip" data-bs-placement="top" title="Has Printers">
+						{% bs_icon 'printer' size='1.75em' extra_classes='feature-icon' %}
+					</span>
+					{% endif %} {% if study_space.has_whiteboards %}
+					<span data-bs-toggle="tooltip" data-bs-placement="top" title="Has Whiteboards">
+						{% bs_icon 'easel' size='1.75em' extra_classes='feature-icon' %}
+					</span>
+					{% endif %} {% if study_space.is_quiet %}
+					<span data-bs-toggle="tooltip" data-bs-placement="top" title="Quiet Study Space">
+						{% bs_icon 'bell-slash' size='1.75em' extra_classes='feature-icon' %}
+					</span>
+					{% endif %} {% if study_space.is_outside %}
+					<span data-bs-toggle="tooltip" data-bs-placement="top" title="Outdoor Study Space">
+						{% bs_icon 'sun' size='1.75em' extra_classes='feature-icon' %}
+					</span>
+					{% endif %} {% if study_space.has_food %}
+					<span data-bs-toggle="tooltip" data-bs-placement="top" title="Food Nearby">
+						{% bs_icon 'cup' size='1.75em' extra_classes='feature-icon' %}
+					</span>
+					{% endif %}
+				</span>
+			</span>
+			<p class="mt-4">{{ study_space.information|linebreaks }}</p>
 		</div>
 	</body>
 </html>
