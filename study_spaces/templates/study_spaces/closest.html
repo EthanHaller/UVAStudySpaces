@@ -21,14 +21,16 @@
 			</label><br><br>
 			<input type="hidden" class="geo" id="id-lat" name="lat" value="">
    			<input type="hidden" class="geo" id="id-long" name="long" value="">
-			<input type="submit" class="btn btn-primary" formaction="{% url 'study_spaces:closest' %}">
+			<input type="submit" class="btn btn-primary" id="submit-button" formaction="{% url 'study_spaces:closest' %}">
 			<br><br>
 			</form>
 			{% block content %}
+			{% if start_address %}
+				<h3>Closest Study Spaces to {{ start_address }}</h3>
+			{% endif %}
 			{% for x in mod %}
 				<h5>{{ x.name }}</h5>
 				<p>{{ x.address }}</p>
-				<br>
 			{% endfor %}
 			{% endblock content %}
 		</div>
@@ -94,6 +96,8 @@
 							if (results[0]) {
 								const userAddress = results[0].formatted_address
 								document.getElementById("id-google-address").value = userAddress
+								document.getElementById("id-lat").value = userLocation.lat
+								document.getElementById("id-long").value = userLocation.lng
 							}
 						}
 					})
