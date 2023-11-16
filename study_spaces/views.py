@@ -105,8 +105,6 @@ def admin_view(request):
 
 @login_required(login_url='/study/login')
 def profile(request):
-    if is_admin(request.user.email):
-        return render(request, 'study_spaces/admin.html')
     return render(request, 'study_spaces/profile.html')
 
 
@@ -126,19 +124,20 @@ def submission(request):
             if request.POST["address"] == '' or request.POST["lat"] == '' or request.POST["long"] == '':
                 context["error_message"] = "Please input a valid address."
                 return render(request, 'study_spaces/submission.html', context)
+
             s = StudySpace(
                 name=request.POST["name"],
                 address=request.POST["address"],
                 latitude=request.POST["lat"],
                 longitude=request.POST["long"],
                 user_email=request.user.email,
-                has_wifi=request.POST["has_wifi"],
-                has_outlets=request.POST["has_outlets"],
-                has_printers=request.POST["has_printers"],
-                has_whiteboards=request.POST["has_whiteboards"],
-                is_quiet=request.POST["is_quiet"],
-                is_outside=request.POST["is_outside"],
-                has_food=request.POST["has_food"],
+                has_wifi= 'has_wifi' in request.POST,
+                has_outlets = 'has_outlets' in request.POST,
+                has_printers = 'has_printers' in request.POST,
+                has_whiteboards = 'has_whiteboards' in request.POST,
+                is_quiet = 'is_quiet' in request.POST,
+                is_outside = 'is_outside' in request.POST,
+                has_food = 'has_food' in request.POST,
             )
             s.save()
         context["submitted_list"] = get_spaces_by_email(request.user.email)

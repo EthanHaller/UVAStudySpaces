@@ -9,9 +9,9 @@
 		{% include 'study_spaces/navbar.html' %}
 		<div class="container-fluid">
         {% if user.is_authenticated %}
-			<!--<p>{{googleUser}}</p>-->
             <p>Account Name: {{user.email}}</p>
             <p>Username: {{user.get_username}}</p>
+			{% if is_admin %}<p>You are an admin</p>{% endif %}
             <a href="logout">Logout</a>
 		{% endif %}
 		</div>

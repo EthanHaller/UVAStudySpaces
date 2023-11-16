@@ -107,3 +107,9 @@
     background-color: var(--background-light);
     margin: 0.5rem 0.5rem 0.5rem 0px !important;
 }
+
+.submission-section {
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 5px;
+    background-color: white;
+}
