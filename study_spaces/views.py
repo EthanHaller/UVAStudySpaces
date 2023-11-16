@@ -114,6 +114,8 @@ def submission(request):
     if is_admin(request.user.email):
         context["pending_list"] = get_pending_spaces()
         context["pending_list_length"] = len(context["pending_list"])
+        context["approved_list"] = get_approved_spaces()
+        context["approved_list_length"] = len(context["approved_list"])
         return render(request, 'study_spaces/approval.html', context)
     else:
         context["submitted_list"] = get_spaces_by_email(request.user.email)
@@ -131,13 +133,15 @@ def submission(request):
                 latitude=request.POST["lat"],
                 longitude=request.POST["long"],
                 user_email=request.user.email,
-                has_wifi= 'has_wifi' in request.POST,
+                has_wifi = 'has_wifi' in request.POST,
                 has_outlets = 'has_outlets' in request.POST,
                 has_printers = 'has_printers' in request.POST,
                 has_whiteboards = 'has_whiteboards' in request.POST,
                 is_quiet = 'is_quiet' in request.POST,
                 is_outside = 'is_outside' in request.POST,
                 has_food = 'has_food' in request.POST,
+                information=request.POST["information"],
+                denial_reason = 'None'
             )
             s.save()
         context["submitted_list"] = get_spaces_by_email(request.user.email)
@@ -161,6 +165,39 @@ def deny_submission(request):
         s.denial_reason = request.POST["Denial"]
         s.save()
     return redirect('/study/submission')
+
+def edit_study_space(request, study_space_id):
+    space = StudySpace.objects.get(pk=study_space_id)
+    context = {"study_space": space, "google_api_key": settings.GOOGLE_API_KEY}
+
+    if request.method == 'POST':
+        if request.POST["name"] == '':
+            context["error_message"] = "Please input a name."
+            return render(request, 'study_spaces/edit.html', context)
+        if request.POST["address"] == '' or request.POST["lat"] == '' or request.POST["long"] == '':
+            context["error_message"] = "Please input a valid address."
+            return render(request, 'study_spaces/edit.html', context)
+
+        s = StudySpace(
+            name=request.POST["name"],
+            address=request.POST["address"],
+            latitude=request.POST["lat"],
+            longitude=request.POST["long"],
+            user_email=request.user.email,
+            has_wifi= 'has_wifi' in request.POST,
+            has_outlets = 'has_outlets' in request.POST,
+            has_printers = 'has_printers' in request.POST,
+            has_whiteboards = 'has_whiteboards' in request.POST,
+            is_quiet = 'is_quiet' in request.POST,
+            is_outside = 'is_outside' in request.POST,
+            has_food = 'has_food' in request.POST,
+            information=request.POST["information"],
+            approved_submission = StudySpace.ApprovalStatus.APPROVED,
+            denial_reason = 'None'
+        )
+        s.save()
+        return redirect('/study/submission')
+    return render(request, 'study_spaces/edit.html', context)
 
 
 @login_required(login_url='/study/login')
@@ -195,26 +232,4 @@ def closest(request):
                    ))
         mod = sorted_spaces_list
         context['mod'] = mod
-    """if is_admin(request.user.email):
-        context["pending_list"] = get_pending_spaces()
-        return render(request, 'study_spaces/approval.html', context)
-    else:
-        context["submitted_list"] = get_spaces_by_email(request.user.email)
-        if request.method == 'POST':
-            if request.POST["name"] == '':
-                context["error_message"] = "Please input a name."
-                return render(request, 'study_spaces/submission.html', context)
-            if request.POST["address"] == '' or request.POST["lat"] == '' or request.POST["long"] == '':
-                context["error_message"] = "Please input a valid address."
-                return render(request, 'study_spaces/submission.html', context)
-            s = StudySpace(
-                name=request.POST["name"],
-                address=request.POST["address"],
-                latitude=request.POST["lat"],
-                longitude=request.POST["long"],
-                user_email=request.user.email
-            )
-            s.save()
-        context["submitted_list"] = get_spaces_by_email(request.user.email)
-        return render(request, 'study_spaces/submission.html', context)"""
     return render(request, 'study_spaces/closest.html', context)

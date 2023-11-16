@@ -6,26 +6,123 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Study Space Approval</title>
 
-		{% load static %} {% load bootstrap5 %} {# Load Bootstrap CSS #} {% bootstrap_css %}
+		{% load static %} {% load bootstrap5 %} {# Load Bootstrap CSS #} {% bootstrap_css %} {% load bootstrap_icons %}
 	</head>
-	<body>
+
+	<body class="background">
 		{% include 'study_spaces/navbar.html' %}
 		<div class="container-fluid col-md-8 col-lg-6 mx-auto">
 			<h3 class="mt-5 mb-3">Approve Submissions</h3>
-			{% if pending_list_length == 0%}
+			{% if pending_list_length == 0 %}
 			<p>No pending submissions</p>
-			{% endif %}
-			{% for x in pending_list %}
-			<form method="post" class="form-multiline">
-				{% csrf_token %} Study Space Name: {{ x.name }}<br />
-				Study Space Address: {{ x.address }}<br />
-				<label>Reason for Denial (if applicable) <input type="text" name="Denial" , size="100" /></label>
+			{% endif %} {% for x in pending_list %}
+			<form method="post" class="form-multiline submission-section p-3 mb-3">
+				{% csrf_token %} 
+				<span class="d-flex">
+					<strong>Study Space Name:</strong>
+					<p class="mx-2">{{ x.name }}</p>
+				</span>
+				<span class="d-flex">
+					<strong>Address:</strong>
+					<p class="mx-2">{{ x.address }}</p>
+				</span>
+				<span class="d-flex flex-column">
+					<strong>Amenities:</strong>
+					<span class="px-3">
+						{% if x.has_wifi %}
+						<span data-bs-toggle="tooltip" data-bs-placement="top" title="Has WiFi">
+							{% bs_icon 'wifi' size='1.75em' extra_classes='feature-icon' %}
+						</span>
+						{% endif %} {% if x.has_outlets %}
+						<span data-bs-toggle="tooltip" data-bs-placement="top" title="Has Outlets">
+							{% bs_icon 'outlet' size='1.75em' extra_classes='feature-icon' %}
+						</span>
+						{% endif %} {% if x.has_printers %}
+						<span data-bs-toggle="tooltip" data-bs-placement="top" title="Has Printers">
+							{% bs_icon 'printer' size='1.75em' extra_classes='feature-icon' %}
+						</span>
+						{% endif %} {% if x.has_whiteboards %}
+						<span data-bs-toggle="tooltip" data-bs-placement="top" title="Has Whiteboards">
+							{% bs_icon 'easel' size='1.75em' extra_classes='feature-icon' %}
+						</span>
+						{% endif %} {% if x.is_quiet %}
+						<span data-bs-toggle="tooltip" data-bs-placement="top" title="Quiet Study Space">
+							{% bs_icon 'bell-slash' size='1.75em' extra_classes='feature-icon' %}
+						</span>
+						{% endif %} {% if x.is_outside %}
+						<span data-bs-toggle="tooltip" data-bs-placement="top" title="Outdoor Study Space">
+							{% bs_icon 'sun' size='1.75em' extra_classes='feature-icon' %}
+						</span>
+						{% endif %} {% if x.has_food %}
+						<span data-bs-toggle="tooltip" data-bs-placement="top" title="Food Nearby">
+							{% bs_icon 'cup' size='1.75em' extra_classes='feature-icon' %}
+						</span>
+						{% endif %}
+					</span>
+				</span>
+				<span class="d-flex">
+					<strong>Information:</strong>
+					<p class="mx-2">{{ x.information }}</p>
+				</span>
+				<label for="denial-reason"><stron>Reason for Denial (if applicable):</stron></label>
+				<textarea id="denial-reason" name="Denial" class="form-control w-100"></textarea>
 				<br />
 				<input type="hidden" name="id" value="{{ x.id }}" />
 				<input type="submit" value="Approve" formaction="{% url 'study_spaces:approve' %}" class="btn btn-success" />
 				<input type="submit" value="Deny" formaction="{% url 'study_spaces:deny' %}" class="btn btn-danger" />
 				<br /><br />
 			</form>
+			{% endfor %}
+
+			<h3 class="mt-5 mb-3">Approved Study Spaces</h3>
+			{% for y in approved_list %}
+			<div class="mb-3 p-3 submission-section">
+				<span class="d-flex">
+					<strong>Study Space Name:</strong>
+					<p class="mx-2">{{ y.name }}</p>
+				</span>
+				<span class="d-flex">
+					<strong>Address:</strong>
+					<p class="mx-2">{{ y.address }}</p>
+				</span>
+				<span class="d-flex flex-column">
+					<strong>Amenities:</strong>
+					<span class="px-3">
+						{% if y.has_wifi %}
+						<span data-bs-toggle="tooltip" data-bs-placement="top" title="Has WiFi">
+							{% bs_icon 'wifi' size='1.75em' extra_classes='feature-icon' %}
+						</span>
+						{% endif %} {% if y.has_outlets %}
+						<span data-bs-toggle="tooltip" data-bs-placement="top" title="Has Outlets">
+							{% bs_icon 'outlet' size='1.75em' extra_classes='feature-icon' %}
+						</span>
+						{% endif %} {% if y.has_printers %}
+						<span data-bs-toggle="tooltip" data-bs-placement="top" title="Has Printers">
+							{% bs_icon 'printer' size='1.75em' extra_classes='feature-icon' %}
+						</span>
+						{% endif %} {% if y.has_whiteboards %}
+						<span data-bs-toggle="tooltip" data-bs-placement="top" title="Has Whiteboards">
+							{% bs_icon 'easel' size='1.75em' extra_classes='feature-icon' %}
+						</span>
+						{% endif %} {% if y.is_quiet %}
+						<span data-bs-toggle="tooltip" data-bs-placement="top" title="Quiet Study Space">
+							{% bs_icon 'bell-slash' size='1.75em' extra_classes='feature-icon' %}
+						</span>
+						{% endif %} {% if y.is_outside %}
+						<span data-bs-toggle="tooltip" data-bs-placement="top" title="Outdoor Study Space">
+							{% bs_icon 'sun' size='1.75em' extra_classes='feature-icon' %}
+						</span>
+						{% endif %} {% if y.has_food %}
+						<span data-bs-toggle="tooltip" data-bs-placement="top" title="Food Nearby">
+							{% bs_icon 'cup' size='1.75em' extra_classes='feature-icon' %}
+						</span>
+						{% endif %}
+					</span>
+				</span>
+				<span class="d-flex justify-content-end">
+					<a href="{% url 'study_spaces:edit' y.id %}" class="btn secondary">Edit</a>
+				</span>
+			</div>
 			{% endfor %}
 		</div>
 	</body>
