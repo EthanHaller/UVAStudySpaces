@@ -158,6 +158,7 @@ def approve_submission(request):
     return redirect('/study/submission')
 
 
+@login_required(login_url='/study/login')
 def deny_submission(request):
     if request.method == 'POST':
         s = StudySpace.objects.get(pk=request.POST["id"])
@@ -166,37 +167,40 @@ def deny_submission(request):
         s.save()
     return redirect('/study/submission')
 
+
 @login_required(login_url='/study/login')
 def edit_study_space(request, study_space_id):
-    space = StudySpace.objects.get(pk=study_space_id)
-    context = {"study_space": space, "google_api_key": settings.GOOGLE_API_KEY}
+    if is_admin(request.user.email):
+        space = StudySpace.objects.get(pk=study_space_id)
+        context = {"study_space": space, "google_api_key": settings.GOOGLE_API_KEY}
 
-    if request.method == 'POST':
-        if request.POST["name"] == '':
-            context["error_message"] = "Please input a name."
-            return render(request, 'study_spaces/edit.html', context)
-        if request.POST["address"] == '' or request.POST["lat"] == '' or request.POST["long"] == '':
-            context["error_message"] = "Please input a valid address."
-            return render(request, 'study_spaces/edit.html', context)
+        if request.method == 'POST':
+            if request.POST["name"] == '':
+                context["error_message"] = "Please input a name."
+                return render(request, 'study_spaces/edit.html', context)
+            if request.POST["address"] == '' or request.POST["lat"] == '' or request.POST["long"] == '':
+                context["error_message"] = "Please input a valid address."
+                return render(request, 'study_spaces/edit.html', context)
 
-        space.name=request.POST["name"]
-        space.address=request.POST["address"]
-        space.latitude=request.POST["lat"]
-        space.longitude=request.POST["long"]
-        space.user_email=request.user.email
-        space.has_wifi= 'has_wifi' in request.POST
-        space.has_outlets = 'has_outlets' in request.POST
-        space.has_printers = 'has_printers' in request.POST
-        space.has_whiteboards = 'has_whiteboards' in request.POST
-        space.is_quiet = 'is_quiet' in request.POST
-        space.is_outside = 'is_outside' in request.POST
-        space.has_food = 'has_food' in request.POST
-        space.information=request.POST["information"]
-        space.approved_submission = StudySpace.ApprovalStatus.APPROVED
-        space.denial_reason = 'None'
-        space.save()
-        return redirect('/study/submission')
-    return render(request, 'study_spaces/edit.html', context)
+            space.name=request.POST["name"]
+            space.address=request.POST["address"]
+            space.latitude=request.POST["lat"]
+            space.longitude=request.POST["long"]
+            space.user_email=request.user.email
+            space.has_wifi= 'has_wifi' in request.POST
+            space.has_outlets = 'has_outlets' in request.POST
+            space.has_printers = 'has_printers' in request.POST
+            space.has_whiteboards = 'has_whiteboards' in request.POST
+            space.is_quiet = 'is_quiet' in request.POST
+            space.is_outside = 'is_outside' in request.POST
+            space.has_food = 'has_food' in request.POST
+            space.information=request.POST["information"]
+            space.approved_submission = StudySpace.ApprovalStatus.APPROVED
+            space.denial_reason = 'None'
+            space.save()
+            return redirect('/study/submission')
+        return render(request, 'study_spaces/edit.html', context)
+    return redirect('/study')
 
 
 @login_required(login_url='/study/login')
