@@ -187,7 +187,6 @@ def edit_study_space(request, study_space_id):
             space.address=request.POST["address"]
             space.latitude=request.POST["lat"]
             space.longitude=request.POST["long"]
-            space.user_email=request.user.email
             space.has_wifi= 'has_wifi' in request.POST
             space.has_outlets = 'has_outlets' in request.POST
             space.has_printers = 'has_printers' in request.POST
