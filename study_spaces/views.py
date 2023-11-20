@@ -17,8 +17,9 @@ def is_admin(email):
         'lukecreech11@gmail.com',
         'rqf8pe@virginia.edu',
         'gracefly4@gmail.com',
-        'ethanhaller02@gmail.com'
-        'cs3240.super@gmail.com'
+        'ethanhaller02@gmail.com',
+        'cs3240.super@gmail.com',
+        'projecta06testuser@gmail.com'
     ]
 
     return email in admins
