@@ -88,8 +88,8 @@
 }
 
 .profile-picture-large {
-    width: 140px;
-    height: 140px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -112,6 +112,9 @@
     padding: 0.3em !important;
     border-radius: 50%;
     background-color: var(--background-light);
+}
+
+.icon-tooltip {
     margin: 0.5rem 0.5rem 0.5rem 0px !important;
 }
 

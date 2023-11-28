@@ -115,7 +115,8 @@
 }
 
 .icon-tooltip {
-    margin: 0.5rem 0.5rem 0.5rem 0px !important;
+    margin: 8px 8px 8px 0px !important;
+    padding: 8px 8px 8px 0px !important;
 }
 
 .submission-section {
