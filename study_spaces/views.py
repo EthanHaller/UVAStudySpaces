@@ -31,7 +31,7 @@ def get_pending_spaces():
 
 
 def get_spaces_by_email(email):
-    return StudySpace.objects.filter(user_email=email)
+    return StudySpace.objects.filter(user_email=email).order_by('-time_created')
 
 
 @login_required(login_url='/study/login')
