@@ -38,8 +38,8 @@
 							<a class="nav-link {% if '/submission' in request.path %}nav-active{% endif %}" href="/study/submission">{% if is_admin %}Submissions{% else %}Submit a Study Space{% endif %}</a>
 						</li>
 					</ul>
-					<div class="nav-item dropdown float-end mx-2">
-						<a class="dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					<div class="nav-item dropdown float-end mx-2 py-1">
+						<a class="dropdown-toggle d-flex align-items-center h-100" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							<span class="profile-name mx-2">Hello, {{ googleUser.name }}</span>
 							<img src="{{ googleUser.picture }}" alt="User Profile Picture" class="profile-picture" />
 						</a>

@@ -59,8 +59,8 @@
 }
 
 .outline-primary:hover {
-    color: var(--secondary-color);
-    border-color: var(--secondary-color);
+    background-color: var(--primary-color);
+    color: var(--background-light);
 }
 
 .primary-button {
@@ -69,8 +69,9 @@
 }
 
 .primary-button:hover {
-    background-color: var(--secondary-color);
-    color: var(--background-light);
+    background-color: transparent;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
 }
 
 .nav-link {

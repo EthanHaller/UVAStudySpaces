@@ -20,7 +20,7 @@
 				><br /><br />
 				<input type="hidden" class="geo" id="id-lat" name="lat" value="" />
 				<input type="hidden" class="geo" id="id-long" name="long" value="" />
-				<input type="submit" class="btn btn-primary" id="submit-button" formaction="{% url 'study_spaces:closest' %}" />
+				<input type="submit" class="btn primary-button" id="submit-button" formaction="{% url 'study_spaces:closest' %}" />
 				<br /><br />
 			</form>
 			{% block content %} {% if start_address %}
@@ -28,7 +28,7 @@
 			{% endif %} {% for x in mod %}
 			<h5>{{ x.name }}</h5>
 			<p>{{ x.address }}</p>
-			<a href="{% url 'study_spaces:directions' %}?dest={{ x.id }}" class="btn btn-primary">Get Directions</a>
+			<a href="{% url 'study_spaces:directions' %}?dest={{ x.id }}" class="btn primary-button">Get Directions</a>
 			<br />
 			<br />
 			<br />

@@ -138,7 +138,7 @@
 				<label for="other_information"><strong>Other Information:</strong></label>
 				<textarea id="other_information" name="other_information" class="form-control w-100 mb-3"></textarea>
 				<span class="d-flex justify-content-end">
-					<button type="button" class="btn primary" id="submissionModalButton" data-bs-toggle="modal" data-bs-target="#submissionModal">
+					<button type="button" class="btn primary-button" id="submissionModalButton" data-bs-toggle="modal" data-bs-target="#submissionModal">
 						Submit
 					</button>
 				</span>
@@ -153,7 +153,7 @@
 							<div class="modal-body">Are you sure you want to submit the Study Space?</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-								<button type="submit" class="btn primary" data-bs-dismiss="modal" formaction="{% url 'study_spaces:submission' %}">
+								<button type="submit" class="btn primary-button" data-bs-dismiss="modal" formaction="{% url 'study_spaces:submission' %}">
 									Submit
 								</button>
 							</div>
