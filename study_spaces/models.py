@@ -1,6 +1,7 @@
 # https://www.w3schools.com/python/ref_string_format.asp
 # https://docs.djangoproject.com/en/4.2/ref/models/fields/
 from django.db import models
+from django.utils import timezone
 
 
 class StudySpace(models.Model):
@@ -27,6 +28,7 @@ class StudySpace(models.Model):
     user_email = models.CharField(max_length=200)
     denial_reason = models.CharField(max_length=200, default='')
     information = models.TextField(default='')
+    time_created = models.DateTimeField(default=timezone.now)
 
     def get_sentence(self):
         return "{name} is located at {address}.".format(name=self.name, address=self.address)
