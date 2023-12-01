@@ -155,6 +155,7 @@ def approve_submission(request):
         s = StudySpace.objects.get(pk=request.POST["id"])
         s.approved_submission = StudySpace.ApprovalStatus.APPROVED
         s.save()
+        messages.success(request, f'Study Space "{s.name}" has been successfully approved.')
     return redirect('/study/submission')
 
 
@@ -165,6 +166,7 @@ def deny_submission(request):
         s.approved_submission = StudySpace.ApprovalStatus.DENIED
         s.denial_reason = request.POST["Denial"]
         s.save()
+        messages.success(request, f'Study Space "{s.name}" has been successfully denied.')
     return redirect('/study/submission')
 
 
@@ -197,6 +199,7 @@ def edit_study_space(request, study_space_id):
             space.approved_submission = StudySpace.ApprovalStatus.APPROVED
             space.denial_reason = 'None'
             space.save()
+            messages.success(request, f'Saved changed to Study Space "{space.name}".')
             return redirect('/study/submission')
         return render(request, 'study_spaces/edit.html', context)
     return redirect('/study')
@@ -208,11 +211,9 @@ def delete_study_space(request, study_space_id):
         try:
             space_to_delete = StudySpace.objects.get(pk=study_space_id)
             space_to_delete.delete()
-
-            messages.success(request, f'Study space "{space_to_delete.name}" has been successfully deleted.')
-
+            messages.success(request, f'Study Space "{space_to_delete.name}" has been successfully deleted.')
         except StudySpace.DoesNotExist:
-            messages.error(request, 'Study space does not exist.')
+            messages.error(request, 'Study Space does not exist.')
 
     return redirect('/study/submission')
 
