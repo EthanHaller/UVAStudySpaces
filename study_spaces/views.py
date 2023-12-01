@@ -109,7 +109,8 @@ def profile(request):
 
 @login_required(login_url='/study/login')
 def submission(request):
-    context = {"google_api_key": settings.GOOGLE_API_KEY}
+    context = {"google_api_key": settings.GOOGLE_API_KEY, "toasts": messages.get_messages(request)}
+
     if is_admin(request.user.email):
         context["pending_list"] = get_pending_spaces()
         context["pending_list_length"] = len(context["pending_list"])
@@ -200,12 +201,21 @@ def edit_study_space(request, study_space_id):
         return render(request, 'study_spaces/edit.html', context)
     return redirect('/study')
 
+
 @login_required(login_url='/study/login')
 def delete_study_space(request, study_space_id):
-    space_to_delete = StudySpace.objects.get(pk=study_space_id)
-    space_to_delete.delete()
+    if request.method == 'POST':
+        try:
+            space_to_delete = StudySpace.objects.get(pk=study_space_id)
+            space_to_delete.delete()
+
+            messages.success(request, f'Study space "{space_to_delete.name}" has been successfully deleted.')
+
+        except StudySpace.DoesNotExist:
+            messages.error(request, 'Study space does not exist.')
 
     return redirect('/study/submission')
+
 
 @login_required(login_url='/study/login')
 def information(request):
