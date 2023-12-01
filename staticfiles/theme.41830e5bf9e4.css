@@ -86,7 +86,6 @@
     box-sizing: border-box;
     color: var(--background-light) !important;
     background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
     border-radius: 5px;
     transition: color 0.3s, background-color 0.3s;
 }

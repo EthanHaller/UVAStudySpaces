@@ -53,16 +53,40 @@
     color: var(--background-light) !important;
 }
 
+.outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.outline-primary:hover {
+    background-color: var(--primary-color);
+    color: var(--background-light);
+}
+
+.primary-button {
+    background-color: var(--primary-color);
+    color: var(--background-light);
+}
+
+.primary-button:hover {
+    
+}
+
 .nav-link {
     color: var(--background-light);
     font-weight: 500;
     transition: none;
+    box-sizing: border-box;
+    border-width: 0 0 3px 0;
+    border-color: var(--primary-color);
+    border-style: solid;
 }
 
 .nav-link:hover {
     box-sizing: border-box;
     color: var(--background-light) !important;
     background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
     border-radius: 5px;
     transition: color 0.3s, background-color 0.3s;
 }
