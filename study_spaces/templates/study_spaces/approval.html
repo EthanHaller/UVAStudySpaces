@@ -10,9 +10,6 @@
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script>
 			$(document).ready(function () {
-				const navbarHeight = document.getElementById("global-navbar").offsetHeight
-				document.getElementById("toast-container").style.top = `calc(${navbarHeight} - 0px)`
-
 				$(".toast").toast()
 				$(".toast").toast("show")
 			})
