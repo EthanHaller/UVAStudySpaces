@@ -140,7 +140,11 @@ def submission(request):
                 is_quiet = 'is_quiet' in request.POST,
                 is_outside = 'is_outside' in request.POST,
                 has_food = 'has_food' in request.POST,
-                information=request.POST["information"],
+                location=request.POST["location"],
+                environment=request.POST["environment"],
+                traffic=request.POST["traffic"],
+                hours=request.POST["hours"],
+                other_information=request.POST["other_information"],
                 denial_reason = 'None'
             )
             s.save()
@@ -196,7 +200,11 @@ def edit_study_space(request, study_space_id):
             space.is_quiet = 'is_quiet' in request.POST
             space.is_outside = 'is_outside' in request.POST
             space.has_food = 'has_food' in request.POST
-            space.information=request.POST["information"]
+            space.location = request.POST["location"],
+            space.environment = request.POST["environment"],
+            space.traffic = request.POST["traffic"],
+            space.hours = request.POST["hours"],
+            space.other_information=request.POST["other_information"]
             space.approved_submission = StudySpace.ApprovalStatus.APPROVED
             space.denial_reason = 'None'
             space.save()

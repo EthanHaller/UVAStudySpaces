@@ -27,7 +27,11 @@ class StudySpace(models.Model):
     approved_submission = models.IntegerField(choices=ApprovalStatus.choices, default=ApprovalStatus.PENDING)
     user_email = models.CharField(max_length=200)
     denial_reason = models.CharField(max_length=200, default='')
-    information = models.TextField(default='')
+    location = models.TextField(default='')
+    environment = models.TextField(default='')
+    traffic = models.TextField(default='')
+    hours = models.TextField(default='')
+    other_information = models.TextField(default='')
     time_created = models.DateTimeField(default=timezone.now)
 
     def get_sentence(self):

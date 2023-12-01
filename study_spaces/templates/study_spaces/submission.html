@@ -127,8 +127,16 @@
 						</div>
 					</div>
 				</div>
-				<label for="information"><stron>Information:</stron></label>
-				<textarea id="information" name="information" class="form-control w-100 mb-3"></textarea>
+                <label for="location"><strong>Location:</strong></label>
+				<textarea id="location" name="location" class="form-control w-100 mb-3"></textarea>
+                <label for="environment"><strong>Environment:</strong></label>
+				<textarea id="environment" name="environment" class="form-control w-100 mb-3"></textarea>
+                <label for="traffic"><strong>Traffic:</strong></label>
+				<textarea id="traffic" name="traffic" class="form-control w-100 mb-3"></textarea>
+                <label for="hours"><strong>Hours:</strong></label>
+				<textarea id="hours" name="hours" class="form-control w-100 mb-3"></textarea>
+				<label for="other_information"><strong>Other Information:</strong></label>
+				<textarea id="other_information" name="other_information" class="form-control w-100 mb-3"></textarea>
 				<span class="d-flex justify-content-end">
 					<button type="button" class="btn primary" id="submissionModalButton" data-bs-toggle="modal" data-bs-target="#submissionModal">
 						Submit
@@ -201,8 +209,16 @@
 					</span>
 				</span>
 				<span class="d-flex">
-					<strong>Information:</strong>
-					<p class="mx-2">{{ x.information }}</p>
+                    <strong>Location:</strong>
+                    <p class="mx-2">{{ x.location }}</p>
+                    <strong>Environment:</strong>
+                    <p class="mx-2">{{ x.environment }}</p>
+                    <strong>Traffic:</strong>
+                    <p class="mx-2">{{ x.traffic }}</p>
+                    <strong>Hours:</strong>
+                    <p class="mx-2">{{ x.hours }}</p>
+					<strong>Other Information:</strong>
+					<p class="mx-2">{{ x.other_information }}</p>
 				</span>
 				<span class="d-flex">
 					<strong>Approval Status:</strong>

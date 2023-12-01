@@ -100,8 +100,16 @@
 						</div>
 					</div>
 				</div>
-                <label for="information"><stron>Information:</stron></label>
-				<textarea id="information" name="information" class="form-control w-100 mb-3">{{ study_space.information }}</textarea>
+                <label for="location"><strong>Location:</strong></label>
+				<textarea id="location" name="location" class="form-control w-100 mb-3">{{ study_space.location }}</textarea>
+                <label for="environment"><strong>Environment:</strong></label>
+				<textarea id="environment" name="environment" class="form-control w-100 mb-3">{{ study_space.environment }}</textarea>
+                <label for="traffic"><strong>Traffic:</strong></label>
+				<textarea id="traffic" name="traffic" class="form-control w-100 mb-3">{{ study_space.traffic }}</textarea>
+                <label for="hours"><strong>Hours:</strong></label>
+				<textarea id="hours" name="hours" class="form-control w-100 mb-3">{{ study_space.hours }}</textarea>
+                <label for="other_information"><strong>Other Information:</strong></label>
+				<textarea id="other_information" name="other_information" class="form-control w-100 mb-3">{{ study_space.other_information }}</textarea>
 				<span class="d-flex justify-content-end">
 					<a class="btn btn-secondary mx-2" href="{% url 'study_spaces:submission' %}">Cancel</a>
 					<button type="button" class="btn secondary" id="submissionModalButton" data-bs-toggle="modal" data-bs-target="#submissionModal">

@@ -49,7 +49,11 @@
 					{% endif %}
 				</span>
 			</span>
-			<p class="mt-4">{{ study_space.information|linebreaks }}</p>
+            <p class="mt-4"><strong>Location: </strong>{{ study_space.location }}</p>
+            <p class="mt-4"><strong>Environment: </strong>{{ study_space.environment }}</p>
+            <p class="mt-4"><strong>Traffic: </strong>{{ study_space.traffic }}</p>
+            <p class="mt-4"><strong>Hours: </strong>{{ study_space.hours }}</p>
+            <p class="mt-4">{{ study_space.other_information|linebreaks }}</p>
 		</div>
 	</body>
 </html>
