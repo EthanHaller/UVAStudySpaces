@@ -36,14 +36,18 @@ function initMap() {
 
 			const card = document.getElementById("study-card-id-" + i.id)
 			card.style.borderColor = "#FFA726"
-			card.scrollIntoView({ behavior: 'smooth' })
+			card.scrollIntoView({ behavior: "smooth" })
 		}
 
 		marker.addListener("click", studySpotClicked)
-		
+
 		const card = document.getElementById("study-card-id-" + i.id)
 		card.addEventListener("click", studySpotClicked)
 	})
 }
+
+$(document).ready(function () {
+	$('[data-toggle="tooltip"]').tooltip()
+})
 
 window.initMap = initMap
