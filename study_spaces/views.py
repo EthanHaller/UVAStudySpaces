@@ -1,12 +1,9 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
-from django.contrib.auth import logout
-from django.conf import settings
-from django.utils.decorators import method_decorator
-
-from .mixins import Directions
 from django.contrib.auth.decorators import login_required
-from django.views import generic
+from django.contrib.auth import logout
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.conf import settings
+from .mixins import Directions
 import json
 
 from .models import *
@@ -203,6 +200,12 @@ def edit_study_space(request, study_space_id):
         return render(request, 'study_spaces/edit.html', context)
     return redirect('/study')
 
+@login_required(login_url='/study/login')
+def delete_study_space(request, study_space_id):
+    space_to_delete = StudySpace.objects.get(pk=study_space_id)
+    space_to_delete.delete()
+
+    return redirect('/study/submission')
 
 @login_required(login_url='/study/login')
 def information(request):

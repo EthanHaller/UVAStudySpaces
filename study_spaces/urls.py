@@ -18,4 +18,5 @@ urlpatterns = [
     path('information', views.information, name='information'),
     path('closest', views.closest, name='closest'),
     path('edit/<int:study_space_id>/', views.edit_study_space, name='edit'),
+    path('delete/<int:study_space_id>/', views.delete_study_space, name='delete'),
 ]
