@@ -7,84 +7,74 @@
 		{% load static %} {% load bootstrap5 %} {# Load Bootstrap CSS #} {% bootstrap_css %}
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	</head>
-	<body>
+	<body class="background">
 		{% include 'study_spaces/navbar.html' %}
 		<div class="container-fluid">
 			<form method="post" class="form-multiline">
-				Enter an address: <br>
-			{% csrf_token %}
-			{% if error_message %}
+				Enter an address: <br />
+				{% csrf_token %} {% if error_message %}
 				<p><strong>{{ error_message }}</strong></p>
-			{% endif %}
-			<label>
-				<input required type="text" size="50" id="id-google-address" name="address">
-			</label><br><br>
-			<input type="hidden" class="geo" id="id-lat" name="lat" value="">
-   			<input type="hidden" class="geo" id="id-long" name="long" value="">
-			<input type="submit" class="btn btn-primary" id="submit-button" formaction="{% url 'study_spaces:closest' %}">
-			<br><br>
+				{% endif %}
+				<label>
+					<input required type="text" size="50" id="id-google-address" name="address" /> </label
+				><br /><br />
+				<input type="hidden" class="geo" id="id-lat" name="lat" value="" />
+				<input type="hidden" class="geo" id="id-long" name="long" value="" />
+				<input type="submit" class="btn btn-primary" id="submit-button" formaction="{% url 'study_spaces:closest' %}" />
+				<br /><br />
 			</form>
-			{% block content %}
-			{% if start_address %}
-				<h3>Closest Study Spaces to {{ start_address }}</h3>
-			{% endif %}
-			{% for x in mod %}
-				<h5>{{ x.name }}</h5>
-				<p>{{ x.address }}</p>
-				<a href="{% url 'study_spaces:directions' %}?dest={{ x.id }}" class="btn btn-primary">Get Directions</a>
-				<br>
-				<br>
-				<br>
-			{% endfor %}
-			{% endblock content %}
+			{% block content %} {% if start_address %}
+			<h3>Closest Study Spaces to {{ start_address }}</h3>
+			{% endif %} {% for x in mod %}
+			<h5>{{ x.name }}</h5>
+			<p>{{ x.address }}</p>
+			<a href="{% url 'study_spaces:directions' %}?dest={{ x.id }}" class="btn btn-primary">Get Directions</a>
+			<br />
+			<br />
+			<br />
+			{% endfor %} {% endblock content %}
 		</div>
 	</body>
 	<script>
 		window.key = "{{ key }}"
-    </script>
+	</script>
 	<script type="text/javascript">
-		$.getScript( "https://maps.googleapis.com/maps/api/js?key=" + window.key + "&libraries=places")
-		.done(function( script, textStatus ) {
+		$.getScript("https://maps.googleapis.com/maps/api/js?key=" + window.key + "&libraries=places").done(function (script, textStatus) {
 			google.maps.event.addDomListener(window, "load", putInRequest)
-
 		})
-		function putInRequest(callback){
+		function putInRequest(callback) {
 			populateStartAddressWithUserLocation()
 			initAutocomplete()
 		}
 		function initAutocomplete(callback) {
-			let autocomplete = new google.maps.places.Autocomplete(
-				document.getElementById('id-google-address'),
-				{
-				   types: ['address'],
-				   componentRestrictions: {'country': ['usa']},
-				})
+			let autocomplete = new google.maps.places.Autocomplete(document.getElementById("id-google-address"), {
+				types: ["address"],
+				componentRestrictions: { country: ["usa"] },
+			})
 
 			autocomplete.addListener("place_changed", () => {
-				const place = autocomplete.getPlace();
+				const place = autocomplete.getPlace()
 				onPlaceChanged(place)
-			});
+			})
 		}
-		function onPlaceChanged (place){
-			let el_id = 'id-google-address'
-			let lat_id = 'id-lat'
-			let long_id = 'id-long'
+		function onPlaceChanged(place) {
+			let el_id = "id-google-address"
+			let lat_id = "id-lat"
+			let long_id = "id-long"
 			var geocoder = new google.maps.Geocoder()
 			var address = document.getElementById(el_id).value
 
-			geocoder.geocode( { 'address': address}, function(results, status) {
-
+			geocoder.geocode({ address: address }, function (results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
-					var latitude = results[0].geometry.location.lat();
-					var longitude = results[0].geometry.location.lng();
-					$('#' + lat_id).val(latitude)
-					$('#' + long_id).val(longitude)
+					var latitude = results[0].geometry.location.lat()
+					var longitude = results[0].geometry.location.lng()
+					$("#" + lat_id).val(latitude)
+					$("#" + long_id).val(longitude)
+				} else {
+					$("#" + lat_id).val("")
+					$("#" + long_id).val("")
 				}
-				else{
-					$('#' + lat_id).val('')
-					$('#' + long_id).val('')
-				}
-			});
+			})
 		}
 		async function populateStartAddressWithUserLocation() {
 			if (navigator.geolocation) {

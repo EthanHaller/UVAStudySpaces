@@ -75,11 +75,6 @@
     color: var(--secondary-color) !important;
 }
 
-.body {
-    background-color: var(--background-light) !important;
-}
-
-
 .profile-picture {
     width: 40px;
     height: 40px;
@@ -88,8 +83,8 @@
 }
 
 .profile-picture-large {
-    width: 140px;
-    height: 140px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     object-fit: cover;
 }

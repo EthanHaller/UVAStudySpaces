@@ -5,14 +5,37 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Submit a Study Space</title>
 
-		{% load static %} {% load bootstrap5 %} {# Load Bootstrap CSS #} {% bootstrap_css %} {% load bootstrap_icons %}
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		{% load static %} {% load bootstrap_icons %}
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script>
+			$(document).ready(function () {
+				const navbarHeight = document.getElementById("global-navbar").offsetHeight
+				document.getElementById("toast-container").style.top = `calc(${navbarHeight} - 0px)`
+
+				$(".toast").toast()
+				$(".toast").toast("show")
+			})
+		</script>
 	</head>
 
 	<body class="background">
-		{% include 'study_spaces/navbar.html' %}
+		{% include 'study_spaces/navbar.html' %} {% if toasts %}
+
+		<div id="toast-container" class="toast-container position-fixed end-0 m-3">
+			{% for message in toasts %}
+			<div class="toast align-items-center text-white bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+				<div class="d-flex">
+					<div class="toast-body">{{ message | safe }}</div>
+					<button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		{% endif %}
+
 		<div class="container-fluid col-md-8 col-lg-6 mx-auto">
 			<h3 class="mt-4 mb-3">Submit a New Study Space!</h3>
+
 			<form method="post" class="form-multiline submission-section p-3">
 				{% csrf_token %} {% if error_message %}
 				<p class="alert alert-danger"><strong>{{ error_message }}</strong></p>
@@ -102,9 +125,27 @@
 				<label for="information"><stron>Information:</stron></label>
 				<textarea id="information" name="information" class="form-control w-100 mb-3"></textarea>
 				<span class="d-flex justify-content-end">
-					<button type="submit" class="btn primary" formaction="{% url 'study_spaces:submission' %}">Submit</button>
+					<button type="button" class="btn primary" data-bs-toggle="modal" data-bs-target="#submissionModal">Submit</button>
 				</span>
+
+				<div class="modal fade" id="submissionModal" tabindex="-1" aria-labelledby="submissionModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="submissionModalLabel">Confirm Submission</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">Are you sure you want to submit the Study Space?</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+								<button type="submit" class="btn primary" formaction="{% url 'study_spaces:submission' %}">Submit</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</form>
+
+
 			{% if submitted_list_length != 0 %}
 			<h3 class="mt-5 mb-3">Past Submissions</h3>
 			{% endif %} {% for x in submitted_list %}
