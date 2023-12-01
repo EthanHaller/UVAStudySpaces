@@ -200,10 +200,10 @@ def edit_study_space(request, study_space_id):
             space.is_quiet = 'is_quiet' in request.POST
             space.is_outside = 'is_outside' in request.POST
             space.has_food = 'has_food' in request.POST
-            space.location = request.POST["location"],
-            space.environment = request.POST["environment"],
-            space.traffic = request.POST["traffic"],
-            space.hours = request.POST["hours"],
+            space.location = request.POST["location"]
+            space.environment = request.POST["environment"]
+            space.traffic = request.POST["traffic"]
+            space.hours = request.POST["hours"]
             space.other_information=request.POST["other_information"]
             space.approved_submission = StudySpace.ApprovalStatus.APPROVED
             space.denial_reason = 'None'
