@@ -144,6 +144,7 @@ def submission(request):
                 denial_reason = 'None'
             )
             s.save()
+            messages.success(request, f'Study Space "{s.name}" has been successfully submitted.')
         context["submitted_list"] = get_spaces_by_email(request.user.email)
         context["submitted_list_length"] = len(context["submitted_list"])
         return render(request, 'study_spaces/submission.html', context)
