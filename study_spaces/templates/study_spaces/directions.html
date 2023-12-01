@@ -24,14 +24,18 @@
 	</head>
 	<body class="background">
 		{% include 'study_spaces/navbar.html' %}
+
 		<div class="row" style="width: 100vw">
 			<div class="col-sm-6">
 				<div id="directions-form" class="p-4 mb-5">
-					<form id="directions-form">
+					<form id="directions-form" method="post">
+						{% csrf_token %}
+						<p id="addresses-error" class="alert alert-danger" hidden><strong>Please input two valid addresses</strong></p>
+
 						<h2>Get Directions</h2>
 						<div class="d-flex align-items-center mb-3">
 							<label for="id-google-address-a" class="form-label" style="width: 20%">Start Address:</label>
-							<input name='startinput' type="text" class="form-control" id="id-google-address-a" placeholder="Enter start address" />
+							<input name="startinput" type="text" class="form-control" id="id-google-address-a" placeholder="Enter start address" />
 						</div>
 						<div class="d-flex align-items-center mb-3">
 							<label for="id-google-address-b" class="form-label" style="width: 20%">End Address:</label>
@@ -41,10 +45,10 @@
 								id="id-google-address-b"
 								placeholder="Enter end address"
 								value="{% if s.address %}{{ s.address }}{% endif %}"
-								name = 'endinput'
+								name="endinput"
 							/>
 						</div>
-						<button name='getdirectionsbutton' type="submit" class="btn btn-primary" style="float: right">Get Directions</button>
+						<button name="getdirectionsbutton" type="submit" class="btn btn-primary" style="float: right">Get Directions</button>
 					</form>
 				</div>
 				<div id="directions-container" class="px-4">
