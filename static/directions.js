@@ -126,7 +126,6 @@ async function CalcRoute() {
 			var url = "/study/directions?" + query
 			window.location.assign(url)
 		} catch (error) {
-			console.error("Geocoder exception:", error)
 			document.getElementById("addresses-error").hidden = false
 		}
 	}
