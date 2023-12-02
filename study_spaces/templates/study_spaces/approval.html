@@ -79,18 +79,26 @@
 						{% endif %}
 					</span>
 				</span>
-				<span class="d-flex">
-                    <strong>Location:</strong>
-                    <p class="mx-2">{{ x.location }}</p>
-                    <strong>Environment:</strong>
-                    <p class="mx-2">{{ x.environment }}</p>
-                    <strong>Traffic:</strong>
-                    <p class="mx-2">{{ x.traffic }}</p>
-                    <strong>Hours:</strong>
-                    <p class="mx-2">{{ x.hours }}</p>
+				<style>
+					.mb-2 p {
+						max-width: 100%;
+						overflow: auto;
+						overflow-x: wrap;
+						white-space: normal;
+					}
+				</style>
+				<div class="mb-2">
+					<strong>Location:</strong>
+					<p class="mx-2">{{ x.location }}</p>
+					<strong>Environment:</strong>
+					<p class="mx-2">{{ x.environment }}</p>
+					<strong>Traffic:</strong>
+					<p class="mx-2">{{ x.traffic }}</p>
+					<strong>Hours:</strong>
+					<p class="mx-2">{{ x.hours }}</p>
 					<strong>Other Information:</strong>
 					<p class="mx-2">{{ x.other_information }}</p>
-				</span>
+				</div>
 				<label for="denial-reason"><stron>Reason for Denial (if applicable):</stron></label>
 				<textarea id="denial-reason" name="Denial" class="form-control w-100"></textarea>
 				<br />
