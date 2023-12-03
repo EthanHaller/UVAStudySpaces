@@ -1,3 +1,4 @@
+// https://github.com/bobby-didcoding/did_django_google_maps_api
 $.getScript("https://maps.googleapis.com/maps/api/js?key=" + window.key + "&callback=initMap&v=weekly&libraries=places").done(function (script, textStatus) {
 	google.maps.event.addListener(window, "load", initMap)
 })
