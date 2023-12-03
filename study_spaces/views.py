@@ -1,12 +1,9 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
-from django.contrib.auth import logout
-from django.conf import settings
-from django.utils.decorators import method_decorator
-
-from .mixins import Directions
 from django.contrib.auth.decorators import login_required
-from django.views import generic
+from django.contrib.auth import logout
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.conf import settings
+from .mixins import Directions
 import json
 
 from .models import *
@@ -34,7 +31,7 @@ def get_pending_spaces():
 
 
 def get_spaces_by_email(email):
-    return StudySpace.objects.filter(user_email=email)
+    return StudySpace.objects.filter(user_email=email).order_by('-time_created')
 
 
 @login_required(login_url='/study/login')
@@ -56,7 +53,7 @@ def logout_view(request):
 
 @login_required(login_url='/study/login')
 def directions(request):
-    # Code taken from https://www.youtube.com/watch?v=wCn8WND-JpU
+    # Reference: https://www.youtube.com/watch?v=wCn8WND-JpU
     mod_json = []
     s = None
     if "dest" in request.GET:
@@ -112,7 +109,8 @@ def profile(request):
 
 @login_required(login_url='/study/login')
 def submission(request):
-    context = {"google_api_key": settings.GOOGLE_API_KEY}
+    context = {"google_api_key": settings.GOOGLE_API_KEY, "toasts": messages.get_messages(request)}
+
     if is_admin(request.user.email):
         context["pending_list"] = get_pending_spaces()
         context["pending_list_length"] = len(context["pending_list"])
@@ -142,10 +140,15 @@ def submission(request):
                 is_quiet = 'is_quiet' in request.POST,
                 is_outside = 'is_outside' in request.POST,
                 has_food = 'has_food' in request.POST,
-                information=request.POST["information"],
+                location=request.POST["location"],
+                environment=request.POST["environment"],
+                traffic=request.POST["traffic"],
+                hours=request.POST["hours"],
+                other_information=request.POST["other_information"],
                 denial_reason = 'None'
             )
             s.save()
+            messages.success(request, f'Study Space "{s.name}" has been successfully submitted.')
         context["submitted_list"] = get_spaces_by_email(request.user.email)
         context["submitted_list_length"] = len(context["submitted_list"])
         return render(request, 'study_spaces/submission.html', context)
@@ -157,6 +160,7 @@ def approve_submission(request):
         s = StudySpace.objects.get(pk=request.POST["id"])
         s.approved_submission = StudySpace.ApprovalStatus.APPROVED
         s.save()
+        messages.success(request, f'Study Space "{s.name}" has been successfully approved.')
     return redirect('/study/submission')
 
 
@@ -167,6 +171,7 @@ def deny_submission(request):
         s.approved_submission = StudySpace.ApprovalStatus.DENIED
         s.denial_reason = request.POST["Denial"]
         s.save()
+        messages.success(request, f'Study Space "{s.name}" has been successfully denied.')
     return redirect('/study/submission')
 
 
@@ -188,7 +193,6 @@ def edit_study_space(request, study_space_id):
             space.address=request.POST["address"]
             space.latitude=request.POST["lat"]
             space.longitude=request.POST["long"]
-            space.user_email=request.user.email
             space.has_wifi= 'has_wifi' in request.POST
             space.has_outlets = 'has_outlets' in request.POST
             space.has_printers = 'has_printers' in request.POST
@@ -196,13 +200,31 @@ def edit_study_space(request, study_space_id):
             space.is_quiet = 'is_quiet' in request.POST
             space.is_outside = 'is_outside' in request.POST
             space.has_food = 'has_food' in request.POST
-            space.information=request.POST["information"]
+            space.location = request.POST["location"]
+            space.environment = request.POST["environment"]
+            space.traffic = request.POST["traffic"]
+            space.hours = request.POST["hours"]
+            space.other_information=request.POST["other_information"]
             space.approved_submission = StudySpace.ApprovalStatus.APPROVED
             space.denial_reason = 'None'
             space.save()
+            messages.success(request, f'Saved changed to Study Space "{space.name}".')
             return redirect('/study/submission')
         return render(request, 'study_spaces/edit.html', context)
     return redirect('/study')
+
+
+@login_required(login_url='/study/login')
+def delete_study_space(request, study_space_id):
+    if request.method == 'POST':
+        try:
+            space_to_delete = StudySpace.objects.get(pk=study_space_id)
+            space_to_delete.delete()
+            messages.success(request, f'Study Space "{space_to_delete.name}" has been successfully deleted.')
+        except StudySpace.DoesNotExist:
+            messages.error(request, 'Study Space does not exist.')
+
+    return redirect('/study/submission')
 
 
 @login_required(login_url='/study/login')

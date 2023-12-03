@@ -5,16 +5,15 @@ $.getScript("https://maps.googleapis.com/maps/api/js?key=" + window.key + "&call
 function initMap() {
 	var directionsService = new google.maps.DirectionsService()
 	var directionsDisplay = new google.maps.DirectionsRenderer()
-    
-    const modData = window.modData
+
+	const modData = window.modData
 	const markers = []
-	if(!modData || modData.length === 0) {
+	if (!modData || modData.length === 0) {
 		map = new google.maps.Map(document.getElementById("map"), {
 			center: { lat: 38.03413872243867, lng: -78.50873523191473 },
 			zoom: 16,
 		})
-	}
-	else {
+	} else {
 		map = new google.maps.Map(document.getElementById("map"), {
 			center: { lat: parseFloat(modData.latitude), lng: parseFloat(modData.longitude) },
 			zoom: 16,
@@ -82,41 +81,53 @@ async function initAutocomplete() {
 	})
 }
 
-
 async function CalcRoute() {
 	const startAddress = document.getElementById("id-google-address-a").value
 	const endAddress = document.getElementById("id-google-address-b").value
-	if (startAddress.value != "" && endAddress.value != "") {
+
+	document.getElementById("addresses-error").hidden = true
+
+	if (startAddress.value !== "" && endAddress.value !== "") {
 		let lat_a, lat_b, long_a, long_b
 		var geocoder = new google.maps.Geocoder()
-		await geocoder.geocode({ address: startAddress }, function (results, status) {
-			if (status === google.maps.GeocoderStatus.OK) {
-				lat_a = results[0].geometry.location.lat()
-				long_a = results[0].geometry.location.lng()
-			}
-		})
-		await geocoder.geocode({ address: endAddress }, function (results, status) {
-			if (status === google.maps.GeocoderStatus.OK) {
-				lat_b = results[0].geometry.location.lat()
-				long_b = results[0].geometry.location.lng()
-			}
-		})
-		if (!lat_a || !lat_b || !long_a || !long_b) return
 
-		var params = {
-			lat_a: lat_a,
-			long_a: long_a,
-			lat_b: lat_b,
-			long_b: long_b,
+		try {
+			await geocoder.geocode({ address: startAddress }, function (results, status) {
+				if (status === google.maps.GeocoderStatus.OK) {
+					lat_a = results[0].geometry.location.lat()
+					long_a = results[0].geometry.location.lng()
+				}
+			})
+
+			await geocoder.geocode({ address: endAddress }, function (results, status) {
+				if (status === google.maps.GeocoderStatus.OK) {
+					lat_b = results[0].geometry.location.lat()
+					long_b = results[0].geometry.location.lng()
+				}
+			})
+
+			if (!lat_a || !lat_b || !long_a || !long_b) {
+				document.getElementById("addresses-error").hidden = false
+				return
+			}
+
+			var params = {
+				lat_a: lat_a,
+				long_a: long_a,
+				lat_b: lat_b,
+				long_b: long_b,
+			}
+
+			var esc = encodeURIComponent
+			var query = Object.keys(params)
+				.map((k) => esc(k) + "=" + esc(params[k]))
+				.join("&")
+
+			var url = "/study/directions?" + query
+			window.location.assign(url)
+		} catch (error) {
+			document.getElementById("addresses-error").hidden = false
 		}
-
-		var esc = encodeURIComponent
-		var query = Object.keys(params)
-			.map((k) => esc(k) + "=" + esc(params[k]))
-			.join("&")
-
-		var url = "/study/directions?" + query
-		window.location.assign(url)
 	}
 }
 

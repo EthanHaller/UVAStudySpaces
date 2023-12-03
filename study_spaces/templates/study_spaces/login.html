@@ -3,18 +3,19 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>Study Spaces Google Sign In</title>
-		{% load socialaccount %} {% load static %} {% load bootstrap5 %} {% bootstrap_css %} {% load bootstrap_icons %}
+		{% load static %} {% load socialaccount %} {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %} {% load bootstrap_icons %}
 		<link rel="stylesheet" type="text/css" href="{% static 'theme.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'login_style.css' %}" />
 	</head>
-	<body class="background">
-		<div class="container-fluid p-0" style="height: 100vh">
-			<div class="row m-0 d-flex h-100">
-				<div class="col-md-7 p-0">
-					<div class="d-flex flex-column align-items-center justify-content-center h-100">
-						<div class="text-center login-box">
-							<h1>UVAStudySpaces</h1>
+	<body>
+		<div class="container-fluid h-100">
+			<div class="row h-100">
+				<div class="col-md-6 h-100">
+					<div class="h-100 d-flex justify-content-center align-items-center">
+						<div class="px-5 login-box" style="padding-top: 100px; padding-bottom: 100px;">
+							<h1 class="mb-3">UVAStudySpaces</h1>
 							<div class="d-flex justify-content-center align-items-center">
-								<a href="{% provider_login_url 'google' %}" class="btn btn-primary primary">
+								<a href="{% provider_login_url 'google' %}" class="btn primary-button">
 									<div class="d-flex align-items-center">
 										{% bs_icon 'google' extra_classes='mx-2' %}
 										<span class="mx-2">Login With Google</span>
@@ -24,9 +25,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-5 p-0 d-md-block">
-					<div class="row primary d-flex flex-fill h-100"></div>
-				</div>
+				<div class="col-md-6 d-flex align-items-center justify-content-center"></div>
 			</div>
 		</div>
 	</body>
