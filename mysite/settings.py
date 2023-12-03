@@ -14,7 +14,66 @@ import os
 import sys
 from dotenv import load_dotenv, find_dotenv
 
-# Referenced the following for setting up google login: https://www.youtube.com/watch?v=yO6PP0vEOMc
+
+"""
+ REFERENCES
+
+ Title: Set up Google Sign-In for Faster Django Login Experience feat. Tech with Tim
+ Author: TechWithTime
+ Date: 12/12/2022
+ Code version: N/A
+ URL: https://www.youtube.com/watch?v=yO6PP0vEOMc
+ Software License: N/A
+
+ Title: DATABASES
+ Author: Django
+ Date: N/A
+ Code version: N/A 
+ URL: https://docs.djangoproject.com/en/dev/ref/settings/#databases
+ Software License: N/A
+
+ Title: Provisioning a Test PostgreSQL database on Heroku for your Django App
+ Author: Sola-Aremu 'Pelumi
+ Date: 04/15/2020
+ Code version: N/A
+ URL: https://medium.com/analytics-vidhya/provisioning-a-test-postgresql-database-on-heroku-for-your-django-app-febb2b5d3b29
+ Software License: N/A
+
+ Title: AUTH_PASSWORD_VALIDATORS
+ Author: Django
+ Date: N/A
+ Code version: N/A
+ URL: https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
+ Software License: N/A
+
+ Title: Internationalization and localization
+ Author: Django
+ Date: N/A
+ Code version: N/A
+ URL: https://docs.djangoproject.com/en/dev/topics/i18n/
+ Software License: N/A
+
+ Title: How to manage static files (e.g. images, JavaScript, CSS)
+ Author: Django
+ Date: N/A
+ Code version: N/A
+ URL: https://docs.djangoproject.com/en/dev/howto/static-files/
+ Software License: N/A
+
+ Title: DEFAULT_AUTO_FIELD
+ Author: Django
+ Date: N/A
+ Code version: N/A
+ URL: https://docs.djangoproject.com/en/dev/ref/settings/#default-auto-field
+ Software License: N/A
+ 
+ Title: Making Django Messages Work with Bootstrap Toast: A Guide
+ Author: Cody Stith
+ Date: 05/20/2023
+ Code version: N/A
+ URL: https://copyprogramming.com/howto/django-messages-bootstrap-toast-how-to-make-it-work
+ Software License: N/A
+ """
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -100,10 +159,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/dev/ref/settings/#databases
-# Provisioning a Test PostgreSQL database on Heroku for your Django App
-# https://medium.com/analytics-vidhya/provisioning-a-test-postgresql-database-on-heroku-for-your-django-app-febb2b5d3b29
 from urllib.parse import urlparse
 DATABASE_URL = os.environ.get("DATABASE_URL")
 url_parts = urlparse(DATABASE_URL)
@@ -132,8 +187,6 @@ if "test" in sys.argv:
     }
 
 
-# Password validation
-# https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -151,9 +204,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/dev/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -161,14 +211,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/dev/howto/static-files/
-
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/dev/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -190,7 +232,6 @@ AUTHENTICATION_BACKENDS = [
   'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-# https://copyprogramming.com/howto/django-messages-bootstrap-toast-how-to-make-it-work
 from django.contrib import messages
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
