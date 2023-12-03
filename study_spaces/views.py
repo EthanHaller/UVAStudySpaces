@@ -53,7 +53,7 @@ def logout_view(request):
 
 @login_required(login_url='/study/login')
 def directions(request):
-    # Code taken from https://www.youtube.com/watch?v=wCn8WND-JpU
+    # Reference: https://www.youtube.com/watch?v=wCn8WND-JpU
     mod_json = []
     s = None
     if "dest" in request.GET:

@@ -14,6 +14,7 @@ import os
 import sys
 from dotenv import load_dotenv, find_dotenv
 
+# Referenced the following for setting up google login: https://www.youtube.com/watch?v=yO6PP0vEOMc
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

@@ -1,4 +1,4 @@
-# Code taken from https://www.youtube.com/watch?v=wCn8WND-JpU
+# Reference: https://www.youtube.com/watch?v=wCn8WND-JpU
 
 from django.conf import settings
 import requests
