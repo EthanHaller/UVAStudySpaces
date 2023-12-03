@@ -26,7 +26,7 @@ from dotenv import load_dotenv, find_dotenv
  Software License: N/A
 
  Title: DATABASES
- Author: Django
+ Author: Django Project
  Date: N/A
  Code version: N/A 
  URL: https://docs.djangoproject.com/en/dev/ref/settings/#databases
@@ -40,28 +40,28 @@ from dotenv import load_dotenv, find_dotenv
  Software License: N/A
 
  Title: AUTH_PASSWORD_VALIDATORS
- Author: Django
+ Author: Django Project
  Date: N/A
  Code version: N/A
  URL: https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
  Software License: N/A
 
  Title: Internationalization and localization
- Author: Django
+ Author: Django Project
  Date: N/A
  Code version: N/A
  URL: https://docs.djangoproject.com/en/dev/topics/i18n/
  Software License: N/A
 
  Title: How to manage static files (e.g. images, JavaScript, CSS)
- Author: Django
+ Author: Django Project
  Date: N/A
  Code version: N/A
  URL: https://docs.djangoproject.com/en/dev/howto/static-files/
  Software License: N/A
 
  Title: DEFAULT_AUTO_FIELD
- Author: Django
+ Author: Django Project
  Date: N/A
  Code version: N/A
  URL: https://docs.djangoproject.com/en/dev/ref/settings/#default-auto-field

@@ -2,7 +2,7 @@
  REFERENCES
 
  Title: Introducing automated testing
- Author: Django
+ Author: Django Project
  Date: N/A
  Code version: N/A
  URL: https://docs.djangoproject.com/en/4.2/intro/tutorial05/

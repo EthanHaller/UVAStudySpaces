@@ -1,13 +1,17 @@
-# Reference: https://www.youtube.com/watch?v=wCn8WND-JpU
+"""
+ REFERENCES
+
+ Title: did_django_google_maps_api
+ Author: Bobby Stearman
+ Date: 04/16/2021
+ Code version: N/A
+ URL: https://www.youtube.com/watch?v=wCn8WND-JpU
+ Software License: GPL-3.0 license
+ """
 
 from django.conf import settings
 import requests
 import json
-
-'''
-Handles directions from Google
-'''
-
 
 def Directions(*args, **kwargs):
     lat_a = kwargs.get("lat_a")

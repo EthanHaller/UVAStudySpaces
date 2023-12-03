@@ -1,5 +1,21 @@
-# https://www.w3schools.com/python/ref_string_format.asp
-# https://docs.djangoproject.com/en/4.2/ref/models/fields/
+"""
+ REFERENCES
+
+ Title: Python String format() Method
+ Author: W3 Schools
+ Date: N/A
+ Code version: N/A
+ URL: https://www.w3schools.com/python/ref_string_format.asp
+ Software License: N/A
+
+ Title: Model field reference
+ Author: Django Project
+ Date: N/A
+ Code version: N/A
+ URL: https://docs.djangoproject.com/en/4.2/ref/models/fields/
+ Software License: N/A
+ """
+
 from django.db import models
 from django.utils import timezone
 
