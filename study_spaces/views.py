@@ -1,3 +1,29 @@
+"""
+ REFERENCES
+
+ Title: did_django_google_maps_api
+ Author: Bobby Stearman
+ Date: 04/16/2021
+ Code version: N/A
+ URL: https://www.youtube.com/watch?v=wCn8WND-JpU
+ Software License: GPL-3.0 license
+
+ Title: Items in JSON object are out of order using "json.dumps"?
+ Author: jfs
+ Date: 12/20/2017
+ Code version: N/A
+ URL: https://stackoverflow.com/questions/10844064/items-in-json-object-are-out-of-order-using-json-dumps
+ Software License: N/A
+ 
+ Title: Lambda Sorted in Python - How to Lambda Sort a List
+ Author: Kolade Chris
+ Date: 03/16/2023
+ Code version: N/A
+ URL: https://www.freecodecamp.org/news/lambda-sort-list-in-python/
+ Software License: N/A
+ """
+
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib import messages
@@ -53,7 +79,6 @@ def logout_view(request):
 
 @login_required(login_url='/study/login')
 def directions(request):
-    # Reference: https://www.youtube.com/watch?v=wCn8WND-JpU
     mod_json = []
     s = None
     if "dest" in request.GET:
@@ -236,8 +261,6 @@ def information(request):
     return render(request, 'study_spaces/information.html', context)
 
 
-# https://stackoverflow.com/questions/10844064/items-in-json-object-are-out-of-order-using-json-dumps
-# https://www.freecodecamp.org/news/lambda-sort-list-in-python/
 @login_required(login_url='/study/login')
 def closest(request):
     mod = get_approved_spaces()

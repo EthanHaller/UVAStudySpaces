@@ -1,3 +1,21 @@
+"""
+ REFERENCES
+
+ Title: Introducing automated testing
+ Author: Django
+ Date: N/A
+ Code version: N/A
+ URL: https://docs.djangoproject.com/en/4.2/intro/tutorial05/
+ Software License: N/A
+ 
+ Title: N/A
+ Author: ChatGPT
+ Date: N/A
+ Code version: N/A
+ URL: https://chat.openai.com/
+ Software License: N/A
+ """
+
 from django.test import TestCase
 from study_spaces.models import *
 from django.urls import reverse
@@ -29,7 +47,6 @@ class StudySpaceModelTestCase(TestCase):
 
 class LoggedOutTests(TestCase):
     def test_redirect(self):
-        # reference: https://docs.djangoproject.com/en/4.2/intro/tutorial05/
 
         response = self.client.get(reverse("study_spaces:directions"))
         response2 = self.client.get(reverse("study_spaces:profile"))
@@ -40,6 +57,9 @@ class LoggedOutTests(TestCase):
         self.assertEqual(response3.status_code, 302)
 
 class NavigationBarTests(TestCase):
+
+    # Note: used ChatGPT for how to set up the google app login for unit tests. Citation is at the top of the document
+
     def setUp(self):
         self.user = User.objects.create_user(username='studyspace', password='studyspacepassword')
         google_app = SocialApp.objects.create(
