@@ -190,7 +190,7 @@ AUTHENTICATION_BACKENDS = [
   'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-
+# https://copyprogramming.com/howto/django-messages-bootstrap-toast-how-to-make-it-work
 from django.contrib import messages
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
