@@ -10,7 +10,7 @@ UVA Study Spaces is web application built in Django using Python, HTML, CSS, and
 2. [How to Use Project](#functions)
 3. [Credits](#credits)
 
-## Installation❓
+## Installation
 
 The web application can be found at the following link: https://project-a-06-99a4abdf2d2b.herokuapp.com. JavaScript must be enabled in the browser. Loading the website for the first time might take some time.
 
