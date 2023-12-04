@@ -7,6 +7,13 @@
  Code version: N/A
  URL: https://www.youtube.com/watch?v=wCn8WND-JpU
  Software License: GPL-3.0 license
+
+ Title: CBI Analytics
+ Author: Nick Mol
+ Date: last updated 11/16/2022 
+ Code Version: commit def4fdb
+ URL: https://cbi-analytics.nl/django-google-maps-tutorial-5-placing-markers-on-a-google-map/
+ License: N/A
 */
 
 $.getScript("https://maps.googleapis.com/maps/api/js?key=" + window.key + "&callback=initMap&v=weekly&libraries=places").done(function (script, textStatus) {
