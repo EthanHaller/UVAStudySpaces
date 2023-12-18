@@ -6,8 +6,8 @@ UVA Study Spaces is web application built in Django using Python, HTML, CSS, and
 
 ## Table of Contents
 
-1. [Installation](#website-access)
-2. [How to Use Project](#functions)
+1. [Website Access](#website-access)
+2. [Functions](#functions)
 3. [Technologies Used](#technologies-used)
 4. [Credits](#credits)
 
