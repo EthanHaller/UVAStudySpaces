@@ -1,14 +1,4 @@
 """
-REFERENCES
-
- Title: did_django_google_maps_api
- Author: Bobby Stearman
- Date: 04/16/2021
- Code version: N/A
- URL: https://www.youtube.com/watch?v=wCn8WND-JpU
- Software License: GPL-3.0 license
-"""
-"""
 WSGI config for mysite project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.

@@ -1,13 +1,4 @@
 """
- REFERENCES
- Title: did_django_google_maps_api
- Author: Bobby Stearman
- Date: 04/16/2021
- Code version: N/A
- URL: https://www.youtube.com/watch?v=wCn8WND-JpU
- Software License: GPL-3.0 license
-"""
-"""
 URL configuration for mysite project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
