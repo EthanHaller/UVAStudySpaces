@@ -41,6 +41,10 @@ The following technologies are listed in requirements.txt and were used througho
 - postgres
 - googlemaps
 
+## License
+This project is licensed under the MIT License - see the 
+[LICENSE](https://github.com/EthanHaller/UVAStudySpaces/blob/main/LICENSE) file for details
+
 ## Credits
 
 This project was successfully implemented thanks to the commitment and dedication of:
