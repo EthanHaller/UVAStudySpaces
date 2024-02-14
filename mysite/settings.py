@@ -81,10 +81,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(find_dotenv())
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-_7rj_k1it)&s!w6^!a=##q#*r!%epc_!on&@4ovd7r(4k#1ds1"
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'project-a-06-99a4abdf2d2b.herokuapp.com']
 
@@ -160,7 +160,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 
 from urllib.parse import urlparse
-DATABASE_URL = os.environ.get("DATABASE_URL")
+DATABASE_URL = 'postgres://bpjzprovcsccqy:5a02d58a65509172131213aa4322619deceaa8f19bc1875ab9b14fbe25a4b2dd@ec2-35-169-11-108.compute-1.amazonaws.com:5432/d7qthk8nq5q0rm'
 url_parts = urlparse(DATABASE_URL)
 
 DATABASE_USER = url_parts.username
@@ -244,4 +244,5 @@ MESSAGE_TAGS = {
 LOGIN_REDIRECT_URL = "/study/"
 LOGOUT_REDIRECT_URL = "/study/logout/"
 SOCIALACCOUNT_LOGIN_ON_GET=True
-GOOGLE_API_KEY = 'AIzaSyC5DCptRFmVd168TUsP-5pe0etKaeGNCEY'
+# GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
+GOOGLE_API_KEY = 'AIzaSyAkozEdPC3ELm4m43E4ia_EMG50bpbzocA'
