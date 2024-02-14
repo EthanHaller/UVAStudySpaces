@@ -127,7 +127,8 @@ def profile(request):
 
 @login_required(login_url='/study/login')
 def submission(request):
-    context = {"google_api_key": settings.GOOGLE_API_KEY, "toasts": messages.get_messages(request)}
+    context = {"google_api_key": settings.GOOGLE_API_KEY}
+    context["toasts"] = [str(message) for message in messages.get_messages(request) if not str(message).startswith("successfully signed in")]
 
     if is_admin(request.user.email):
         context["pending_list"] = get_pending_spaces()
