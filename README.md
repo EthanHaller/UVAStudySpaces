@@ -6,14 +6,16 @@ UVA Study Spaces is web application built in Django using Python, HTML, CSS, and
 
 ## Table of Contents
 
-1. [Installation](#website-location)
-2. [How to Use Project](#functions)
+1. [Website Access](#website-access)
+2. [Functions](#functions)
 3. [Technologies Used](#technologies-used)
 4. [Credits](#credits)
 
 ## Website Access
 
 The web application can be found at the following link: https://project-a-06-99a4abdf2d2b.herokuapp.com. JavaScript must be enabled in the browser. Loading the website for the first time might take some time.
+
+Additionally, the project can be opened locally. To open the project locally, run the command `pip install requirements.txt`. Then, run the command `python manage.py collectstatic` and `python manage.py runserver`.
 
 ## Functions
 
@@ -27,6 +29,8 @@ The web application can be found at the following link: https://project-a-06-99a
 
 ## Technologies Used
 
+The following technologies are listed in requirements.txt and were used throughout the project. Additionally, the website has been deployed on Heroku and is connected to a Heroky Postgres database.
+
 - Django
 - gunicorn
 - django-allauth
@@ -36,6 +40,10 @@ The web application can be found at the following link: https://project-a-06-99a
 - django-bootstrap-icons
 - postgres
 - googlemaps
+
+## License
+This project is licensed under the MIT License - see the 
+[LICENSE](https://github.com/EthanHaller/UVAStudySpaces/blob/main/LICENSE) file for details
 
 ## Credits
 
