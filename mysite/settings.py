@@ -160,7 +160,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 
 from urllib.parse import urlparse
-DATABASE_URL = 'postgres://bpjzprovcsccqy:5a02d58a65509172131213aa4322619deceaa8f19bc1875ab9b14fbe25a4b2dd@ec2-35-169-11-108.compute-1.amazonaws.com:5432/d7qthk8nq5q0rm'
+DATABASE_URL = os.environ.get("DATABASE_URL")
 url_parts = urlparse(DATABASE_URL)
 
 DATABASE_USER = url_parts.username
