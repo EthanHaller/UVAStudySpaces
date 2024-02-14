@@ -40,9 +40,6 @@ REFERENCES
 							<a class="nav-link {% if request.path == '/study/' %}nav-active{% endif %}" href="/study/">Home</a>
 						</li>
 						<li class="nav-item mx-2 my-1">
-							<a class="nav-link" href="/study/closest">Find Closest Spaces</a>
-						</li>
-						<li class="nav-item mx-2 my-1">
 							<a class="nav-link {% if '/directions' in request.path %}nav-active{% endif %}" href="{% url 'study_spaces:directions' %}">Directions</a>
 						</li>
 						<li class="nav-item mx-2 my-1">

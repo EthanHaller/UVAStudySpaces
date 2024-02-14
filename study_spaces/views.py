@@ -252,28 +252,3 @@ def information(request):
         s = StudySpace.objects.get(pk=request.GET["dest"])
         context["study_space"] = s
     return render(request, 'study_spaces/information.html', context)
-
-
-@login_required(login_url='/study/login')
-def closest(request):
-    mod = get_approved_spaces()
-    context = {
-        'mod': mod,
-        'key': settings.GOOGLE_API_KEY,
-    }
-    if request.method == 'POST':
-        if request.POST["address"] == '' or request.POST["lat"] == '' or request.POST["long"] == '':
-            context["error_message"] = "Please input a valid address."
-            return render(request, 'study_spaces/closest.html', context)
-        input_lat = float(request.POST["lat"])
-        input_long = float(request.POST["long"])
-        spaces_list = list(mod.values('latitude', 'longitude', 'id', 'name', 'address'))
-        sorted_spaces_list = (
-            sorted(spaces_list,
-                   key=lambda space:
-                   (space['latitude'] - input_lat) ** 2 + (space['longitude'] - input_long) ** 2
-                   ))
-        mod = sorted_spaces_list
-        context['mod'] = mod
-        context['start_address'] = request.POST["address"]
-    return render(request, 'study_spaces/closest.html', context)
