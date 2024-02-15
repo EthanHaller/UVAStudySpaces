@@ -77,26 +77,15 @@
     color: var(--background-light);
     font-weight: 500;
     transition: none;
-    box-sizing: border-box;
-    border-width: 0 0 3px 0;
-    border-color: var(--primary-color);
-    border-style: solid;
 }
 
 .nav-link:hover {
-    box-sizing: border-box;
-    color: var(--background-light) !important;
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
-    border-radius: 5px;
-    transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+    border-bottom: 3px solid var(--secondary-color);
+    color: var(--secondary-color);
 }
 
 .nav-active {
-    box-sizing: border-box;
-    border-width: 0 0 3px 0;
-    border-color: var(--secondary-color);
-    border-style: solid;
+    border-bottom: 3px solid var(--secondary-color);
     color: var(--secondary-color) !important;
 }
 

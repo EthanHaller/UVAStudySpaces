@@ -82,6 +82,7 @@
 .nav-link:hover {
     border-bottom: 3px solid var(--secondary-color);
     color: var(--secondary-color);
+    transition: border 0.3s
 }
 
 .nav-active {
