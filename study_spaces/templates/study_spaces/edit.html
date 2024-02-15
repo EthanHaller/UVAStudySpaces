@@ -19,17 +19,17 @@
 				{% endif %}
 
                 <div class="mb-3">
-					<label for="id-name" class="form-label">Study Space Name:</label>
+					<label for="id-name" class="form-label"><strong>Study Space Name:</strong></label>
 					<input required type="text" class="form-control" id="id-name" name="name" value="{{ study_space.name }}" placeholder="Rice Hall" />
 				</div>
 				<div class="mb-3">
-					<label for="id-google-address" class="form-label">Address:</label>
+					<label for="id-google-address" class="form-label"><strong>Address:</strong></label>
 					<input required type="text" class="form-control" size="50" id="id-google-address" name="address" value="{{ study_space.address }}" placeholder="Enter an Address..."/>
 				</div>
 				<input type="hidden" class="geo" id="id-lat" name="lat" value="" />
 				<input type="hidden" class="geo" id="id-long" name="long" value="" />
 
-				<p class="mt-3 mb-0">Amenities:</p>
+				<p class="mt-3 mb-0"><strong>Amenities:</strong></p>
 
 				<div class="row">
 					<div class="col-md-6">
