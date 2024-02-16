@@ -10,22 +10,19 @@
 	<body>
 		<div class="container-fluid h-100">
 			<div class="row h-100">
-				<div class="col-md-6 h-100">
-					<div class="h-100 d-flex justify-content-center align-items-center">
-						<div class="px-5 login-box" style="padding-top: 100px; padding-bottom: 100px;">
-							<h1 class="mb-3">UVAStudySpaces</h1>
-							<div class="d-flex justify-content-center align-items-center">
-								<a href="{% provider_login_url 'google' %}" class="btn primary-button">
-									<div class="d-flex align-items-center">
-										{% bs_icon 'google' extra_classes='mx-2' %}
-										<span class="mx-2">Login With Google</span>
-									</div>
-								</a>
+				<div class="col-lg-6 h-100 d-flex flex-column justify-content-center align-items-center login-box">
+					<h1 id="login-title-header" class="text-center">UVAStudySpaces</h1>
+					<h5 class="mx-5 text-center">Your solution to finding the perfect study spot on Grounds!</h5>
+					<div class="d-flex justify-content-center align-items-center">
+						<a href="{% provider_login_url 'google' %}" class="btn primary-button mt-5">
+							<div class="d-flex align-items-center">
+								{% bs_icon 'google' extra_classes='mx-2' %}
+								<span class="mx-2">Login With Google</span>
 							</div>
-						</div>
+						</a>
 					</div>
 				</div>
-				<div class="col-md-6 d-flex align-items-center justify-content-center"></div>
+				<div class="col-lg-6 d-flex align-items-center justify-content-center login-fade"></div>
 			</div>
 		</div>
 	</body>

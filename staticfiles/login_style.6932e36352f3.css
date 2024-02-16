@@ -15,8 +15,3 @@ body {
 .login-fade {
 	background: linear-gradient(90deg, rgba(255,255,255,0.9), transparent);
 }
-
-#login-title-header {
-    font-weight: bold;
-    color: var(--primary-color);
-}

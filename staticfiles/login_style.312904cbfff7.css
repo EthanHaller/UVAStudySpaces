@@ -9,14 +9,9 @@ body {
 }
 
 .login-box {
-	background-color: rgba(255,255,255,0.9);
+	background-color: rgba(245, 245, 245, 0.9);
 }
 
 .login-fade {
-	background: linear-gradient(90deg, rgba(255,255,255,0.9), transparent);
-}
-
-#login-title-header {
-    font-weight: bold;
-    color: var(--primary-color);
+	background: linear-gradient(90deg, white transparent);
 }
