@@ -160,7 +160,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 
 from urllib.parse import urlparse
-DATABASE_URL = os.environ.get("DATABASE_URL")
+DATABASE_URL = os.environ.get("HEROKU_POSTGRESQL_ROSE_URL")
 url_parts = urlparse(DATABASE_URL)
 
 DATABASE_USER = url_parts.username
