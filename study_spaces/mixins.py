@@ -21,6 +21,9 @@ def Directions(*args, **kwargs):
         })
 
     directions = result.json()
+    distance = 0
+    duration = 0
+    steps = []
 
     if directions["status"] == "OK":
         route = directions["routes"][0]["legs"][0]
@@ -34,7 +37,6 @@ def Directions(*args, **kwargs):
                 s["distance"]["text"],
                 s["duration"]["text"],
                 s["html_instructions"],
-
             ]
             for s in route["steps"]]
 
