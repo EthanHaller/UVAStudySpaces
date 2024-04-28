@@ -164,7 +164,7 @@ class FeatureTests(TestCase):
             'long_b': '-78.51084803374002',
         }
         response = self.client.get(reverse("study_spaces:directions"), data=data)
-        print(response.content)
+        # print(response.content)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<strong>Distance:</strong> 1.7 mi')
 

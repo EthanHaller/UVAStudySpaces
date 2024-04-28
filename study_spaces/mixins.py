@@ -16,13 +16,11 @@ def Directions(*args, **kwargs):
         params={
             'origin': origin,
             'destination': destination,
-            "key": settings.GOOGLE_API_KEY,
+            "key": os.environ.get("GOOGLE_API_KEY"),
             'mode': 'walking'
         })
 
     directions = result.json()
-
-    print(directions)
 
     distance = 0
     duration = 0
