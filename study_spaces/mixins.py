@@ -21,6 +21,9 @@ def Directions(*args, **kwargs):
         })
 
     directions = result.json()
+
+    print(directions)
+
     distance = 0
     duration = 0
     steps = []
