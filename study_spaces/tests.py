@@ -156,7 +156,6 @@ class FeatureTests(TestCase):
         self.assertContains(response, 'Location: Located on Engineering Way, home to the Computer Science Department')
     
     def test_get_directions(self):
-        import os
         self.client.login(username='studyspace', password='studyspacepassword')
         data = {
             'lat_a': '38.0515639',

@@ -1,6 +1,7 @@
 from django.conf import settings
 import requests
 import json
+import os
 
 def Directions(*args, **kwargs):
     lat_a = kwargs.get("lat_a")
