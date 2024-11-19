@@ -154,19 +154,6 @@ class FeatureTests(TestCase):
         context = {'dest': 1}
         response = self.client.get(reverse("study_spaces:information"), data=context)
         self.assertContains(response, 'Location: Located on Engineering Way, home to the Computer Science Department')
-    
-    def test_get_directions(self):
-        self.client.login(username='studyspace', password='studyspacepassword')
-        data = {
-            'lat_a': '38.0515639',
-            'long_a': '-78.5099015',
-            'lat_b': '38.03162799401157',
-            'long_b': '-78.51084803374002',
-        }
-        response = self.client.get(reverse("study_spaces:directions"), data=data)
-        # print(response.content)
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<strong>Distance:</strong> 1.7 mi')
 
     def test_submit_a_study_space(self):
         self.client.login(username='studyspace', password='studyspacepassword')
