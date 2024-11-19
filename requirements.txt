@@ -8,4 +8,4 @@ django-bootstrap-icons
 postgres
 googlemaps
 pyjwt
-cryptocurrency
+cryptography
