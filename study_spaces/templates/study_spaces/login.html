@@ -1,29 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<title>Study Spaces Google Sign In</title>
-		{% load static %} {% load socialaccount %} {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %} {% load bootstrap_icons %}
-		<link rel="stylesheet" type="text/css" href="{% static 'theme.css' %}" />
-		<link rel="stylesheet" type="text/css" href="{% static 'login_style.css' %}" />
-	</head>
-	<body>
-		<div class="container-fluid h-100">
-			<div class="row h-100">
-				<div class="col-lg-6 h-100 d-flex flex-column justify-content-center align-items-center login-box">
-					<h1 id="login-title-header" class="text-center">UVAStudySpaces</h1>
-					<h5 class="mx-5 text-center">Your solution to finding the perfect study spot on Grounds!</h5>
-					<div class="d-flex justify-content-center align-items-center">
-						<a href="{% provider_login_url 'google' %}" class="btn primary-button mt-5">
-							<div class="d-flex align-items-center">
-								{% bs_icon 'google' extra_classes='mx-2' %}
-								<span class="mx-2">Login With Google</span>
-							</div>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-6 d-flex align-items-center justify-content-center login-fade"></div>
-			</div>
-		</div>
-	</body>
+<head>
+    <meta charset="UTF-8" />
+    <title>WahooStudy - Find Your Perfect Study Spot</title>
+    {% load static %} 
+    {% load socialaccount %} 
+    {% load bootstrap5 %} 
+    {% bootstrap_css %} 
+    {% bootstrap_javascript %} 
+    {% load bootstrap_icons %}
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'theme.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'login_style.css' %}" />
+
+</head>
+<body>
+
+    <!-- Hero Section with Background Image -->
+    <section class="hero-section text-center">
+        <div class="container hero-content">
+            <h1>Welcome to WahooStudy!</h1>
+            <p>Your ultimate guide to finding the best study spaces at the University of Virginia.</p>
+            <a href="{% provider_login_url 'google' %}" class="btn primary mt-3">
+                <div class="d-flex align-items-center">
+                    {% bs_icon 'google' extra_classes='mx-2' %}
+                    <span class="mx-2">Login with Google</span>
+                </div>
+            </a>
+        </div>
+		<div class="hero-overlay background"></div>
+    </section>
+
+    <!-- Features Description Section -->
+    <section class="features-section py-5 background">
+        <div class="container">
+            <div class="row">
+                <!-- Image Section -->
+                <div class="col-lg-6 image-container d-flex justify-content-center align-items-center">
+                    <!-- Placeholder for an image -->
+					<img src="{% static 'uvastudyspaces.png' %}" alt="Study Space Map" />
+                </div>
+
+                <!-- Text Section -->
+                <div class="col-lg-6 d-flex flex-column justify-content-center">
+                    <h2>Discover What WahooStudy Offers</h2>
+                    <ul class="list-unstyled mx-3">
+						<li class="mb-2"><strong>Explore Study Spaces:</strong> Browse a comprehensive catalog of study spots across Grounds.</li>
+						<li class="mb-2"><strong>Submit Your Favorite Spots:</strong> Contribute by adding new study spaces and track your submissions.</li>
+						<li class="mb-2"><strong>View on a Map:</strong> Visualize study spaces on an interactive map powered by Google Maps.</li>
+						<li class="mb-2"><strong>Get Directions:</strong> Use the Google Maps API to get directions to your chosen study spot directly from the app.</li>
+					</ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="text-center py-4 bg-dark text-light">
+        &copy; 2024 WahooStudy | University of Virginia
+    </footer>
+
+</body>
 </html>
