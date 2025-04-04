@@ -4,20 +4,21 @@
 
 UVA Study Spaces is web application built in Django using Python, HTML, CSS, and JavaScript. UVA Study Spaces is a catalog of different buildings to study in at the University of Virginia. This project was created for CS 3240: Advanced Software Development at the University of Virginia.
 
+## Demo
+
+Click the image below to watch a short demo of **UVAStudySpaces** in action.
+
+[![Watch the demo](UVAStudySpacesDemoThumbnail.png)](https://youtu.be/0Z2lxLK3Gdk)
+
 ## Table of Contents
 
-1. [Website Access](#website-access)
-2. [Functions](#functions)
-3. [Technologies Used](#technologies-used)
-4. [Credits](#credits)
-
-## Website Access
-
-The web application can be found at the following link: https://project-a-06-99a4abdf2d2b.herokuapp.com. JavaScript must be enabled in the browser. Loading the website for the first time might take some time.
+1. [Features](#features)
+2. [Technologies Used](#technologies-used)
+3. [Credits](#credits)
 
 Additionally, the project can be opened locally. To open the project locally, run the command `pip install requirements.txt`. Then, run the command `python manage.py collectstatic` and `python manage.py runserver`.
 
-## Functions
+## Features
 
 - A Google account is required to login
 - All users can browse different study spaces and view them on a map or in a list of cards on the homepage.
